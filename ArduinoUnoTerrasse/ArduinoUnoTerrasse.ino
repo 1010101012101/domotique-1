@@ -69,7 +69,7 @@ void loop() {
     if (_Xbee.getResponse().getApiId() == ZB_RX_RESPONSE) {
       Serial.println("This is a ZB response");
       // got a zb rx packet
-
+flashPin(_OutPinBuz1, 1, 250);
       // now fill our zb rx class
       _Xbee.getResponse().getZBRxResponse(_ZbRxResp);
       _CmdReceived = _ZbRxResp.getData(0);
@@ -91,6 +91,7 @@ void loop() {
     DHT22_ERROR_t errorCode;
     Serial.print("Requesting data...");
     errorCode = _Dht22.readData();
+    
     switch(errorCode)
     {
     case DHT_ERROR_NONE:

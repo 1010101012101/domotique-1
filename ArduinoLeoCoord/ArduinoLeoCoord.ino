@@ -144,6 +144,7 @@ void loop()
   //Reset command to 0
   _CmdReceived = 0;
   _UsbCmdReceived = 0;
+  _DataToSend = 0;
 
   if (_Xbee.getResponse().isAvailable()) {
     // got something
@@ -158,8 +159,7 @@ void loop()
       // now fill our zb rx class
       _Xbee.getResponse().getZBRxResponse(_ZbRxResp);
       //flashPin(_OutPinLedTest, 3, 200);
-      _CmdReceived = _ZbRxResp.getData(0);
-	  _DataToSend = 4;
+      _DataToSend = _ZbRxResp.getData(0);
       
     }  
   }
@@ -300,6 +300,18 @@ void loop()
     unsigned int aCmd=9;
     unsigned long aAdrr=0x400a3e5d;
     sendZigBeeMsg(aCmd,aAdrr);
+  }
+  else if(_CmdReceived==21)
+  {
+    unsigned int aCmd=2;
+    //unsigned long aAdrr=0x406b7b64;
+    unsigned long aAdrr=0x408CCB53;
+    sendZigBeeMsg(aCmd,aAdrr);
+  }
+  if (_DataToSend!=0)
+  {
+    delay(10);
+    Serial.println(_DataToSend);
   }
 
 }
