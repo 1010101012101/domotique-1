@@ -1,0 +1,2015 @@
+DATE: Thu Dec 13 23:12:00 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Thu Dec 13 23:12:14 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Thu Dec 13 23:38:00 CET 2012 IP: 90.84.144.231 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Fri Dec 14 06:00:01 CET 2012 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Fri Dec 14 06:50:26 CET 2012 IP: 90.84.144.231 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Dec 14 06:50:32 CET 2012 IP: 90.84.144.231 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Fri Dec 14 07:00:01 CET 2012 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Fri Dec 14 07:05:26 CET 2012 IP: 192.168.0.1 CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Fri Dec 14 07:06:55 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Fri Dec 14 07:06:58 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Fri Dec 14 07:07:06 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Dec 14 07:07:12 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Fri Dec 14 07:07:27 CET 2012 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Fri Dec 14 07:15:01 CET 2012 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Fri Dec 14 07:20:46 CET 2012 IP: 90.84.144.231 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Fri Dec 14 07:21:20 CET 2012 IP: 90.84.144.231 CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Fri Dec 14 18:00:01 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Fri Dec 14 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Fri Dec 14 20:48:38 CET 2012 IP: 90.84.144.207 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Fri Dec 14 20:48:42 CET 2012 IP: 90.84.144.207 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Dec 14 21:09:51 CET 2012 IP: 90.84.144.207 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Fri Dec 14 22:33:10 CET 2012 IP: 90.84.144.207 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sat Dec 15 17:21:45 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sat Dec 15 17:21:58 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sat Dec 15 17:21:59 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sat Dec 15 18:00:01 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Sat Dec 15 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sat Dec 15 21:35:07 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sat Dec 15 21:35:09 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sat Dec 15 21:35:10 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sat Dec 15 21:35:13 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sat Dec 15 21:35:17 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sat Dec 15 21:35:43 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sat Dec 15 21:35:44 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Sat Dec 15 21:35:46 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sat Dec 15 22:58:12 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Dec 16 08:22:07 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Sun Dec 16 08:22:39 CET 2012 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Sun Dec 16 10:10:04 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sun Dec 16 11:28:06 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Sun Dec 16 11:28:53 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Dec 16 11:29:32 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Dec 16 11:29:33 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sun Dec 16 11:29:59 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Dec 16 11:30:01 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Dec 16 11:31:11 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Dec 16 11:31:12 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Dec 16 11:37:41 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Dec 16 11:37:42 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Dec 16 11:38:38 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Dec 16 11:38:39 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Dec 16 11:41:18 CET 2012 IP: 192.168.0.1 CMD: 1 2 AEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : AEND
+[MAIN]aCmdStr : AEND
+[MAIN]static_cast<int>(aCmd) : 65END
+DATE: Sun Dec 16 11:41:35 CET 2012 IP: 192.168.0.1 CMD: 1 2 @EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : @END
+[MAIN]aCmdStr : @END
+[MAIN]static_cast<int>(aCmd) : 64END
+DATE: Sun Dec 16 17:51:07 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Sun Dec 16 18:00:01 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Sun Dec 16 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sun Dec 16 23:04:14 CET 2012 IP: 90.84.144.63 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Mon Dec 17 06:00:01 CET 2012 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Mon Dec 17 07:15:01 CET 2012 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Mon Dec 17 07:16:07 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Mon Dec 17 07:16:10 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Mon Dec 17 08:01:28 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Mon Dec 17 18:00:01 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Mon Dec 17 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Mon Dec 17 19:00:18 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Mon Dec 17 19:06:46 CET 2012 IP: 192.168.0.1 CMD: 1 2 =EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : =END
+[MAIN]aCmdStr : =END
+[MAIN]static_cast<int>(aCmd) : 61END
+DATE: Mon Dec 17 19:06:59 CET 2012 IP: 192.168.0.1 CMD: 1 2 >EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : >END
+[MAIN]aCmdStr : >END
+[MAIN]static_cast<int>(aCmd) : 62END
+DATE: Mon Dec 17 21:27:12 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Mon Dec 17 21:27:12 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Mon Dec 17 22:16:57 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Mon Dec 17 22:17:15 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Mon Dec 17 22:17:25 CET 2012 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Tue Dec 18 06:00:01 CET 2012 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Tue Dec 18 07:15:01 CET 2012 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Tue Dec 18 07:25:05 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Tue Dec 18 07:25:08 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Tue Dec 18 08:33:52 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Tue Dec 18 18:00:02 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Tue Dec 18 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Tue Dec 18 20:35:51 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Dec 27 18:05:37 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+[MAIN]libusb_set_configuration error : -6
+DATE: Thu Dec 27 18:07:22 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Dec 27 18:07:23 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Thu Dec 27 18:07:26 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Thu Dec 27 18:07:27 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Dec 27 18:07:40 CET 2012 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Thu Dec 27 18:07:43 CET 2012 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Thu Dec 27 19:13:21 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Dec 27 19:13:23 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Dec 27 19:13:24 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Thu Dec 27 19:13:28 CET 2012 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Thu Dec 27 19:13:31 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Thu Dec 27 19:18:56 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Dec 27 19:18:57 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Thu Dec 27 21:53:22 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Dec 27 21:53:23 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Thu Dec 27 22:14:20 CET 2012 IP: 90.84.144.237 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Dec 27 22:14:23 CET 2012 IP: 90.84.144.237 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Dec 28 06:00:01 CET 2012 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Fri Dec 28 07:00:35 CET 2012 IP: 90.84.144.237 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Dec 28 07:06:56 CET 2012 IP: 90.84.144.237 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Fri Dec 28 07:07:32 CET 2012 IP: 90.84.144.237 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Fri Dec 28 07:15:01 CET 2012 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Fri Dec 28 07:22:12 CET 2012 IP: 90.84.144.237 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Dec 28 17:58:15 CET 2012 IP: 90.84.144.237 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Fri Dec 28 18:00:01 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Fri Dec 28 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Fri Dec 28 20:16:08 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Dec 28 20:16:10 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Dec 28 22:03:09 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Fri Dec 28 22:03:09 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Dec 28 22:17:29 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sat Dec 29 08:49:32 CET 2012 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Sat Dec 29 08:50:06 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Sat Dec 29 17:14:52 CET 2012 IP: 90.84.144.11 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sat Dec 29 18:00:01 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Sat Dec 29 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sat Dec 29 23:05:53 CET 2012 IP: 90.84.144.11 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Sat Dec 29 23:05:53 CET 2012 IP: 90.84.144.11 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sat Dec 29 23:06:26 CET 2012 IP: 90.84.144.204 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sun Dec 30 08:58:21 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Sun Dec 30 08:58:53 CET 2012 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Sun Dec 30 16:42:34 CET 2012 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Sun Dec 30 16:42:36 CET 2012 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Dec 30 16:42:37 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sun Dec 30 18:00:01 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Sun Dec 30 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sun Dec 30 18:57:05 CET 2012 IP: 90.84.146.222 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Dec 30 19:23:09 CET 2012 IP: 90.84.146.222 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Dec 30 22:09:23 CET 2012 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Mon Dec 31 06:00:01 CET 2012 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Mon Dec 31 06:55:53 CET 2012 IP: 90.84.146.203 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Mon Dec 31 06:55:55 CET 2012 IP: 90.84.146.203 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Mon Dec 31 06:57:05 CET 2012 IP: 90.84.146.203 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Mon Dec 31 07:15:01 CET 2012 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Mon Dec 31 08:17:34 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Mon Dec 31 17:27:33 CET 2012 IP: 90.84.146.203 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Mon Dec 31 18:00:01 CET 2012 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Mon Dec 31 18:05:01 CET 2012 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Mon Dec 31 22:24:43 CET 2012 IP: 90.84.146.203 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Mon Dec 31 22:24:46 CET 2012 IP: 90.84.146.203 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Mon Dec 31 23:37:53 CET 2012 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Mon Dec 31 23:38:02 CET 2012 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Mon Dec 31 23:38:10 CET 2012 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Tue Jan 1 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Tue Jan 1 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Tue Jan 1 10:22:30 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Tue Jan 1 10:22:51 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Tue Jan 1 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Tue Jan 1 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Wed Jan 2 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Wed Jan 2 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Wed Jan 2 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Wed Jan 2 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Wed Jan 2 18:58:18 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Wed Jan 2 22:33:33 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Wed Jan 2 22:34:36 CET 2013 IP: 90.84.144.8 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Wed Jan 2 22:34:49 CET 2013 IP: 90.84.144.8 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Wed Jan 2 22:34:56 CET 2013 IP: 90.84.144.8 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Wed Jan 2 22:34:59 CET 2013 IP: 90.84.144.8 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Thu Jan 3 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Thu Jan 3 07:00:38 CET 2013 IP: 90.84.144.8 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Thu Jan 3 07:00:43 CET 2013 IP: 90.84.144.8 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Thu Jan 3 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Thu Jan 3 07:29:05 CET 2013 IP: 90.84.144.8 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Thu Jan 3 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Thu Jan 3 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Thu Jan 3 21:24:07 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Thu Jan 3 21:24:08 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Jan 3 21:36:24 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Jan 3 22:59:29 CET 2013 IP: 90.84.144.91 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Jan 4 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Fri Jan 4 07:00:46 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Jan 4 07:00:49 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Fri Jan 4 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Fri Jan 4 07:15:07 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Fri Jan 4 08:52:25 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Jan 4 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Fri Jan 4 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sat Jan 5 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Sat Jan 5 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sat Jan 5 21:12:52 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sat Jan 5 22:56:16 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Jan 6 08:33:18 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Sun Jan 6 08:33:49 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Sun Jan 6 17:39:08 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sun Jan 6 17:39:11 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+[MAIN]libusb_set_configuration error : -6
+DATE: Sun Jan 6 17:39:19 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Jan 6 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sun Jan 6 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sun Jan 6 20:17:47 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Jan 6 20:17:49 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Jan 6 20:18:14 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Sun Jan 6 21:57:57 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Jan 6 22:21:23 CET 2013 IP: 90.84.144.115 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Mon Jan 7 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Mon Jan 7 06:55:35 CET 2013 IP: 90.84.144.115 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Mon Jan 7 06:56:45 CET 2013 IP: 90.84.144.115 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Mon Jan 7 06:56:51 CET 2013 IP: 90.84.144.115 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Mon Jan 7 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Mon Jan 7 07:17:14 CET 2013 IP: 90.84.144.115 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Mon Jan 7 07:17:14 CET 2013 IP: 90.84.144.115 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Mon Jan 7 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Mon Jan 7 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Mon Jan 7 20:05:11 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Mon Jan 7 22:44:06 CET 2013 IP: 90.84.144.30 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Tue Jan 8 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Tue Jan 8 07:10:33 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Tue Jan 8 07:10:37 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Tue Jan 8 07:11:24 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Tue Jan 8 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Tue Jan 8 07:41:05 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Tue Jan 8 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Tue Jan 8 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Tue Jan 8 20:03:34 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Tue Jan 8 22:14:57 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Tue Jan 8 22:14:57 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Tue Jan 8 22:15:05 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Tue Jan 8 22:20:14 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Tue Jan 8 22:21:11 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Tue Jan 8 22:21:21 CET 2013 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Tue Jan 8 22:21:24 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Tue Jan 8 22:36:45 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Tue Jan 8 23:04:37 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Wed Jan 9 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Wed Jan 9 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Wed Jan 9 07:54:08 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Wed Jan 9 07:54:11 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Wed Jan 9 07:54:30 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Wed Jan 9 08:15:39 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Wed Jan 9 08:40:13 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Wed Jan 9 08:40:13 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Wed Jan 9 16:39:53 CET 2013 IP: 90.84.146.192 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Wed Jan 9 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Wed Jan 9 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Wed Jan 9 22:35:20 CET 2013 IP: 90.84.146.209 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Jan 10 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Thu Jan 10 07:09:23 CET 2013 IP: 90.84.146.209 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Jan 10 07:09:25 CET 2013 IP: 90.84.146.209 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Thu Jan 10 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Thu Jan 10 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Thu Jan 10 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Thu Jan 10 18:59:00 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Jan 10 18:59:02 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Jan 10 22:39:57 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Thu Jan 10 22:39:58 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Jan 10 22:40:07 CET 2013 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Fri Jan 11 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Fri Jan 11 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Fri Jan 11 07:15:04 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Jan 11 07:15:07 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Fri Jan 11 07:15:25 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Fri Jan 11 07:49:08 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Fri Jan 11 08:01:04 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Fri Jan 11 08:01:05 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Jan 11 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Fri Jan 11 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Fri Jan 11 19:21:31 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Fri Jan 11 22:33:23 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Jan 11 22:33:24 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Fri Jan 11 22:33:50 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Fri Jan 11 22:34:01 CET 2013 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Fri Jan 11 22:43:19 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sat Jan 12 08:24:38 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Sat Jan 12 17:27:47 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sat Jan 12 17:27:50 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Sat Jan 12 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Sat Jan 12 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sun Jan 13 00:20:24 CET 2013 IP: 90.84.144.222 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sun Jan 13 00:20:25 CET 2013 IP: 90.84.144.222 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Sun Jan 13 10:52:57 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Sun Jan 13 10:53:06 CET 2013 IP: 192.168.0.1 CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sun Jan 13 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Sun Jan 13 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Sun Jan 13 22:50:38 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Sun Jan 13 22:50:40 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Mon Jan 14 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Mon Jan 14 07:12:07 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Mon Jan 14 07:12:17 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Mon Jan 14 07:12:48 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Mon Jan 14 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Mon Jan 14 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Mon Jan 14 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Mon Jan 14 19:24:12 CET 2013 IP: 90.84.146.195 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Wed Jan 16 17:14:38 CET 2013 IP: 90.84.146.250 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Wed Jan 16 17:14:38 CET 2013 IP: 90.84.146.250 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Wed Jan 16 17:14:39 CET 2013 IP: 90.84.146.250 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Wed Jan 16 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Wed Jan 16 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Wed Jan 16 22:19:43 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Wed Jan 16 22:19:46 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Wed Jan 16 22:31:17 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Thu Jan 17 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Thu Jan 17 06:50:49 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Thu Jan 17 06:51:20 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Thu Jan 17 06:53:36 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Thu Jan 17 07:14:36 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Jan 17 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Thu Jan 17 07:18:22 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Jan 17 07:18:23 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Thu Jan 17 18:00:02 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Thu Jan 17 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Thu Jan 17 18:17:45 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Thu Jan 17 18:17:46 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Thu Jan 17 20:56:46 CET 2013 IP: 192.168.0.1 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Thu Jan 17 22:43:12 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Jan 18 06:00:01 CET 2013 IP: raspberrypi CMD: 1 2 BEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : BEND
+[MAIN]aCmdStr : BEND
+[MAIN]static_cast<int>(aCmd) : 66END
+DATE: Fri Jan 18 07:15:01 CET 2013 IP: raspberrypi CMD: 1 2 CEOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : CEND
+[MAIN]aCmdStr : CEND
+[MAIN]static_cast<int>(aCmd) : 67END
+DATE: Fri Jan 18 07:16:10 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Fri Jan 18 07:16:22 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Jan 18 07:16:44 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Fri Jan 18 08:07:42 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Fri Jan 18 17:55:48 CET 2013 IP: 192.168.0.1 CMD: 1 2 5EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 5END
+[MAIN]aCmdStr : 5END
+[MAIN]static_cast<int>(aCmd) : 53END
+DATE: Fri Jan 18 17:55:49 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Fri Jan 18 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+DATE: Fri Jan 18 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+DATE: Fri Jan 18 23:53:10 CET 2013 IP: 90.84.144.123 CMD: 1 2 6EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 6END
+[MAIN]aCmdStr : 6END
+[MAIN]static_cast<int>(aCmd) : 54END
+DATE: Fri Jan 18 23:53:12 CET 2013 IP: 90.84.144.123 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+DATE: Sat Jan 19 08:30:20 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+DATE: Sat Jan 19 08:30:21 CET 2013 IP: 192.168.0.1 CMD: 1 2 7EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 7END
+[MAIN]aCmdStr : 7END
+[MAIN]static_cast<int>(aCmd) : 55END
+DATE: Sat Jan 19 08:30:48 CET 2013 IP: 192.168.0.1 CMD: 1 2 9EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 9END
+[MAIN]aCmdStr : 9END
+[MAIN]static_cast<int>(aCmd) : 57END
+DATE: Sat Jan 19 10:10:40 CET 2013 IP: 90.84.146.234 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sat Jan 19 10:10:58 CET 2013 IP: 90.84.146.234 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sat Jan 19 10:11:04 CET 2013 IP: 90.84.146.234 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sat Jan 19 10:11:21 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sat Jan 19 10:11:22 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sat Jan 19 10:11:25 CET 2013 IP: 192.168.0.1 CMD: 1 2 ;EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : ;END
+[MAIN]aCmdStr : ;END
+[MAIN]static_cast<int>(aCmd) : 59END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sat Jan 19 10:11:28 CET 2013 IP: 192.168.0.1 CMD: 1 2 <EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : <END
+[MAIN]aCmdStr : <END
+[MAIN]static_cast<int>(aCmd) : 60END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sat Jan 19 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sat Jan 19 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sun Jan 20 18:00:01 CET 2013 IP: raspberrypi CMD: 1 2 :EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : :END
+[MAIN]aCmdStr : :END
+[MAIN]static_cast<int>(aCmd) : 58END
+[MAIN]Could not find/open LVR Generic HID device
+DATE: Sun Jan 20 18:05:01 CET 2013 IP: raspberrypi CMD: 1 2 8EOL
+[MAIN]The interface used will be : 2END
+[MAIN]The configuration used will be : 1END
+[MAIN]aCmd : 8END
+[MAIN]aCmdStr : 8END
+[MAIN]static_cast<int>(aCmd) : 56END
+[MAIN]Could not find/open LVR Generic HID device
