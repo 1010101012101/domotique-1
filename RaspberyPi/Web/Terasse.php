@@ -20,6 +20,19 @@
 			{
 				type: "POST",
 				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '20' ,iCmdToExecute : 'E' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
+		
+		$("#Bping").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
 				data: ({iId : '20' ,iCmdToExecute : 'D' , iCmdType : "CMD_X10"}),
 				cache: false,
 				dataType: "text",
@@ -38,7 +51,8 @@
 			?>
 		</div>
 		<div data-role="content">
-			<input id="Bopen" type="button" name="open" value="Wake up PC"/>
+			<input id="Bopen" type="button" name="open" value="Temperature"/>
+			<input id="Bping" type="button" name="open" value="Ping entree"/>
 		</div>
 	</div>
 	</body>
