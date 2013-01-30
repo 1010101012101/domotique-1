@@ -14,7 +14,7 @@
 
 XBee _Xbee = XBee(); // create Xbee object to control a Xbee
 ZBRxResponse _ZbRxResp = ZBRxResponse(); //Create reusable response objects for responses we expect to handle
-int _ServoPosition = 90;
+
 
 
 //Define the pin number
@@ -304,6 +304,13 @@ void loop()
   else if(_CmdReceived==21)
   {
     unsigned int aCmd=2;
+    //unsigned long aAdrr=0x406b7b64;
+    unsigned long aAdrr=0x408CCB53;
+    sendZigBeeMsg(aCmd,aAdrr);
+  }
+  else if(_CmdReceived==22)
+  {
+    unsigned int aCmd=3;
     //unsigned long aAdrr=0x406b7b64;
     unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);

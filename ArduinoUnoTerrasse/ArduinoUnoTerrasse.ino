@@ -42,7 +42,7 @@ void setup()
   pinMode(_OutPinBuz1, OUTPUT);
   pinMode(_InPinButton4,INPUT);
   
-  flashPin(_OutPinBuz1, 1, 250);
+  //flashPin(_OutPinBuz1, 1, 250);
 }
 
 // continuously reads packets, looking for ZB Receive or Modem Status
@@ -52,11 +52,11 @@ void loop() {
   _CmdReceived = 0;
   _DataToSend=0;
   
-  int aSendMsgToEd4 = digitalRead(_InPinButton4);
-  if (aSendMsgToEd4 == LOW)
-  {
-  flashPin(_OutPinBuz1, 1, 250);
-  }
+  //int aSendMsgToEd4 = digitalRead(_InPinButton4);
+  //if (aSendMsgToEd4 == LOW)
+  //{
+  //flashPin(_OutPinBuz1, 1, 250);
+  //}
 
   //Read if we received an inoming message
   _Xbee.readPacket();
@@ -69,7 +69,7 @@ void loop() {
     if (_Xbee.getResponse().getApiId() == ZB_RX_RESPONSE) {
       Serial.println("This is a ZB response");
       // got a zb rx packet
-flashPin(_OutPinBuz1, 1, 250);
+//flashPin(_OutPinBuz1, 1, 250);
       // now fill our zb rx class
       _Xbee.getResponse().getZBRxResponse(_ZbRxResp);
       _CmdReceived = _ZbRxResp.getData(0);

@@ -42,6 +42,8 @@
 		
 		function onSuccess(data)
 		{
+		
+		$('.container').text(data);
 		}
 		
 	</script>
@@ -52,6 +54,10 @@
 		</div>
 		<div data-role="content">
 			<input id="Bopen" type="button" name="open" value="Temperature"/>
+			
+			Response :
+			<div class="container">
+			</div>
 			<input id="Bping" type="button" name="open" value="Ping entree"/>
 		</div>
 	</div>
