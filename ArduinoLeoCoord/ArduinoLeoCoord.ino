@@ -159,7 +159,7 @@ void loop()
       // now fill our zb rx class
       _Xbee.getResponse().getZBRxResponse(_ZbRxResp);
       //flashPin(_OutPinLedTest, 3, 200);
-      _DataToSend = _ZbRxResp.getData(0);
+	  _DataToSend=word(_ZbRxResp.getData(1),_ZbRxResp.getData(0));
       
     }  
   }
@@ -311,6 +311,20 @@ void loop()
   else if(_CmdReceived==22)
   {
     unsigned int aCmd=3;
+    //unsigned long aAdrr=0x406b7b64;
+    unsigned long aAdrr=0x408CCB53;
+    sendZigBeeMsg(aCmd,aAdrr);
+  }
+  else if(_CmdReceived==23)
+  {
+    unsigned int aCmd=1;
+    //unsigned long aAdrr=0x406b7b64;
+    unsigned long aAdrr=0x408CCB53;
+    sendZigBeeMsg(aCmd,aAdrr);
+  }
+  else if(_CmdReceived==24)
+  {
+    unsigned int aCmd=4;
     //unsigned long aAdrr=0x406b7b64;
     unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);

@@ -5,24 +5,10 @@
 	switch($aCmdType) 
 		{
 			case "CMD_X10" :
-			//$aCommandToExecute = WRAPPER . getenv(REMOTE_ADDR) . ' "1 2 ' . $_REQUEST["iCmdToExecute"] . '"';
-			//$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . " -s " .' "' . $_REQUEST["iCmdToExecute"] . '"';
-			//$aCommandToExecute = "/home/pi/Usb_Arduino_Leonardo/Test.py -s D -t 20 -o TOTO";           OK
 			$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . " -s " . '"' . $_REQUEST["iCmdToExecute"] . '"';
-			//echo exec($aCommandToExecute);
 			$output = array();
-exec($aCommandToExecute, $output);
-//var_dump( $output);
-//Response object 
-				print(json_encode($output));
-			//echo $aCommandToExecute;
-			// 1 : on ouvre le fichier
-			//$monfichier = fopen('../Logs/logs.txt', 'a+');
-			// 2 : on fera ici nos opérations sur le fichier...
-			//$aLogTxt = "DATE: " . date("Y-m-d_H:i:s") . " IP: " . getenv(REMOTE_ADDR) . " CMD: " . $aCommandToExecute . "\n";
-			//fputs($monfichier, $aLogTxt);
-			// 3 : quand on a fini de l'utiliser, on ferme le fichier
-			//fclose($monfichier);
+			exec($aCommandToExecute, $output);
+			print(json_encode($output));
 			if(isset($_REQUEST['iStatus']))
 			{
 				try 

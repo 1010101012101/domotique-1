@@ -16,14 +16,49 @@
 	
 		$("#Bopen").click(function() 
 		{
+			var aTypeRequest="temperature";
 			$.ajax(
 			{
 				type: "POST",
-				url: "./Sender/XbeeWrapper.php",
-				data: ({iId : '20' ,iCmdToExecute : 'E' , iCmdType : "CMD_X10"}),
+				url: "./Reader/GateWayReader.php",
+				data: ({iId : '20' ,iCmdToExecute : 'E' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
-				success: onSuccess
+				success:  function(data) {
+       onSuccess(data, aTypeRequest);
+     }
+			});
+        });
+		
+		$("#Bluminosite").click(function() 
+		{
+			var aTypeRequest="luminere";
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Reader/GateWayReader.php",
+				data: ({iId : '20' ,iCmdToExecute : 'G' , iCmdType : "CMD_X10_READ"}),
+				cache: false,
+				dataType: "text",
+				success:  function(data) {
+       onSuccess(data, aTypeRequest);
+     }
+			});
+        });
+		
+		$("#BHumidite").click(function() 
+		{
+			var aTypeRequest="humidite";
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Reader/GateWayReader.php",
+				data: ({iId : '20' ,iCmdToExecute : 'F' , iCmdType : "CMD_X10_READ"}),
+				cache: false,
+				dataType: "text",
+				success: function(data) {
+       onSuccess(data, aTypeRequest);
+     }
 			});
         });
 		
@@ -32,18 +67,33 @@
 			$.ajax(
 			{
 				type: "POST",
-				url: "./Sender/XbeeWrapper.php",
-				data: ({iId : '20' ,iCmdToExecute : 'D' , iCmdType : "CMD_X10"}),
+				url: "./Reader/GateWayReader.php",
+				data: ({iId : '20' ,iCmdToExecute : 'D' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
-				success: onSuccess
+				success: onSuccess2
 			});
         });
 		
-		function onSuccess(data)
+		function onSuccess(data,iTypeRequest)
 		{
 		
-		$('.container').text(data);
+		$('.container').text("DEBUG LOG START");
+		$('.container').append(data);
+		var reg1=new RegExp("Response : (\d*)","g");
+		$('.container').append("DEBUG LOG END --");
+		$('.container').append(iTypeRequest);
+		var myRegexp = /Response : (\d*)/g;
+				var match2 = myRegexp.exec(data);
+		//$('.container').append(match2[1]);
+		var aIntValue=parseInt(match2[1]);
+		var aFloat=parseFloat(aIntValue);
+		aFloat=aFloat/10;
+		$('.container').append(aFloat);
+		}
+		
+		function onSuccess2(data)
+		{
 		}
 		
 	</script>
@@ -53,12 +103,14 @@
 			?>
 		</div>
 		<div data-role="content">
+		PAGE DE TEST--le capteur est dans ma chambre en ce moment est pas encore sur la terrasse
 			<input id="Bopen" type="button" name="open" value="Temperature"/>
-			
+			<input id="BHumidite" type="button" name="huminide" value="Humidite"/>
+			<input id="Bluminosite" type="button" name="lumiere" value="Luminosite"/>
 			Response :
 			<div class="container">
 			</div>
-			<input id="Bping" type="button" name="open" value="Ping entree"/>
+			<input id="Bping" type="button" name="open" value="Ping entree(debug only)"/>
 		</div>
 	</div>
 	</body>
