@@ -1,0 +1,8 @@
+MSTimer2:
+http://www.pjrc.com/teensy/td_libs_MsTimer2.html
+
+Xbee Arduino:
+http://code.google.com/p/xbee-arduino/
+
+X10ex // X10 arduino API
+http://code.google.com/p/arduino-x10/
