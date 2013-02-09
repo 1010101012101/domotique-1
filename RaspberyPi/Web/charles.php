@@ -32,13 +32,27 @@
 					{
 						$('#flip-1').val('on').slider("refresh");
 					}
-					if((data[1].id==5)&&(data[1].status=="on"))
-					{
-						$('#flip-3').val('on').slider("refresh");
-					}
 					if((data[2].id==6)&&(data[2].status=="on"))
 					{
 						$('#flip-2').val('on').slider("refresh");
+					}
+				}
+				
+				$.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iId : '4,5,6', iCmdToExecute : "2" , iCmdType : "PING_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess2
+                });
+				
+				function onSuccess2(data)
+				{
+					if(data=="0")
+					{
+						$('#flip-3').val('on').slider("refresh");
 					}
 				}
 
@@ -153,6 +167,11 @@
 			<select name="flip-2" id="flip-2" data-role="slider">
 				<option value="off">Allumer(;)</option>
 				<option value="on">Eteindre(<)</option>
+			</select> 
+			<label for="flip-3">PC Charles (read only - ping) :</label>
+			<select name="flip-3" id="flip-3" data-role="slider" disabled >
+				<option value="off">OFF</option>
+				<option value="on">ON</option>
 			</select> 
 			<input id="Bopen" type="button" name="open" value="Wake up PC"/>
 			<input id="VoletUp" type="button" name="VoletUp" value="Monter Volet(7)"/>

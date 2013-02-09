@@ -4,6 +4,9 @@
 //Timer library
 #include <MsTimer2.h>
 
+//Include for RHT03 library -> https://github.com/nethoncho/Arduino-DHT22
+#include <DHT22.h>
+
 //Xbee objects
 //create Xbee object to control a Xbee
 XBee _Xbee = XBee(); 
@@ -12,11 +15,18 @@ ZBRxResponse _ZbRxResp = ZBRxResponse();
 
 //Pin definition
 const int _InPinIrDetector = 7;
-const int _OutPinRelay = 10;
+const int _OutPinRelay = 11;
+const int _InPinLedMeasure = A0;
+const int _InPinMoistureMeasure = A1;
+const int _InPinDht22 = 10;
+const int _OutPinBuz1 = 9;
 
 //Global variable used in the program
 int _CmdReceived = 0;
 int _AllowAutoLight = 1;
+int _DataToSend = 0;
+
+DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance
 
 void InterruptTimer2() 
 {
@@ -91,6 +101,8 @@ void setup()
   pinMode(_InPinIrDetector,INPUT);
   pinMode(_OutPinRelay, OUTPUT);
   
+  digitalWrite(_OutPinRelay, LOW);
+  
   //Set timer to 10seconds
   MsTimer2::set(60000, InterruptTimer2);
   delay(1000);
@@ -99,11 +111,12 @@ void setup()
 void loop()
 {
   _CmdReceived = 0;
+  _DataToSend = 0;
   _Xbee.readPacket();
   //Read button status
   int aInputDigitalValue = digitalRead(_InPinIrDetector);
 
-  if (aInputDigitalValue == HIGH)
+  if (aInputDigitalValue == LOW)
   {
     if (_AllowAutoLight == 1)
     {
@@ -163,6 +176,118 @@ void loop()
     unsigned long aReceiver = 0x400a3e5e;
     unsigned int aCommand = 3;
     sendZigBeeMsg(aCommand, aReceiver);
+  }
+  else if(_CmdReceived==1)
+  {
+     _DataToSend=analogRead(_InPinLedMeasure);
+    Serial.print("Light Value : ");
+    Serial.println(_DataToSend);
+  }
+  else if((_CmdReceived==2)||(_CmdReceived==3))
+  {
+    delay(50);
+    DHT22_ERROR_t errorCode;
+    Serial.print("Requesting data...");
+    errorCode = _Dht22.readData();
+    
+    switch(errorCode)
+    {
+    case DHT_ERROR_NONE:
+      Serial.print("Got Data ");
+      Serial.print(_Dht22.getTemperatureCAsFloat());
+      Serial.print("/");
+      Serial.print(_Dht22.getTemperatureCAsInt());
+      Serial.print("C ");
+      Serial.print(_Dht22.getHumidityAsFloat());
+      Serial.print("/");
+      Serial.print(_Dht22.getHumidityAsInt());
+      Serial.println("%");
+      if (_CmdReceived==2)
+      {
+        _DataToSend=_Dht22.getTemperatureCAsInt();
+      }
+      else if(_CmdReceived==3)
+      {
+        _DataToSend=_Dht22.getHumidityAsInt();
+      }
+      break;
+    case DHT_ERROR_CHECKSUM:
+      Serial.print("check sum error ");
+      Serial.print(_Dht22.getTemperatureCAsFloat());
+      Serial.print("C ");
+      Serial.print(_Dht22.getHumidityAsFloat());
+      Serial.println("%");
+      break;
+    case DHT_BUS_HUNG:
+      Serial.println("BUS Hung ");
+      break;
+    case DHT_ERROR_NOT_PRESENT:
+      Serial.println("Not Present ");
+      break;
+    case DHT_ERROR_ACK_TOO_LONG:
+      Serial.println("ACK time out ");
+      break;
+    case DHT_ERROR_SYNC_TIMEOUT:
+      Serial.println("Sync Timeout ");
+      break;
+    case DHT_ERROR_DATA_TIMEOUT:
+      Serial.println("Data Timeout ");
+      break;
+    case DHT_ERROR_TOOQUICK:
+      Serial.println("Polled to quick ");
+      break;
+    }
+  }
+  
+    //Send the response if necessary
+  if(_DataToSend!=0)
+  {
+    uint8_t aPayload[2];
+
+    aPayload[0] = _DataToSend & 0xff; //LSB
+    Serial.print("Data0: 0x");
+    Serial.println(aPayload[0], HEX);
+    aPayload[1] = (_DataToSend >> 8) & 0xff; //MSB
+    Serial.print("Data1: 0x");
+    Serial.println(aPayload[1], HEX);
+
+    // Specify the address of the remote XBee (this is the SH + SL)
+    XBeeAddress64 aAddr64 = XBeeAddress64(0x0013a200, 0x400a3e5e);
+
+    // Create a TX Request
+    ZBTxRequest aZbTx = ZBTxRequest(aAddr64, aPayload, sizeof(aPayload));
+
+    // Send your request
+    _Xbee.send(aZbTx);
+
+    Serial.println("Message has been sent");
+
+    if (_Xbee.readPacket(5000)) {
+      Serial.println("We got a response to the message");
+
+      // should be a znet tx status  
+
+      ZBTxStatusResponse aZbTxStatus = ZBTxStatusResponse();        
+      if (_Xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
+        Serial.println("It is a transmition status");
+        _Xbee.getResponse().getZBTxStatusResponse(aZbTxStatus);
+
+        // get the delivery status, the fifth byte
+        if (aZbTxStatus.getDeliveryStatus() == SUCCESS) {
+          Serial.println("The Trx was OK");
+        } 
+        else {
+          Serial.println("Warning : The Trx was KO");
+        }
+      } 
+      else{
+        Serial.print("It was not a Trx status. ApiId:");
+        Serial.println(_Xbee.getResponse().getApiId());
+      }   
+    } 
+    else {
+      Serial.println("Warning : This should never happen");
+    }
   }
 }
 

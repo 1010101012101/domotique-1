@@ -43,5 +43,17 @@
 			print(json_encode($output));
 			}
 			break;
+			
+			case "PING_READ" :
+			$aRequestId = $_REQUEST["iCmdToExecute"];
+			//$aCommandToExecute = 'sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50';
+			//echo exec($aCommandToExecute);
+			//$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . " -s " . '"' . $aRequestId . '"';
+			$aCommandToExecute = 'ping -c 1 www.google.fr';
+			$output = array();
+			exec($aCommandToExecute, $output, $result);
+			print(json_encode($result));
+
+			break;
 		}
 ?>
