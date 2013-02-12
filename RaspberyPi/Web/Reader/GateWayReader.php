@@ -49,7 +49,7 @@
 			//$aCommandToExecute = 'sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50';
 			//echo exec($aCommandToExecute);
 			//$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . " -s " . '"' . $aRequestId . '"';
-			$aCommandToExecute = 'ping -c 1 www.google.fr';
+			$aCommandToExecute = 'ping -c 1 -W 2 192.168.0.7';
 			$output = array();
 			exec($aCommandToExecute, $output, $result);
 			print(json_encode($result));

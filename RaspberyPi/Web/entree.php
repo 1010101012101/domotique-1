@@ -38,6 +38,57 @@
 
             });
         });
+		
+				$("#Bopen").click(function() 
+		{
+			var aTypeRequest="temperature";
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Reader/GateWayReader.php",
+				data: ({iId : '20' ,iCmdToExecute : 'E' , iCmdType : "CMD_X10_READ"}),
+				cache: false,
+				dataType: "text",
+				success:  function(data) {
+       onSuccess2(data, aTypeRequest);
+     }
+			});
+        });
+		
+				$("#BHumidite").click(function() 
+		{
+			var aTypeRequest="humidite";
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Reader/GateWayReader.php",
+				data: ({iId : '20' ,iCmdToExecute : 'F' , iCmdType : "CMD_X10_READ"}),
+				cache: false,
+				dataType: "text",
+				success: function(data) {
+       onSuccess2(data, aTypeRequest);
+     }
+			});
+        });
+		
+				function onSuccess2(data,iTypeRequest)
+		{
+		
+		$('.container').text("DEBUG LOG START");
+		$('.container').append(data);
+		var reg1=new RegExp("Response : (\d*)","g");
+		$('.container').append("DEBUG LOG END --");
+		$('.container').append(iTypeRequest);
+		var myRegexp = /Response : (\d*)/g;
+				var match2 = myRegexp.exec(data);
+		//$('.container').append(match2[1]);
+		var aIntValue=parseInt(match2[1]);
+		var aFloat=parseFloat(aIntValue);
+		aFloat=aFloat/10;
+		$('.container').append(aFloat);
+		}
+		
+		
 	
 		
 		$("#VoletUp").click(function() 
@@ -119,8 +170,13 @@
 				<option value="off">Desactiver</option>
 				<option value="on">Activer</option>
 			</select> 
-			<input id="VoletUp" type="button" name="VoletUp" value="Allumer lumiere"/>
-			<input id="VoletDown" type="button" name="VoletDown" value="Eteindre lumiere"/>
+			<input id="VoletUp" type="button" name="VoletUp" value="Allumer lumiere - Beta" disabled/>
+			<input id="VoletDown" type="button" name="VoletDown" value="Eteindre lumiere - Beta" disabled/>
+			<input id="Bopen" type="button" name="open" value="Temperature"/>
+			<input id="BHumidite" type="button" name="huminide" value="Humidite"/>
+			Response :
+			<div class="container">
+			</div>
 		</div>
 	</div>
 	</body>
