@@ -116,7 +116,7 @@ void loop()
   //Read button status
   int aInputDigitalValue = digitalRead(_InPinIrDetector);
 
-  if (aInputDigitalValue == LOW)
+  if (aInputDigitalValue == HIGH)
   {
     if (_AllowAutoLight == 1)
     {
@@ -127,7 +127,7 @@ void loop()
     //2/Send the detection info to central
     unsigned long aReceiver = 0x400a3e5e;
     unsigned int aCommand = 3;
-    sendZigBeeMsg(aCommand, aReceiver);
+    //sendZigBeeMsg(aCommand, aReceiver);
   }
 
   if (_Xbee.getResponse().isAvailable()) 

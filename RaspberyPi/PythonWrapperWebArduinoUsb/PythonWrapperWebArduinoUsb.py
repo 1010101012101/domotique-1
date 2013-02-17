@@ -3,6 +3,7 @@
 import serial, time
 import sys
 import datetime
+import sqlite3
 from optparse import OptionParser
 
 parser = OptionParser(usage="usage: %prog [options] filename",version="%prog 1.0")
@@ -23,6 +24,10 @@ print ("Sending : " + options.aMsgToSend)
 
 fd.write(options.aMsgToSend)
 
+conn = sqlite3.connect('/var/www/DataBase/Domos.db')
+
+c = conn.cursor()
+
 aLoopIndex=1
 aResponse=""
 while aLoopIndex <= int(options.aTimeout):
@@ -30,6 +35,9 @@ while aLoopIndex <= int(options.aTimeout):
     aResponse = fd.readline() #How do I get the most recent line sent from the device?
     if(aResponse != ""):
         print ("Response : " + aResponse)
+        c.execute('SELECT * FROM object')
+        print c.fetchone()
+        conn.close()
         sys.exit(0)
     aLoopIndex=aLoopIndex+1
     time.sleep(1)

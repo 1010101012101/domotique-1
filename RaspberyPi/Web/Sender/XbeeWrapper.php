@@ -60,7 +60,7 @@
 				$aResponse = array();
 		
 				//create table object (id integer primary key, status text); 
-				//insert into object (status,id) values ('On',8);
+				//insert into object (status,id,name) values ('On',8,'');
 	
 				$aSqlRequest = 'select id,status from object where id IN (' . $aId . ' )';
 				foreach ($dbh->query($aSqlRequest) as $row)
