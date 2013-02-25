@@ -28,6 +28,26 @@
                     success: onSuccess
                 });
 				
+				$.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iId : '20', iCmdToExecute : "2" , iCmdType : "CMD_READ_VALUE_DB"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess4
+                });
+				
+				$.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iId : '21', iCmdToExecute : "2" , iCmdType : "CMD_READ_VALUE_DB"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess4
+                });
+				
 				function onSuccess(data)
 				{
 					if((data[0].id==8)&&(data[0].status=="on"))
@@ -35,6 +55,32 @@
 						$('#flip-2').val('on').slider("refresh");
 					}
 				}
+				
+				function onSuccess4(data)
+				{
+				if (data[0]["id"]=="20")
+				{
+				$('.Temperature').append("Derniere temperature : ");
+var aIntValue=parseInt(data[0]["value"]);
+		var aFloat=parseFloat(aIntValue);
+		aFloat=aFloat/10;
+		$('.Temperature').append(aFloat);
+		$('.Temperature').append(" degre releve le : ");
+		$('.Temperature').append(data[0]["timestamp"]);
+		}
+		else
+		{
+		$('.Humidite').append("Derniere humidite : ");
+var aIntValue=parseInt(data[0]["value"]);
+		var aFloat=parseFloat(aIntValue);
+		aFloat=aFloat/10;
+		$('.Humidite').append(aFloat);
+		$('.Humidite').append(" % humidite relative releve le : ");
+		$('.Humidite').append(data[0]["timestamp"]);
+		}
+				}
+				
+
 
             });
         });
@@ -62,7 +108,7 @@
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iId : '20' ,iCmdToExecute : 'F' , iCmdType : "CMD_X10_READ"}),
+				data: ({iId : '21' ,iCmdToExecute : 'F' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
 				success: function(data) {
@@ -73,19 +119,7 @@
 		
 				function onSuccess2(data,iTypeRequest)
 		{
-		
-		$('.container').text("DEBUG LOG START");
-		$('.container').append(data);
-		var reg1=new RegExp("Response : (\d*)","g");
-		$('.container').append("DEBUG LOG END --");
-		$('.container').append(iTypeRequest);
-		var myRegexp = /Response : (\d*)/g;
-				var match2 = myRegexp.exec(data);
-		//$('.container').append(match2[1]);
-		var aIntValue=parseInt(match2[1]);
-		var aFloat=parseFloat(aIntValue);
-		aFloat=aFloat/10;
-		$('.container').append(aFloat);
+	
 		}
 		
 		
@@ -170,12 +204,15 @@
 				<option value="off">Desactiver</option>
 				<option value="on">Activer</option>
 			</select> 
-			<input id="VoletUp" type="button" name="VoletUp" value="Allumer lumiere - Beta" disabled/>
+			<input id="VoletUp" type="button" name="VoletUp" value="Allumer lumiere"/>
 			<input id="VoletDown" type="button" name="VoletDown" value="Eteindre lumiere - Beta" disabled/>
-			<input id="Bopen" type="button" name="open" value="Temperature"/>
-			<input id="BHumidite" type="button" name="huminide" value="Humidite"/>
+			<input id="Bopen" type="button" name="open" value="Refresh Temperature"/>
+			Temperature :
+			<div class="Temperature">
+			</div>
+			<input id="BHumidite" type="button" name="huminide" value="Refresh Humidite"/>
 			Response :
-			<div class="container">
+			<div class="Humidite">
 			</div>
 		</div>
 	</div>

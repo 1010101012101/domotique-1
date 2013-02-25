@@ -211,15 +211,6 @@ void loop()
     flashPin(_OutPinLedTest, 3, 200);
     delay(10);
     Serial.println("ACK_1");
-    //Serial.flush();
-    //if(Serial)
-    //{
-    //  flashPin(_OutPinLedTest, 5, 200);
-    //}
-    //else
-    //{
-    //  flashPin(_OutPinLedTest, 2, 200);
-    //}
   }
   else if(_CmdReceived==4)
   {

@@ -32,7 +32,7 @@
 			<a href="salon.php" data-role="button">Salon</a> 
 			<a href="entree.php" data-role="button">Entree</a>			
 			<a href="SalleDeBain.php" data-role="button">Salle de bain</a>
-			<a href="Terasse.php" data-role="button">Terasse</a>
+			<a href="Terasse.php" data-role="button">Terasse (Beta)</a>
 		</div>
 		<div data-role="footer" data-id="foo1" data-position="fixed">
 	<div data-role="navbar">
