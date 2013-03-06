@@ -145,6 +145,7 @@ void loop()
   _CmdReceived = 0;
   _UsbCmdReceived = 0;
   _DataToSend = 0;
+  uint8_t aPayload[] = { 0, 0 , 0};
 
   if (_Xbee.getResponse().isAvailable()) {
     // got something
@@ -160,6 +161,13 @@ void loop()
       _Xbee.getResponse().getZBRxResponse(_ZbRxResp);
       //flashPin(_OutPinLedTest, 3, 200);
 	  _DataToSend=word(_ZbRxResp.getData(1),_ZbRxResp.getData(0));
+	  if(_ZbRxResp.getDataLength()>2)
+	  {
+	  aPayload[0]=_ZbRxResp.getData(0);
+	  aPayload[1]=_ZbRxResp.getData(1);
+	  aPayload[2]=_ZbRxResp.getData(2);
+	  _DataToSend=word(_ZbRxResp.getData(2),_ZbRxResp.getData(1));
+	  }
       
     }  
   }
@@ -203,7 +211,7 @@ void loop()
   if(_CmdReceived==2)
   {
     unsigned int aCmd=5;
-    unsigned long aAdrr=0x400a3e5d;
+    unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
   else if(_CmdReceived==3)
@@ -215,7 +223,7 @@ void loop()
   else if(_CmdReceived==4)
   {
     unsigned int aCmd=4;
-    unsigned long aAdrr=0x400a3e5d;
+    unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
   else if(_CmdReceived==5)
@@ -263,19 +271,19 @@ void loop()
   else if(_CmdReceived==15)
   {
     unsigned int aCmd=6;
-    unsigned long aAdrr=0x400a3e5d;
+    unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
   else if(_CmdReceived==16)
   {
     unsigned int aCmd=7;
-    unsigned long aAdrr=0x400a3e5d;
+    unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
   else if(_CmdReceived==17)
   {
     unsigned int aCmd=8;
-    unsigned long aAdrr=0x400a3e5d;
+    unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
   else if(_CmdReceived==18)
@@ -289,7 +297,7 @@ void loop()
   else if(_CmdReceived==20)
   {
     unsigned int aCmd=9;
-    unsigned long aAdrr=0x400a3e5d;
+    unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
   else if(_CmdReceived==21)
@@ -320,10 +328,34 @@ void loop()
     unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
+  else if(_CmdReceived==25)  // 'I'
+  {
+    unsigned int aCmd=4;
+    //unsigned long aAdrr=0x406b7b64;
+    unsigned long aAdrr=0x400a3e5d;
+    sendZigBeeMsg(aCmd,aAdrr);
+  }
+  else if(_CmdReceived==26)  // 'J'
+  {
+    unsigned int aCmd=5;
+    //unsigned long aAdrr=0x406b7b64;
+    unsigned long aAdrr=0x400a3e5d;
+    sendZigBeeMsg(aCmd,aAdrr);
+  }
   if (_DataToSend!=0)
   {
     delay(10);
+	if(aPayload[0] != 0)
+	{
+	Serial.print("ID:");
+	Serial.print(aPayload[0]);
+	Serial.print("_OUTPUT:");
+	Serial.println(_DataToSend);
+	}
+	else
+	{
     Serial.println(_DataToSend);
+	}
   }
 
 }

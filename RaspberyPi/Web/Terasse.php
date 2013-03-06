@@ -13,22 +13,7 @@
 	
 	<div id="TERASSE" data-role="page" data-add-back-btn="true">
 	<script type="text/javascript">
-	
-		$("#Bopen").click(function() 
-		{
-			var aTypeRequest="temperature";
-			$.ajax(
-			{
-				type: "POST",
-				url: "./Reader/GateWayReader.php",
-				data: ({iId : '20' ,iCmdToExecute : 'E' , iCmdType : "CMD_X10_READ"}),
-				cache: false,
-				dataType: "text",
-				success:  function(data) {
-       onSuccess(data, aTypeRequest);
-     }
-			});
-        });
+
 		
 		$("#Bluminosite").click(function() 
 		{
@@ -37,7 +22,7 @@
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iId : '20' ,iCmdToExecute : 'G' , iCmdType : "CMD_X10_READ"}),
+				data: ({iId : '19' ,iCmdToExecute : 'J' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
 				success:  function(data) {
@@ -46,21 +31,6 @@
 			});
         });
 		
-		$("#BHumidite").click(function() 
-		{
-			var aTypeRequest="humidite";
-			$.ajax(
-			{
-				type: "POST",
-				url: "./Reader/GateWayReader.php",
-				data: ({iId : '20' ,iCmdToExecute : 'F' , iCmdType : "CMD_X10_READ"}),
-				cache: false,
-				dataType: "text",
-				success: function(data) {
-       onSuccess(data, aTypeRequest);
-     }
-			});
-        });
 		
 		$("#Bping").click(function() 
 		{
@@ -68,7 +38,7 @@
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iId : '20' ,iCmdToExecute : 'D' , iCmdType : "CMD_X10_READ"}),
+				data: ({iId : '18' ,iCmdToExecute : 'I' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
 				success: onSuccess2
@@ -80,16 +50,6 @@
 		
 		$('.container').text("DEBUG LOG START");
 		$('.container').append(data);
-		var reg1=new RegExp("Response : (\d*)","g");
-		$('.container').append("DEBUG LOG END --");
-		$('.container').append(iTypeRequest);
-		var myRegexp = /Response : (\d*)/g;
-				var match2 = myRegexp.exec(data);
-		//$('.container').append(match2[1]);
-		var aIntValue=parseInt(match2[1]);
-		var aFloat=parseFloat(aIntValue);
-		aFloat=aFloat/10;
-		$('.container').append(aFloat);
 		}
 		
 		function onSuccess2(data)
@@ -104,13 +64,11 @@
 		</div>
 		<div data-role="content">
 		PAGE DE TEST--le capteur est dans ma chambre en ce moment est pas encore sur la terrasse
-			<input id="Bopen" type="button" name="open" value="Temperature"/>
-			<input id="BHumidite" type="button" name="huminide" value="Humidite"/>
-			<input id="Bluminosite" type="button" name="lumiere" value="Luminosite"/>
+			<input id="Bluminosite" type="button" name="lumiere" value="Ping avec reponse(debug only)"/>
 			Response :
 			<div class="container">
 			</div>
-			<input id="Bping" type="button" name="open" value="Ping entree(debug only)"/>
+			<input id="Bping" type="button" name="open" value="Ping sans reponse(debug only)"/>
 		</div>
 	</div>
 	</body>

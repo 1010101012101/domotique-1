@@ -17,6 +17,9 @@ parser.add_option("-o", "--originator",action="store",dest="aOriginator",default
 aCurrentDateTime = datetime.datetime.now()
 aLogLine = "DATE: " + str(aCurrentDateTime) + " ORIGIN: " + options.aOriginator + " CMD: " + options.aMsgToSend + " ID: " + options.aRequestorId
 print ("Log line : " + aLogLine)
+aLogFile = open("/var/www/Logs/logs.txt", "a")
+aLogFile.write(aLogLine+"\n")
+aLogFile.close()
 
 print ("Open virtual serial port")
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
@@ -37,12 +40,20 @@ while aLoopIndex <= int(options.aTimeout):
     if(aResponse != ""):
         print ("Response : " + aResponse)
         expires = aCurrentDateTime
-        #("INSERT INTO token VALUES (?, ?)", (token, expires))
-        c.execute("INSERT INTO measures (id, timestamp, value) VALUES (?,?,?)",(options.aRequestorId,expires,float(aResponse)))
-        conn.commit()
-        print c.fetchone()
-        conn.close()
-        sys.exit(0)
+        if("ID" in aResponse):
+            aValueReceived = (aResponse.split('_')[1]).split(':')[1]
+            c.execute("INSERT INTO measures (id, timestamp, value) VALUES (?,?,?)",(options.aRequestorId,expires,float(aValueReceived)))
+            conn.commit()
+            print c.fetchone()
+            conn.close()
+            sys.exit(0)
+        else:
+            #("INSERT INTO token VALUES (?, ?)", (token, expires))
+            c.execute("INSERT INTO measures (id, timestamp, value) VALUES (?,?,?)",(options.aRequestorId,expires,float(aResponse)))
+            conn.commit()
+            print c.fetchone()
+            conn.close()
+            sys.exit(0)
     aLoopIndex=aLoopIndex+1
     time.sleep(1)
 sys.exit(1)

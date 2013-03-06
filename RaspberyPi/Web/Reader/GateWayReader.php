@@ -64,7 +64,7 @@
 			
 			case "CMD_X10_READ" :
 			$aRequestId = $_REQUEST["iCmdToExecute"];
-			if(($aRequestId == 'D')||($aRequestId == 'E')||($aRequestId == 'F')||($aRequestId == 'G'))
+			if(($aRequestId == 'D')||($aRequestId == 'E')||($aRequestId == 'F')||($aRequestId == 'G')||($aRequestId == 'I')||($aRequestId == 'J'))
 			{
 			$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . " -i " . $_REQUEST['iId'] . " -s " . '"' . $aRequestId . '"';
 			$output = array();
