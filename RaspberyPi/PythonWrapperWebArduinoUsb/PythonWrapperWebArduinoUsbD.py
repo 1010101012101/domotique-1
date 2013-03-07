@@ -9,14 +9,14 @@ import sys
 import sqlite3
 from optparse import OptionParser
 
-parser = OptionParser(usage="usage: %prog [options] filename",version="%prog 1.0")
-parser.add_option("-s", "--send",action="store",dest="aMsgToSend",default="20",help="Command to send to Arduino Leonardo")
+parser = OptionParser(usage="usage: %prog [options]",version="%prog 1.0")
+parser.add_option("-p", "--port",action="store",dest="aPortToUse",default="50007",help="the port to listen")
 (options, args) = parser.parse_args()
 
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 
 host = ''
-port = 50007
+port = int(options.aPortToUse)
 backlog = 5
 size = 1024
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -62,6 +62,9 @@ while 1:
             if data:
                 print ("Writting input to USB port and sending back to sender")
                 aCurrentDateTime = datetime.datetime.now()
+                aCmdFromData=(data.split('_')[0]).split(':')[1]
+                aIdFromData=(data.split('_')[1]).split(':')[1]
+                aOriginFromData=(data.split('_')[2]).split(':')[1]
                 aLogLine = "DATE: " + str(aCurrentDateTime) + " ORIGIN: "  + " CMD: " + data + " ID: " 
                 print ("Log line : " + aLogLine)
                 aLogFile = open("/var/www/Logs/logs.txt", "a")
