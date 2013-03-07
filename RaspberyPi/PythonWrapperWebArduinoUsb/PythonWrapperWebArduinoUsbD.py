@@ -65,12 +65,12 @@ while 1:
                 aCmdFromData=(data.split('_')[0]).split(':')[1]
                 aIdFromData=(data.split('_')[1]).split(':')[1]
                 aOriginFromData=(data.split('_')[2]).split(':')[1]
-                aLogLine = "DATE: " + str(aCurrentDateTime) + " ORIGIN: "  + " CMD: " + data + " ID: " 
+                aLogLine = "DATE: " + str(aCurrentDateTime) + " ORIGIN: " + aOriginFromData  + " CMD: " + aCmdFromData + " ID: " +aIdFromData
                 print ("Log line : " + aLogLine)
                 aLogFile = open("/var/www/Logs/logs.txt", "a")
                 aLogFile.write(aLogLine+"\n")
                 aLogFile.close()
-                fd.write(data)
+                fd.write(aCmdFromData)
                 s.send(data)
             else:
                 print ("Closing socket")
