@@ -22,7 +22,7 @@ size = 1024
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host,port))
 server.listen(backlog)
-input = [server,sys.stdin,fd]
+input = [server,fd]
 while 1:
     inputready,outputready,exceptready = select.select(input,[],[])
 
@@ -32,12 +32,6 @@ while 1:
             print ("handle the server socket")
             client, address = server.accept()
             input.append(client)
-
-        elif s == sys.stdin:
-            print ("handle standard input")
-            aInput = sys.stdin.readline()
-            print ("input is : " + aInput)
-            fd.write(aInput)
             
         elif s == fd:
             print ("handle USB port input")
@@ -65,7 +59,7 @@ while 1:
                 aCmdFromData=(data.split('_')[0]).split(':')[1]
                 aIdFromData=(data.split('_')[1]).split(':')[1]
                 aOriginFromData=(data.split('_')[2]).split(':')[1]
-                aLogLine = "DATE: " + str(aCurrentDateTime) + " ORIGIN: " + aOriginFromData  + " CMD: " + aCmdFromData + " ID: " +aIdFromData
+                aLogLine = "(V2)DATE: " + str(aCurrentDateTime) + " ORIGIN: " + aOriginFromData  + " CMD: " + aCmdFromData + " ID: " +aIdFromData
                 print ("Log line : " + aLogLine)
                 aLogFile = open("/var/www/Logs/logs.txt", "a")
                 aLogFile.write(aLogLine+"\n")
