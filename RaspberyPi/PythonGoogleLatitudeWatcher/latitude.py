@@ -38,7 +38,10 @@ __author__ = 'jcgregorio@google.com (Joe Gregorio)'
 import gflags
 import httplib2
 import logging
+import geopy
+import geopy.distance
 import os
+import math
 import json
 import datetime
 import pprint
@@ -86,9 +89,10 @@ with information from the APIs Console <https://code.google.com/apis/console>.
 FLOW = flow_from_clientsecrets(CLIENT_SECRETS,
     scope='https://www.googleapis.com/auth/latitude.all.best',
     message=MISSING_CLIENT_SECRETS_MESSAGE)
+CHARLES_HOME_LONGITUDE = 7.07532
+CHARLES_HOME_LATITUDE = 43.618244
 
-
-         
+        
 def main(argv):
   # Let the gflags module process the command-line arguments
   try:
@@ -118,11 +122,18 @@ def main(argv):
 
   try:
     aCurrentLocation = service.currentLocation().get(granularity='best').execute()
-    print str(aCurrentLocation)
+    print (str(aCurrentLocation))
     #aCurrentLocationJson = json.loads(aCurrentLocation)
     aTimeStamp = float(aCurrentLocation["timestampMs"])
     aDate = dt_from_epoch(aTimeStamp)
-    print str(aDate)
+   
+    pt1 = geopy.Point(CHARLES_HOME_LATITUDE, CHARLES_HOME_LONGITUDE)
+    pt2 = geopy.Point(float(aCurrentLocation["latitude"]), float(aCurrentLocation["longitude"]))
+   
+    dist = geopy.distance.distance(pt1, pt2).km
+   
+    #dist = math.sqrt( ( float(aCurrentLocation["latitude"]) - CHARLES_HOME_LATITUDE)**2 + (float(aCurrentLocation["longitude"]) - CHARLES_HOME_LONGITUDE)**2 )
+    print ("Distance was : " + str(dist) + " km at "  + str(aDate))
 
   except AccessTokenRefreshError:
     print ("The credentials have been revoked or expired, please re-run"
