@@ -28,7 +28,8 @@
 				?>
 		</div>
 		<div data-role="content">	
-			<a href="charles.php" data-role="button">Charles</a>	
+			<a href="charles.php" data-role="button">Charles</a>
+            <a href="charles_mobile.php" data-role="button">charles_mobile</a>            
 			<a href="salon.php" data-role="button">Salon</a> 
 			<a href="entree.php" data-role="button">Entree</a>			
 			<a href="SalleDeBain.php" data-role="button">Salle de bain</a>

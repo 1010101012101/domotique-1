@@ -176,7 +176,14 @@ void loop()
   if (Serial.available() > 0) {
     // read incoming serial data:
     _UsbCmdReceived = Serial.read();
-    _CmdReceived = _UsbCmdReceived - 48;
+    if (_UsbCmdReceived > 47)
+    {
+        _CmdReceived = _UsbCmdReceived - 48;
+    }
+    else
+    {
+        _CmdReceived = _UsbCmdReceived - 0;
+    }
     // Type the next ASCII value from what you received:
     //flashPin(_OutPinLedTest, 3, 200);
   }
@@ -340,6 +347,18 @@ void loop()
     unsigned int aCmd=5;
     //unsigned long aAdrr=0x406b7b64;
     unsigned long aAdrr=0x400a3e5d;
+    sendZigBeeMsg(aCmd,aAdrr);
+  }
+  else if(_CmdReceived==30)  // 'J'
+  {
+    unsigned int aCmd=30;
+    unsigned long aAdrr=0x408CCB53;
+    sendZigBeeMsg(aCmd,aAdrr);
+  }
+  else if(_CmdReceived==31)  // 'J'
+  {
+    unsigned int aCmd=31;
+    unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
   if (_DataToSend!=0)

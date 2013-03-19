@@ -17,8 +17,7 @@
 
 """Simple command-line example for Latitude.
 
-Command-line application that sets the users
-current location.
+Command-line application that get the user current location.
 
 Usage:
   $ python latitude.py
@@ -27,22 +26,17 @@ You can also get help on all the command-line flags the program understands
 by running:
 
   $ python latitude.py --help
-
-To get detailed log output run:
-
-  $ python latitude.py --logging_level=DEBUG
 """
-
+#original author 'jcgregorio@google.com (Joe Gregorio)'
 __author__ = 'jcgregorio@google.com (Joe Gregorio)'
 
+#Import section
 import gflags
 import httplib2
 import logging
 import geopy
 import geopy.distance
 import os
-import math
-import json
 import datetime
 import pprint
 import sys
@@ -53,6 +47,7 @@ from oauth2client.client import AccessTokenRefreshError
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.tools import run
 
+#Usefull functions section
 def dt_from_epoch(epoch):
     epoch = int(epoch)
     secs = epoch/1000
@@ -62,37 +57,19 @@ def dt_from_epoch(epoch):
     dt.replace(microsecond=mils*1000)
     return dt
 
-
+#Const definition section
 FLAGS = gflags.FLAGS
-
-# CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
-# application, including client_id and client_secret, which are found
-# on the API Access tab on the Google APIs
-# Console <http://code.google.com/apis/console>
+# CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this application, including client_id and client_secret, which are found on the API Access tab on the Google APIs Console <http://code.google.com/apis/console>
 CLIENT_SECRETS = 'client_secrets.json'
-
-# Helpful message to display in the browser if the CLIENT_SECRETS file
-# is missing.
-MISSING_CLIENT_SECRETS_MESSAGE = """
-WARNING: Please configure OAuth 2.0
-
-To make this sample run you will need to populate the client_secrets.json file
-found at:
-
-   %s
-
-with information from the APIs Console <https://code.google.com/apis/console>.
-
-""" % os.path.join(os.path.dirname(__file__), CLIENT_SECRETS)
-
+# Helpful message to display in the browser if the CLIENT_SECRETS file is missing.
+MISSING_CLIENT_SECRETS_MESSAGE = "OAuth 2.0 is not properly configure. Please fill the file " + CLIENT_SECRETS + " with info found on google api console."
+# My home geocoord use to calculate how far I am 
+CHARLES_HOME_GEOPY_LOCATION = geopy.Point(43.618244, 7.07532)
 # Set up a Flow object to be used if we need to authenticate.
-FLOW = flow_from_clientsecrets(CLIENT_SECRETS,
-    scope='https://www.googleapis.com/auth/latitude.all.best',
-    message=MISSING_CLIENT_SECRETS_MESSAGE)
-CHARLES_HOME_LONGITUDE = 7.07532
-CHARLES_HOME_LATITUDE = 43.618244
+FLOW = flow_from_clientsecrets(CLIENT_SECRETS, scope='https://www.googleapis.com/auth/latitude.all.best', message=MISSING_CLIENT_SECRETS_MESSAGE)
 
-        
+
+#main section        
 def main(argv):
   # Let the gflags module process the command-line arguments
   try:
@@ -104,17 +81,14 @@ def main(argv):
   # Set the logging according to the command-line flag
   logging.basicConfig(filename='Logs.log',level=logging.DEBUG)
 
-  # If the Credentials don't exist or are invalid run through the native client
-  # flow. The Storage object will ensure that if successful the good
-  # Credentials will get written back to a file.
+  # If the Credentials don't exist or are invalid run through the native client flow. The Storage object will ensure that if successful the good Credentials will get written back to a file.
   storage = Storage('latitude.dat')
   credentials = storage.get()
 
   if credentials is None or credentials.invalid:
     credentials = run(FLOW, storage)
 
-  # Create an httplib2.Http object to handle our HTTP requests and authorize it
-  # with our good Credentials.
+  # Create an httplib2.Http object to handle our HTTP requests and authorize it with our good Credentials.
   http = httplib2.Http()
   http = credentials.authorize(http)
 
@@ -123,16 +97,13 @@ def main(argv):
   try:
     aCurrentLocation = service.currentLocation().get(granularity='best').execute()
     print (str(aCurrentLocation))
-    #aCurrentLocationJson = json.loads(aCurrentLocation)
+
     aTimeStamp = float(aCurrentLocation["timestampMs"])
     aDate = dt_from_epoch(aTimeStamp)
    
-    pt1 = geopy.Point(CHARLES_HOME_LATITUDE, CHARLES_HOME_LONGITUDE)
     pt2 = geopy.Point(float(aCurrentLocation["latitude"]), float(aCurrentLocation["longitude"]))
    
-    dist = geopy.distance.distance(pt1, pt2).km
-   
-    #dist = math.sqrt( ( float(aCurrentLocation["latitude"]) - CHARLES_HOME_LATITUDE)**2 + (float(aCurrentLocation["longitude"]) - CHARLES_HOME_LONGITUDE)**2 )
+    dist = geopy.distance.distance(CHARLES_HOME_GEOPY_LOCATION, pt2).km
     print ("Distance was : " + str(dist) + " km at "  + str(aDate))
 
   except AccessTokenRefreshError:

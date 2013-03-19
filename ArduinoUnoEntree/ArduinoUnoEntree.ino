@@ -177,13 +177,13 @@ void loop()
     unsigned int aCommand = 3;
     sendZigBeeMsg(aCommand, aReceiver);
   }
-  else if(_CmdReceived==1)
+  else if((_CmdReceived==1)||(_CmdReceived==32))
   {
      _DataToSend=analogRead(_InPinLedMeasure);
     Serial.print("Light Value : ");
     Serial.println(_DataToSend);
   }
-  else if((_CmdReceived==2)||(_CmdReceived==3))
+  else if((_CmdReceived==2)||(_CmdReceived==3)||(_CmdReceived==30)||(_CmdReceived==31))
   {
     delay(50);
     DHT22_ERROR_t errorCode;
@@ -202,11 +202,11 @@ void loop()
       Serial.print("/");
       Serial.print(_Dht22.getHumidityAsInt());
       Serial.println("%");
-      if (_CmdReceived==2)
+      if ((_CmdReceived==2)||(_CmdReceived==30))
       {
         _DataToSend=_Dht22.getTemperatureCAsInt();
       }
-      else if(_CmdReceived==3)
+      else if((_CmdReceived==3)||(_CmdReceived==31))
       {
         _DataToSend=_Dht22.getHumidityAsInt();
       }
@@ -242,14 +242,17 @@ void loop()
     //Send the response if necessary
   if(_DataToSend!=0)
   {
-    uint8_t aPayload[2];
+    uint8_t aPayload[3];
 
-    aPayload[0] = _DataToSend & 0xff; //LSB
+    aPayload[0] = _CmdReceived; //LSB
     Serial.print("Data0: 0x");
     Serial.println(aPayload[0], HEX);
-    aPayload[1] = (_DataToSend >> 8) & 0xff; //MSB
-    Serial.print("Data1: 0x");
+    aPayload[1] = _DataToSend & 0xff; //LSB
+    Serial.print("Data0: 0x");
     Serial.println(aPayload[1], HEX);
+    aPayload[2] = (_DataToSend >> 8) & 0xff; //MSB
+    Serial.print("Data1: 0x");
+    Serial.println(aPayload[2], HEX);
 
     // Specify the address of the remote XBee (this is the SH + SL)
     XBeeAddress64 aAddr64 = XBeeAddress64(0x0013a200, 0x400a3e5e);
