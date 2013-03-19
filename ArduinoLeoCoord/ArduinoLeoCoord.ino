@@ -331,31 +331,30 @@ void loop()
   else if(_CmdReceived==24)
   {
     unsigned int aCmd=4;
-    //unsigned long aAdrr=0x406b7b64;
     unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
-  else if(_CmdReceived==25)  // 'I'
+  else if(_CmdReceived==25)
   {
     unsigned int aCmd=4;
     //unsigned long aAdrr=0x406b7b64;
     unsigned long aAdrr=0x400a3e5d;
     sendZigBeeMsg(aCmd,aAdrr);
   }
-  else if(_CmdReceived==26)  // 'J'
+  else if(_CmdReceived==26)
   {
     unsigned int aCmd=5;
     //unsigned long aAdrr=0x406b7b64;
     unsigned long aAdrr=0x400a3e5d;
     sendZigBeeMsg(aCmd,aAdrr);
   }
-  else if(_CmdReceived==30)  // 'J'
+  else if(_CmdReceived==30)
   {
     unsigned int aCmd=30;
     unsigned long aAdrr=0x408CCB53;
     sendZigBeeMsg(aCmd,aAdrr);
   }
-  else if(_CmdReceived==31)  // 'J'
+  else if(_CmdReceived==31)
   {
     unsigned int aCmd=31;
     unsigned long aAdrr=0x408CCB53;

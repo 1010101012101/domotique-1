@@ -142,33 +142,33 @@ void loop()
   }
 
   //Do the real action
-  if(_CmdReceived==4)
+  if(_CmdReceived==34)
   {
     //This command allow the master to turn the light on
     //flashPin(_OutPinRelay, _CmdReceived, 400);
     digitalWrite(_OutPinRelay, HIGH);
   }
-  else if(_CmdReceived==5)
+  else if(_CmdReceived==35)
   {
     
     //This command allow the master to turn the light off
     digitalWrite(_OutPinRelay, LOW);
   }
-  else if(_CmdReceived==6)
+  else if(_CmdReceived==36)
   {
     //This command allow to trig the "user detected" even
     digitalWrite(_OutPinRelay, HIGH);
     MsTimer2::start(); // active Timer 2 
   }
-  else if(_CmdReceived==7)
+  else if(_CmdReceived==37)
   {
      _AllowAutoLight=1;
   }
-  else if(_CmdReceived==8)
+  else if(_CmdReceived==38)
   {
      _AllowAutoLight=0;
   }
-  else if(_CmdReceived==9)
+  else if(_CmdReceived==33)
   {
   //for debuging; simulate light on event
      //2/Send the detection info to central
@@ -177,13 +177,13 @@ void loop()
     unsigned int aCommand = 3;
     sendZigBeeMsg(aCommand, aReceiver);
   }
-  else if((_CmdReceived==1)||(_CmdReceived==32))
+  else if(_CmdReceived==32)
   {
      _DataToSend=analogRead(_InPinLedMeasure);
     Serial.print("Light Value : ");
     Serial.println(_DataToSend);
   }
-  else if((_CmdReceived==2)||(_CmdReceived==3)||(_CmdReceived==30)||(_CmdReceived==31))
+  else if((_CmdReceived==30)||(_CmdReceived==31))
   {
     delay(50);
     DHT22_ERROR_t errorCode;
