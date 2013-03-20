@@ -64,9 +64,10 @@
 			
 			case "CMD_X10_READ" :
 			$aRequestId = $_REQUEST["iCmdToExecute"];
-			if(($aRequestId == 'D')||($aRequestId == 'E')||($aRequestId == 'F')||($aRequestId == 'G')||($aRequestId == 'I')||($aRequestId == 'J'))
+			if(($aRequestId == '30')||($aRequestId == '31')||($aRequestId == '40')||($aRequestId == '41'))
 			{
-			$aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -i " . $_REQUEST['iId'] . " -s " . '"' . $aRequestId . '"';
+			//$aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -i " . $_REQUEST['iId'] . " -s " . '"' . $aRequestId . '"';
+            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $aRequestId ;
 			$output = array();
 			exec($aCommandToExecute, $output);
 			print(json_encode($output));

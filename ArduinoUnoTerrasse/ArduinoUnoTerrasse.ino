@@ -74,13 +74,13 @@ void loop() {
   }
 
   //Test if we have an action to do 
-  if(_CmdReceived==4)
+  if(_CmdReceived==40)
   {
     flashPin(_OutPinLed4, 1, 250);
   }
-  else if(_CmdReceived==5)
+  else if(_CmdReceived==41)
   {
-    _DataToSend=analogRead(_InPinLedMeasure);
+    //_DataToSend=analogRead(_InPinLedMeasure);
 	_DataToSend=456;
   }
   else

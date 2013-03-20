@@ -15,41 +15,39 @@
 	<script type="text/javascript">
 
 		
-		$("#Bluminosite").click(function() 
+		$("#Button_PingAvecReponse").click(function() 
 		{
-			var aTypeRequest="luminere";
 			$.ajax(
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iId : '19' ,iCmdToExecute : 'J' , iCmdType : "CMD_X10_READ"}),
+				data: ({iCmdToExecute : '41' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
-				success:  function(data) {
-       onSuccess(data, aTypeRequest);
-     }
+				success:  function(data) 
+                {
+                    onSuccess(data);
+                }
 			});
         });
 		
-		
-		$("#Bping").click(function() 
+		$("#Button_PingSansReponse").click(function() 
 		{
 			$.ajax(
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iId : '18' ,iCmdToExecute : 'I' , iCmdType : "CMD_X10_READ"}),
+				data: ({iCmdToExecute : '40' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
 				success: onSuccess2
 			});
         });
 		
-		function onSuccess(data,iTypeRequest)
+		function onSuccess(data)
 		{
-		
-		$('.container').text("DEBUG LOG START");
-		$('.container').append(data);
+            $('.container').text("DEBUG LOG START");
+            $('.container').append(data);
 		}
 		
 		function onSuccess2(data)
@@ -64,11 +62,11 @@
 		</div>
 		<div data-role="content">
 		PAGE DE TEST--le capteur est dans ma chambre en ce moment est pas encore sur la terrasse
-			<input id="Bluminosite" type="button" name="lumiere" value="Ping avec reponse(debug only)"/>
+			<input id="Button_PingAvecReponse" type="button" name="Button_PingAvecReponse" value="Ping avec reponse(debug only)"/>
 			Response :
 			<div class="container">
 			</div>
-			<input id="Bping" type="button" name="open" value="Ping sans reponse(debug only)"/>
+			<input id="Button_PingSansReponse" type="button" name="Button_PingSansReponse" value="Ping sans reponse(debug only)"/>
 		</div>
 	</div>
 	</body>

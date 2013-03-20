@@ -21,6 +21,8 @@ ZBRxResponse _ZbRxResp = ZBRxResponse(); //Create reusable response objects for 
 const int _OutPinLedTest = 7;
 const int PIN_BOUTON_ON = 4;
 const int PIN_BOUTON_OFF = 3;
+unsigned long ENTREE_ADDR=0x408CCB53;
+unsigned long TERRASSE_ADDR=0x400a3e5d;
 
 // Fields used for serial and byte message reception
 unsigned long sdReceived;
@@ -92,6 +94,10 @@ void flashPin(int pin, int times, int wait)
       delay(wait);
     }
   }
+}
+
+void processCommandReceivedFromUsb(int iCommande) 
+{
 }
 
 void sendZigBeeMsg(unsigned int iPayLoad, unsigned long iAddrToTarget)
@@ -184,8 +190,6 @@ void loop()
     {
         _CmdReceived = _UsbCmdReceived - 0;
     }
-    // Type the next ASCII value from what you received:
-    //flashPin(_OutPinLedTest, 3, 200);
   }
  
  //Read button status
@@ -214,25 +218,14 @@ void loop()
   //}
   
   //Process the command
-  //Test if we have an action to do 
-  if(_CmdReceived==2)
-  {
-    unsigned int aCmd=5;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
-  }
-  else if(_CmdReceived==3)
+  //Test if we have an action to do en commencant par une commande de debug
+  if(_CmdReceived==3)
   {
     flashPin(_OutPinLedTest, 3, 200);
     delay(10);
     Serial.println("ACK_1");
   }
-  else if(_CmdReceived==4)
-  {
-    unsigned int aCmd=4;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
-  }
+  //Test des commandes pour le X10
   else if(_CmdReceived==5)
   {
     x10ex.sendCmd('A', 4, CMD_ON, 1);
@@ -243,12 +236,10 @@ void loop()
   }
   else if(_CmdReceived==7)
   {
-    //flashPin(_OutPinLedTest, 2, 200);
     x10ex.sendCmd('A', 5, CMD_BRIGHT, 1);
   }
   else if(_CmdReceived==8)
   {
-    //flashPin(_OutPinLedTest, 6, 200);
     x10ex.sendCmd('A', 5, CMD_DIM, 1);
   }
   else if(_CmdReceived==9)
@@ -275,24 +266,6 @@ void loop()
   {
     x10ex.sendCmd('A', 6, CMD_OFF, 1);
   }
-  else if(_CmdReceived==15)
-  {
-    unsigned int aCmd=6;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
-  }
-  else if(_CmdReceived==16)
-  {
-    unsigned int aCmd=7;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
-  }
-  else if(_CmdReceived==17)
-  {
-    unsigned int aCmd=8;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
-  }
   else if(_CmdReceived==18)
   {
     x10ex.sendCmd('A', 8, CMD_ON, 1);
@@ -301,65 +274,76 @@ void loop()
   {
     x10ex.sendCmd('A', 8, CMD_OFF, 1);
   }
+  //Debut des commandes pour ENTREE
+  else if(_CmdReceived==2)
+  {
+    unsigned int aCmd=35;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==4)
+  {
+    unsigned int aCmd=34;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==15)
+  {
+    unsigned int aCmd=36;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==16)
+  {
+    unsigned int aCmd=37;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==17)
+  {
+    unsigned int aCmd=38;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
+  }
   else if(_CmdReceived==20)
   {
-    unsigned int aCmd=9;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
+    unsigned int aCmd=33;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
   }
   else if(_CmdReceived==21)
   {
-    unsigned int aCmd=2;
-    //unsigned long aAdrr=0x406b7b64;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
+    unsigned int aCmd=30;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
   }
   else if(_CmdReceived==22)
   {
-    unsigned int aCmd=3;
-    //unsigned long aAdrr=0x406b7b64;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
+    unsigned int aCmd=31;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
   }
   else if(_CmdReceived==23)
   {
-    unsigned int aCmd=1;
-    //unsigned long aAdrr=0x406b7b64;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
+    unsigned int aCmd=32;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
   }
   else if(_CmdReceived==24)
   {
-    unsigned int aCmd=4;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
-  }
-  else if(_CmdReceived==25)
-  {
-    unsigned int aCmd=4;
-    //unsigned long aAdrr=0x406b7b64;
-    unsigned long aAdrr=0x400a3e5d;
-    sendZigBeeMsg(aCmd,aAdrr);
-  }
-  else if(_CmdReceived==26)
-  {
-    unsigned int aCmd=5;
-    //unsigned long aAdrr=0x406b7b64;
-    unsigned long aAdrr=0x400a3e5d;
-    sendZigBeeMsg(aCmd,aAdrr);
+    unsigned int aCmd=34;
+    sendZigBeeMsg(aCmd,ENTREE_ADDR);
   }
   else if(_CmdReceived==30)
   {
-    unsigned int aCmd=30;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==31)
   {
-    unsigned int aCmd=31;
-    unsigned long aAdrr=0x408CCB53;
-    sendZigBeeMsg(aCmd,aAdrr);
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
   }
+  //Debut des commandes TERRASSE
+  else if(_CmdReceived==40)
+  {
+    sendZigBeeMsg(_CmdReceived,TERRASSE_ADDR);
+  }
+  else if(_CmdReceived==41)
+  {
+    sendZigBeeMsg(_CmdReceived,TERRASSE_ADDR);
+  }
+  
+  //Si on doit renvoyer qq chose sur le port USB (une reponse d un capteur)
   if (_DataToSend!=0)
   {
     delay(10);
@@ -375,7 +359,6 @@ void loop()
     Serial.println(_DataToSend);
 	}
   }
-
 }
 
 void printX10Message(const char type[], char house, byte unit, byte command, byte extData, byte extCommand, int remainingBits)

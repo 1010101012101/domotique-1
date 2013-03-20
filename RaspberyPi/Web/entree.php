@@ -3,11 +3,9 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Xbee handler</title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-
-    
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	</head>
 	<body> 
 	
@@ -22,7 +20,7 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '8', iCmdToExecute : "2" , iCmdType : "CMD_READ"}),
+                    data: ({iId : '8', iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess
@@ -32,7 +30,7 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '20', iCmdToExecute : "2" , iCmdType : "CMD_READ_VALUE_DB"}),
+                    data: ({iId : '30', iCmdType : "CMD_READ_VALUE_DB"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess4
@@ -42,7 +40,7 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '21', iCmdToExecute : "2" , iCmdType : "CMD_READ_VALUE_DB"}),
+                    data: ({iId : '31' , iCmdType : "CMD_READ_VALUE_DB"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess4
@@ -52,80 +50,73 @@
 				{
 					if((data[0].id==8)&&(data[0].status=="on"))
 					{
-						$('#flip-2').val('on').slider("refresh");
+						$('#Flip_LumiereAuto').val('on').slider("refresh");
 					}
 				}
 				
 				function onSuccess4(data)
 				{
-				if (data[0]["id"]=="20")
-				{
-				$('.Temperature').append("Derniere temperature : ");
-var aIntValue=parseInt(data[0]["value"]);
-		var aFloat=parseFloat(aIntValue);
-		aFloat=aFloat/10;
-		$('.Temperature').append(aFloat);
-		$('.Temperature').append(" degre releve le : ");
-		$('.Temperature').append(data[0]["timestamp"]);
-		}
-		else
-		{
-		$('.Humidite').append("Derniere humidite : ");
-var aIntValue=parseInt(data[0]["value"]);
-		var aFloat=parseFloat(aIntValue);
-		aFloat=aFloat/10;
-		$('.Humidite').append(aFloat);
-		$('.Humidite').append(" % humidite relative releve le : ");
-		$('.Humidite').append(data[0]["timestamp"]);
-		}
+                    if (data[0]["id"]=="30")
+                    {
+                        $('.Temperature').append("Derniere temperature : ");
+                        var aIntValue=parseInt(data[0]["value"]);
+                        var aFloat=parseFloat(aIntValue);
+                        aFloat=aFloat/10;
+                        $('.Temperature').append(aFloat);
+                        $('.Temperature').append(" degre releve le : ");
+                        $('.Temperature').append(data[0]["timestamp"]);
+                    }
+                    else
+                    {
+                        $('.Humidite').append("Derniere humidite : ");
+                        var aIntValue=parseInt(data[0]["value"]);
+                        var aFloat=parseFloat(aIntValue);
+                        aFloat=aFloat/10;
+                        $('.Humidite').append(aFloat);
+                        $('.Humidite').append(" % humidite relative releve le : ");
+                        $('.Humidite').append(data[0]["timestamp"]);
+                    }
 				}
-				
-
-
             });
         });
 		
-				$("#Bopen").click(function() 
+		$("#Button_RefreshTemperature").click(function() 
 		{
-			var aTypeRequest="temperature";
 			$.ajax(
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iId : '20' ,iCmdToExecute : 'E' , iCmdType : "CMD_X10_READ"}),
+				data: ({iCmdToExecute : '30' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
-				success:  function(data) {
-       onSuccess2(data, aTypeRequest);
-     }
+				success:  function(data) 
+                {
+                    onSuccess2(data);
+                }
 			});
         });
 		
-				$("#BHumidite").click(function() 
+		$("#Button_RefreshHumidite").click(function() 
 		{
-			var aTypeRequest="humidite";
 			$.ajax(
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iId : '21' ,iCmdToExecute : 'F' , iCmdType : "CMD_X10_READ"}),
+				data: ({iCmdToExecute : '31' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
-				success: function(data) {
-       onSuccess2(data, aTypeRequest);
-     }
+				success: function(data) 
+                {
+                    onSuccess2(data);
+                }
 			});
         });
 		
-				function onSuccess2(data,iTypeRequest)
+		function onSuccess2(data)
 		{
-	
 		}
 		
-		
-	
-		
-		$("#VoletUp").click(function() 
+		$("#Button_AllumerLumiere").click(function() 
 		{
 			$.ajax(
 			{
@@ -138,7 +129,7 @@ var aIntValue=parseInt(data[0]["value"]);
 			});
         });
 		
-		$("#VoletDown").click(function() 
+		$("#Button_EteindreLumiere").click(function() 
 		{
 			$.ajax(
 			{
@@ -151,20 +142,7 @@ var aIntValue=parseInt(data[0]["value"]);
 			});
         });
 		
-		$("#test").click(function() 
-		{
-			$.ajax(
-			{
-				type: "POST",
-				url: "./Sender/XbeeWrapper.php",
-				data: ({iId : '5' ,iCmdToExecute : '?' , iCmdType : "CMD_X10"}),
-				cache: false,
-				dataType: "text",
-				success: onSuccess
-			});
-        });
-		
-		$( "#flip-2" ).on( 'slidestop', function( event ) 
+		$( "#Flip_LumiereAuto" ).on( 'slidestop', function( event ) 
 		{ 
 			sVal = $(this).val();
 			var theName;
@@ -177,7 +155,7 @@ var aIntValue=parseInt(data[0]["value"]);
 				theName = 'A';
 			}
                $.ajax(
-			{
+                {
 				type: "POST",
                    url: "./Sender/XbeeWrapper.php",
                    data: ({iId : '8' , iStatus : sVal,iCmdToExecute: theName , iCmdType : "CMD_X10"}),
@@ -186,7 +164,6 @@ var aIntValue=parseInt(data[0]["value"]);
                    success: onSuccess
                });		
 		});
-		
 		
 		function onSuccess(data)
 		{
@@ -199,18 +176,18 @@ var aIntValue=parseInt(data[0]["value"]);
 			?>
 		</div>
 		<div data-role="content">	
-			<label for="flip-2">Lumiere auto:</label>
-			<select name="flip-2" id="flip-2" data-role="slider">
+			<label for="Flip_LumiereAuto">Lumiere auto:</label>
+			<select name="Flip_LumiereAuto" id="Flip_LumiereAuto" data-role="slider">
 				<option value="off">Desactiver</option>
 				<option value="on">Activer</option>
 			</select> 
-			<input id="VoletUp" type="button" name="VoletUp" value="Allumer lumiere"/>
-			<input id="VoletDown" type="button" name="VoletDown" value="Eteindre lumiere - Beta" disabled/>
-			<input id="Bopen" type="button" name="open" value="Refresh Temperature"/>
+			<input id="Button_AllumerLumiere" type="button" name="Button_AllumerLumiere" value="Allumer lumiere"/>
+			<input id="Button_EteindreLumiere" type="button" name="Button_EteindreLumiere" value="Eteindre lumiere - Beta" disabled/>
+			<input id="Button_RefreshTemperature" type="button" name="Button_RefreshTemperature" value="Refresh Temperature"/>
 			Temperature :
 			<div class="Temperature">
 			</div>
-			<input id="BHumidite" type="button" name="huminide" value="Refresh Humidite"/>
+			<input id="Button_RefreshHumidite" type="button" name="Button_RefreshHumidite" value="Refresh Humidite"/>
 			Response :
 			<div class="Humidite">
 			</div>

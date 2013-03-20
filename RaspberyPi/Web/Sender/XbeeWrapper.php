@@ -5,7 +5,8 @@
 	switch($aCmdType) 
 		{
 			case "CMD_X10" :
-			$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . "-i " . $_REQUEST['iId'] . " -s " . '"' . $_REQUEST["iCmdToExecute"] . '"';
+			//$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . "-i " . $_REQUEST['iId'] . " -s " . '"' . $_REQUEST["iCmdToExecute"] . '"';
+            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $_REQUEST["iCmdToExecute"] ;
 			$output = array();
 			exec($aCommandToExecute, $output);
 			print(json_encode($output));
