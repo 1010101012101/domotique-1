@@ -158,7 +158,7 @@
                 {
 				type: "POST",
                    url: "./Sender/XbeeWrapper.php",
-                   data: ({iId : '8' , iStatus : sVal,iCmdToExecute: theName , iCmdType : "CMD_X10"}),
+                   data: ({iId : '8' , iStatus : sVal, iCmdToExecute: theName , iCmdType : "CMD_X10"}),
                    cache: false,
                    dataType: "text",
                    success: onSuccess

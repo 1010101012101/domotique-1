@@ -30,11 +30,11 @@
 				{
 					if((data[0].id==4)&&(data[0].status=="on"))
 					{
-						$('#flip-1').val('on').slider("refresh");
+						$('#Flip_LumierePrincipale').val('on').slider("refresh");
 					}
 					if((data[2].id==6)&&(data[2].status=="on"))
 					{
-						$('#flip-2').val('on').slider("refresh");
+						$('#Flip_LumiereSecondaire').val('on').slider("refresh");
 					}
 				}
 				
@@ -52,7 +52,7 @@
 				{
 					if(data=="0")
 					{
-						$('#flip-3').val('on').slider("refresh");
+						$('#Flip_PcCharles').val('on').slider("refresh");
 					}
 				}
 
@@ -60,7 +60,7 @@
         });
 		
 
-		$("#Bopen").click(function() 
+		$("#Button_AllumerPcCharles").click(function() 
 		{
 			$.ajax(
 			{
@@ -73,7 +73,7 @@
             });
         });
 		
-		$("#VoletUp").click(function() 
+		$("#Button_MonterVoletCharles").click(function() 
 		{
 			$.ajax(
 			{
@@ -86,7 +86,7 @@
 			});
         });
 		
-		$("#VoletDown").click(function() 
+		$("#Button_DescendreVoletCharles").click(function() 
 		{
 			$.ajax(
 			{
@@ -103,7 +103,7 @@
 		{
 		}
 
-		$( "#flip-1" ).on( 'slidestop', function( event ) 
+		$( "#Flip_LumierePrincipale" ).on( 'slidestop', function( event ) 
 		{ 
 			sVal = $(this).val();
 			var theName;
@@ -126,7 +126,7 @@
                });			
 		});
 
-		$( "#flip-2" ).on( 'slidestop', function( event ) 
+		$( "#Flip_LumiereSecondaire" ).on( 'slidestop', function( event ) 
 		{ 
 			sVal = $(this).val();
 			var theName;
@@ -158,24 +158,24 @@
 			?>
 		</div>
 		<div data-role="content">	
-			<label for="flip-1">Lumiere Principale:</label>
-			<select name="flip-1" id="flip-1" data-role="slider">
+			<label for="Flip_LumierePrincipale">Lumiere Principale:</label>
+			<select name="Flip_LumierePrincipale" id="Flip_LumierePrincipale" data-role="slider">
 				<option value="off">Allumer(5)</option>
 				<option value="on">Eteindre(6)</option>
 			</select> 
-			<label for="flip-2">Lumiere Secondaire:</label>
-			<select name="flip-2" id="flip-2" data-role="slider">
+			<label for="Flip_LumiereSecondaire">Lumiere Secondaire:</label>
+			<select name="Flip_LumiereSecondaire" id="Flip_LumiereSecondaire" data-role="slider">
 				<option value="off">Allumer(;)</option>
 				<option value="on">Eteindre(<)</option>
 			</select> 
-			<label for="flip-3">PC Charles (read only - ping) :</label>
-			<select name="flip-3" id="flip-3" data-role="slider" disabled >
+			<label for="Flip_PcCharles">PC Charles (read only - ping) :</label>
+			<select name="Flip_PcCharles" id="Flip_PcCharles" data-role="slider" disabled >
 				<option value="off">OFF</option>
 				<option value="on">ON</option>
 			</select> 
-			<input id="Bopen" type="button" name="open" value="Wake up PC"/>
-			<input id="VoletUp" type="button" name="VoletUp" value="Monter Volet(7)"/>
-			<input id="VoletDown" type="button" name="VoletDown" value="Descendre Volet(8)"/>
+			<input id="Button_AllumerPcCharles" type="button" name="Button_AllumerPcCharles" value="Wake up PC"/>
+			<input id="Button_MonterVoletCharles" type="button" name="Button_MonterVoletCharles" value="Monter Volet"/>
+			<input id="Button_DescendreVoletCharles" type="button" name="Button_DescendreVoletCharles" value="Descendre Volet"/>
 		</div>
 	</div>
 	</body>
