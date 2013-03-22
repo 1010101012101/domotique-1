@@ -15,7 +15,7 @@
 	<script type="text/javascript">
 	
 		
-		$("#VoletUp").click(function() 
+		$("#Button_MonterVoletSalon").click(function() 
 		{
 			$.ajax(
 			{
@@ -28,30 +28,30 @@
 			});
         });
 		
-		$("#VoletDown").click(function() 
+		$("#Button_DescendreVoletSalon").click(function() 
 		{
 			$.ajax(
 			{
 				type: "POST",
 				url: "./Sender/XbeeWrapper.php",
-				data: ({iId : '7' ,iCmdToExecute : ':' , iCmdType : "CMD_X10"}),
+				data: ({iId : '7' ,iCmdToExecute : '10' , iCmdType : "CMD_X10"}),
 				cache: false,
 				dataType: "text",
 				success: onSuccess
 			});
         });
 		
-		$( "#flip-2" ).on( 'slidestop', function( event ) 
+		$( "#Flip_HalogeneSalon" ).on( 'slidestop', function( event ) 
 		{ 
 			sVal = $(this).val();
 			var theName;
 			if (sVal=="on")
 			{
-				theName = '=';
+				theName = '13';
 			}
 			else
 			{
-				theName = '>';
+				theName = '14';
 			}
                $.ajax(
 			{
@@ -86,7 +86,7 @@
 				{
 					if((data[1].id==13)&&(data[1].status=="on"))
 					{
-						$('#flip-2').val('on').slider("refresh");
+						$('#Flip_HalogeneSalon').val('on').slider("refresh");
 					}
 				}
 
@@ -100,10 +100,10 @@
 			?>
 		</div>
 		<div data-role="content">	
-			<input id="VoletUp" type="button" name="VoletUp" value="Monter Volet"/>
-			<input id="VoletDown" type="button" name="VoletDown" value="Descendre Volet"/>
-			<label for="flip-2">Halogene:</label>
-			<select name="flip-2" id="flip-2" data-role="slider">
+			<input id="Button_MonterVoletSalon" type="button" name="Button_MonterVoletSalon" value="Monter Volet"/>
+			<input id="Button_DescendreVoletSalon" type="button" name="Button_DescendreVoletSalon" value="Descendre Volet"/>
+			<label for="Flip_HalogeneSalon">Halogene:</label>
+			<select name="Flip_HalogeneSalon" id="Flip_HalogeneSalon" data-role="slider">
 				<option value="off">Allumer</option>
 				<option value="on">Eteindre</option>
 			</select> 			

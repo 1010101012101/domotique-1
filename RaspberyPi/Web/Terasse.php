@@ -21,7 +21,7 @@
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iCmdToExecute : '41' , iCmdType : "CMD_X10_READ"}),
+				data: ({iCmdToExecute : '39' , iCmdType : "CMD_X10_READ"}),
 				cache: false,
 				dataType: "text",
 				success:  function(data) 

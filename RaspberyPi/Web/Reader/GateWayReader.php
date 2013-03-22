@@ -40,9 +40,6 @@
 				$dbh = new PDO("sqlite:../DataBase/Domos.db");
 				$aId = $_REQUEST['iId'];
 				$aResponse = array();
-		
-				//create table object (id integer primary key, status text); 
-				//insert into object (status,id) values ('On',8);
 	
 				$aSqlRequest = 'select id,timestamp,value from measures where id = ' . $aId . ' order by timestamp DESC LIMIT 1';
 				foreach ($dbh->query($aSqlRequest) as $row)

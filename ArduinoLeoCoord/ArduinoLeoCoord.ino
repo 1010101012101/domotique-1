@@ -10,19 +10,17 @@
 #define SERIAL_DATA_TIMEOUT "SD:_ExTimOut"
 #define MODULE_STATE_MSG "MS:"
 #define MSG_DATA_ERROR "_ExSyntax"
-//Next
 
 XBee _Xbee = XBee(); // create Xbee object to control a Xbee
 ZBRxResponse _ZbRxResp = ZBRxResponse(); //Create reusable response objects for responses we expect to handle
 
-
-
 //Define the pin number
 const int _OutPinLedTest = 7;
-const int PIN_BOUTON_ON = 4;
-const int PIN_BOUTON_OFF = 3;
-unsigned long ENTREE_ADDR=0x408CCB53;
-unsigned long TERRASSE_ADDR=0x400a3e5d;
+const int _InPinIrDetector = 8;
+const int _InPinButtonOn = 4;
+//Define other consts
+const unsigned long ENTREE_ADDR=0x408CCB53;
+const unsigned long TERRASSE_ADDR=0x400a3e5d;
 
 // Fields used for serial and byte message reception
 unsigned long sdReceived;
@@ -67,12 +65,11 @@ void setup()
 {
   //defined input button
   pinMode(_OutPinLedTest,OUTPUT);
-  pinMode(PIN_BOUTON_ON,INPUT);
-  pinMode(PIN_BOUTON_OFF,INPUT);
+  pinMode(_InPinButtonOn,INPUT);
+  pinMode(_InPinIrDetector,INPUT);
   
   //Active resistor as pull up
-  digitalWrite(PIN_BOUTON_ON,HIGH);
-  digitalWrite(PIN_BOUTON_OFF,HIGH);
+  digitalWrite(_InPinButtonOn,HIGH);
 
   // start serial
   _Xbee.begin(9600);
@@ -179,21 +176,22 @@ void loop()
   }
   
   // check for incoming serial data:
-  if (Serial.available() > 0) {
+  if (Serial.available() > 0) 
+  {
     // read incoming serial data:
     _UsbCmdReceived = Serial.read();
-    if (_UsbCmdReceived > 47)
-    {
-        _CmdReceived = _UsbCmdReceived - 48;
-    }
-    else
-    {
-        _CmdReceived = _UsbCmdReceived - 0;
-    }
+    _CmdReceived = _UsbCmdReceived;
+
   }
+  
+ //int aInputDigitalValue = digitalRead(_InPinIrDetector);
+  //if (aInputDigitalValue == HIGH)
+  //{
+	//Serial.println("ID:44_OUTPUT:1");
+  //}
  
  //Read button status
- int aInputDigitalValue = digitalRead(PIN_BOUTON_ON);
+ int aInputDigitalValue = digitalRead(_InPinButtonOn);
   //Reset the counter if button is press
   if ((aInputDigitalValue == LOW))
   {
@@ -210,12 +208,6 @@ void loop()
    // OK x10ex.sendCmd('A', 5, CMD_BRIGHT, 1);
     
   }
-  //aInputDigitalValue = digitalRead(PIN_BOUTON_OFF);
-  //Reset the counter if button is press
-  //if ((aInputDigitalValue == LOW))
-  //{
-  //  _CmdReceived=8;
-  //}
   
   //Process the command
   //Test if we have an action to do en commencant par une commande de debug
@@ -226,105 +218,55 @@ void loop()
     Serial.println("ACK_1");
   }
   //Test des commandes pour le X10
-  else if(_CmdReceived==5)
+  else if(_CmdReceived==5) //Charles lumiere principlae
   {
     x10ex.sendCmd('A', 4, CMD_ON, 1);
   }
-  else if(_CmdReceived==6)
+  else if(_CmdReceived==6) //Charles lumiere principlae
   {
     x10ex.sendCmd('A', 4, CMD_OFF, 1);
   }
-  else if(_CmdReceived==7)
+  else if(_CmdReceived==7) //Volet charles
   {
     x10ex.sendCmd('A', 5, CMD_BRIGHT, 1);
   }
-  else if(_CmdReceived==8)
+  else if(_CmdReceived==8) //Volet charles
   {
     x10ex.sendCmd('A', 5, CMD_DIM, 1);
   }
-  else if(_CmdReceived==9)
+  else if(_CmdReceived==9) //Volet Salon
   {
     x10ex.sendCmd('A', 7, CMD_BRIGHT, 1);
   }
-  else if(_CmdReceived==10)
+  else if(_CmdReceived==10) //Volet Salon
   {
     x10ex.sendCmd('A', 7, CMD_DIM, 1);
   }
-  else if(_CmdReceived==11)
+  else if(_CmdReceived==11) //Charles lumiere secondaire
   {
     x10ex.sendCmd('A', 13, CMD_ON, 1);
   }
-  else if(_CmdReceived==12)
+  else if(_CmdReceived==12) //Charles lumiere secondaire
   {
     x10ex.sendCmd('A', 13, CMD_OFF, 1);
   }
-  else if(_CmdReceived==13)
+  else if(_CmdReceived==13) //Lampe halogene salon
   {
     x10ex.sendCmd('A', 6, CMD_ON, 1);
   }
-  else if(_CmdReceived==14)
+  else if(_CmdReceived==14) //Lampe halogene salon
   {
     x10ex.sendCmd('A', 6, CMD_OFF, 1);
   }
-  else if(_CmdReceived==18)
+  else if(_CmdReceived==42) //Allumer le chauffage de la SDB
   {
-    x10ex.sendCmd('A', 8, CMD_ON, 1);
+    x10ex.sendCmd('A', 8, CMD_ON, 1); 
   }
-  else if(_CmdReceived==19)
+  else if(_CmdReceived==43) //Eteindre le chauffage de la SDB
   {
-    x10ex.sendCmd('A', 8, CMD_OFF, 1);
+    x10ex.sendCmd('A', 8, CMD_OFF, 1); 
   }
   //Debut des commandes pour ENTREE
-  else if(_CmdReceived==2)
-  {
-    unsigned int aCmd=35;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==4)
-  {
-    unsigned int aCmd=34;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==15)
-  {
-    unsigned int aCmd=36;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==16)
-  {
-    unsigned int aCmd=37;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==17)
-  {
-    unsigned int aCmd=38;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==20)
-  {
-    unsigned int aCmd=33;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==21)
-  {
-    unsigned int aCmd=30;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==22)
-  {
-    unsigned int aCmd=31;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==23)
-  {
-    unsigned int aCmd=32;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==24)
-  {
-    unsigned int aCmd=34;
-    sendZigBeeMsg(aCmd,ENTREE_ADDR);
-  }
   else if(_CmdReceived==30)
   {
     sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
@@ -333,15 +275,44 @@ void loop()
   {
     sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
   }
+  else if(_CmdReceived==32)
+  {
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==33)
+  {
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==34)
+  {
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==35)
+  {
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==36)
+  {
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==37)
+  {
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+  }
+  else if(_CmdReceived==38)
+  {
+    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+  }
   //Debut des commandes TERRASSE
+  else if(_CmdReceived==39)
+  {
+    sendZigBeeMsg(_CmdReceived,TERRASSE_ADDR);
+  }
   else if(_CmdReceived==40)
   {
     sendZigBeeMsg(_CmdReceived,TERRASSE_ADDR);
   }
-  else if(_CmdReceived==41)
-  {
-    sendZigBeeMsg(_CmdReceived,TERRASSE_ADDR);
-  }
+
   
   //Si on doit renvoyer qq chose sur le port USB (une reponse d un capteur)
   if (_DataToSend!=0)

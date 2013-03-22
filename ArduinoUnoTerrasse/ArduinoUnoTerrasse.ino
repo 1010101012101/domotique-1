@@ -1,6 +1,9 @@
 //Include for Xbee library -> http://code.google.com/p/xbee-arduino/
 #include <XBee.h>
 
+//Timer library
+#include <MsTimer2.h>
+
 //Definition of the pin used in program
 const int _OutPinBuz = 9;
 const int _OutPinLed4 = 10;
@@ -15,6 +18,13 @@ ZBRxResponse _ZbRxResp = ZBRxResponse(); //Create reusable response objects for 
 int _CurrentLightValue = 0;
 int _CmdReceived = 0;
 int _DataToSend = 0;
+bool _TimerExpire = true;
+
+void InterruptTimer2() 
+{
+  _TimerExpire= true;
+  MsTimer2::stop();
+}
 
 void flashPin(int pin, int times, int wait) 
 {
@@ -42,6 +52,9 @@ void setup()
   pinMode(_InPinButton4,INPUT);
   pinMode(_InPinFireDetection,INPUT);
   
+    //Set timer to 10seconds
+  MsTimer2::set(30000, InterruptTimer2);
+  
 }
 
 // continuously reads packets, looking for ZB Receive or Modem Status
@@ -66,19 +79,23 @@ void loop() {
     }  
   }
   
-  int aInputDigitalValue = digitalRead(_InPinFireDetection);
+  int aInputDigitalValue = digitalRead(_InPinButton4);
 
-  if (aInputDigitalValue == HIGH)
+  if ((aInputDigitalValue == LOW)&&(_TimerExpire == true))
   {
+  _TimerExpire = false;
   flashPin(_OutPinBuz, 1, 250);
+  _CmdReceived=1;
+  _DataToSend=444;
+  MsTimer2::start(); // active Timer 2 
   }
 
   //Test if we have an action to do 
   if(_CmdReceived==40)
   {
-    flashPin(_OutPinLed4, 1, 250);
+    flashPin(_OutPinBuz, 1, 250);
   }
-  else if(_CmdReceived==41)
+  else if(_CmdReceived==39)
   {
     //_DataToSend=analogRead(_InPinLedMeasure);
 	_DataToSend=456;

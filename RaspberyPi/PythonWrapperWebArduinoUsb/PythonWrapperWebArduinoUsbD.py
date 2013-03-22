@@ -6,6 +6,12 @@ import socket
 import datetime
 import select
 import sys
+
+# Import smtplib to provide email functions
+import smtplib
+# Import the email modules
+from email.mime.text import MIMEText
+
 import sqlite3
 from optparse import OptionParser
 
@@ -47,6 +53,28 @@ while 1:
                 c.execute("INSERT INTO measures (id, timestamp, value) VALUES (?,?,?)",(aRequestorId,expires,float(aValueReceived)))
                 sqliteCnx.commit()
                 sqliteCnx.close()
+                if(aRequestorId == "1"):
+                    print("OMG...Hell on earth")
+                    # Define email addresses to use
+                    addr_to   = 'xxxxxxxx'
+                    addr_from = 'xxxxxxxx'
+                    
+                    # Define SMTP email server details
+                    smtp_server = 'xxxxxxxx' #mail.djynet.net:143 et mail.djynet.net:587
+                    smtp_user   = 'xxxxxxxx'
+                    smtp_pass   = 'xxxxxxxx'
+                    
+                    # Construct email
+                    msg = MIMEText('Fire detected at ' + str(expires))
+                    msg['To'] = addr_to
+                    msg['From'] = addr_from
+                    msg['Subject'] = 'Fire alarm'
+                    
+                    # Send the message via an SMTP server
+                    s = smtplib.SMTP(smtp_server, 587)
+                    s.login(smtp_user,smtp_pass)
+                    s.sendmail(addr_from, addr_to, msg.as_string())
+                    s.quit()
             else:
                 print("Strange response....ignore it")
 

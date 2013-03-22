@@ -132,11 +132,11 @@
 			var theName;
 			if (sVal=="on")
 			{
-				theName = ';';
+				theName = '11';
 			}
 			else
 			{
-				theName = '<';
+				theName = '12';
 			}
                $.ajax(
 			{

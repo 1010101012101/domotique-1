@@ -31,6 +31,7 @@ DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance
 void InterruptTimer2() 
 {
   digitalWrite(_OutPinRelay, LOW);
+  MsTimer2::stop();
 }
 
 void flashPin(int pin, int times, int wait) 

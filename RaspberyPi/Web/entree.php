@@ -122,7 +122,7 @@
 			{
 				type: "POST",
 				url: "./Sender/XbeeWrapper.php",
-				data: ({iId : '5' ,iCmdToExecute : '4' , iCmdType : "CMD_X10"}),
+				data: ({iId : '5' ,iCmdToExecute : '34' , iCmdType : "CMD_X10"}),
 				cache: false,
 				dataType: "text",
 				success: onSuccess
@@ -135,7 +135,7 @@
 			{
 				type: "POST",
 				url: "./Sender/XbeeWrapper.php",
-				data: ({iId : '5' ,iCmdToExecute : '2' , iCmdType : "CMD_X10"}),
+				data: ({iId : '5' ,iCmdToExecute : '35' , iCmdType : "CMD_X10"}),
 				cache: false,
 				dataType: "text",
 				success: onSuccess
@@ -148,11 +148,11 @@
 			var theName;
 			if (sVal=="on")
 			{
-				theName = '@';
+				theName = '37';
 			}
 			else
 			{
-				theName = 'A';
+				theName = '38';
 			}
                $.ajax(
                 {
@@ -182,7 +182,7 @@
 				<option value="on">Activer</option>
 			</select> 
 			<input id="Button_AllumerLumiere" type="button" name="Button_AllumerLumiere" value="Allumer lumiere"/>
-			<input id="Button_EteindreLumiere" type="button" name="Button_EteindreLumiere" value="Eteindre lumiere - Beta" disabled/>
+			<input id="Button_EteindreLumiere" type="button" name="Button_EteindreLumiere" value="Eteindre lumiere"/>
 			<input id="Button_RefreshTemperature" type="button" name="Button_RefreshTemperature" value="Refresh Temperature"/>
 			Temperature :
 			<div class="Temperature">
