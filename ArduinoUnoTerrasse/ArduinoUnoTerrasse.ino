@@ -1,9 +1,7 @@
 //Include for Xbee library -> http://code.google.com/p/xbee-arduino/
 #include <XBee.h>
-
 //Timer library
 #include <MsTimer2.h>
-
 //Deipara includes
 #include <Deipara.h>
 
@@ -29,35 +27,19 @@ void InterruptTimer2()
   MsTimer2::stop();
 }
 
-void flashPin(int pin, int times, int wait) 
-{
-  for (int i = 0; i < times; i++) {
-    digitalWrite(pin, HIGH);
-    delay(wait);
-    digitalWrite(pin, LOW);
-
-    if (i + 1 < times) {
-      delay(wait);
-    }
-  }
-}
-
 void setup() 
 {
   // start serial port
   Serial.begin(XBEE_SPEED);
-  // start serial
   _Xbee.begin(XBEE_SPEED);
   
   pinMode(_OutPinLed4, OUTPUT);
   pinMode(_OutPinBuz, OUTPUT);
-  
   pinMode(_InPinButton4,INPUT);
   pinMode(_InPinFireDetection,INPUT);
   
-    //Set timer to 10seconds
+  //Set timer to 10seconds
   MsTimer2::set(30000, InterruptTimer2);
-  
 }
 
 // continuously reads packets, looking for ZB Receive or Modem Status
