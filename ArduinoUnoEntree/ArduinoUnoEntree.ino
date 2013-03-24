@@ -20,16 +20,20 @@ const int _InPinLedMeasure = A0;
 const int _InPinMoistureMeasure = A1;
 const int _InPinDht22 = 10;
 const int _OutPinBuz1 = 9;
+//Define other consts
+const unsigned long COORD_ADDR=0x400a3e5e;
 
 //Global variable used in the program
 int _CmdReceived = 0;
 int _AllowAutoLight = 1;
 int _DataToSend = 0;
+bool _TimerExpire = true;
 
 DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance
 
 void InterruptTimer2() 
 {
+  _TimerExpire= true;
   digitalWrite(_OutPinRelay, LOW);
   MsTimer2::stop();
 }
@@ -121,14 +125,16 @@ void loop()
   {
     if (_AllowAutoLight == 1)
     {
+      _TimerExpire = false;
       digitalWrite(_OutPinRelay, HIGH);
       MsTimer2::start(); // active Timer 2 
     }
-    
-    //2/Send the detection info to central
-    unsigned long aReceiver = 0x400a3e5e;
-    unsigned int aCommand = 3;
-    //sendZigBeeMsg(aCommand, aReceiver);
+    if (_TimerExpire == true)
+    {
+        //2/Send the detection info to central
+        unsigned int aCommand = 3;
+        //sendZigBeeMsg(aCommand, COORD_ADDR);
+    }
   }
 
   if (_Xbee.getResponse().isAvailable()) 
@@ -174,9 +180,8 @@ void loop()
   //for debuging; simulate light on event
      //2/Send the detection info to central
 	 delay(1000);
-    unsigned long aReceiver = 0x400a3e5e;
     unsigned int aCommand = 3;
-    sendZigBeeMsg(aCommand, aReceiver);
+    sendZigBeeMsg(aCommand, COORD_ADDR);
   }
   else if(_CmdReceived==32)
   {
@@ -256,7 +261,7 @@ void loop()
     Serial.println(aPayload[2], HEX);
 
     // Specify the address of the remote XBee (this is the SH + SL)
-    XBeeAddress64 aAddr64 = XBeeAddress64(0x0013a200, 0x400a3e5e);
+    XBeeAddress64 aAddr64 = XBeeAddress64(0x0013a200, COORD_ADDR);
 
     // Create a TX Request
     ZBTxRequest aZbTx = ZBTxRequest(aAddr64, aPayload, sizeof(aPayload));
