@@ -4,6 +4,9 @@
 //Timer library
 #include <MsTimer2.h>
 
+//Deipara includes
+#include <Deipara.h>
+
 //Definition of the pin used in program
 const int _OutPinBuz = 9;
 const int _OutPinLed4 = 10;
@@ -42,9 +45,9 @@ void flashPin(int pin, int times, int wait)
 void setup() 
 {
   // start serial port
-  Serial.begin(9600);
+  Serial.begin(XBEE_SPEED);
   // start serial
-  _Xbee.begin(9600);
+  _Xbee.begin(XBEE_SPEED);
   
   pinMode(_OutPinLed4, OUTPUT);
   pinMode(_OutPinBuz, OUTPUT);
@@ -119,7 +122,7 @@ void loop() {
     Serial.println(aPayload[2], HEX);
 
     // Specify the address of the remote XBee (this is the SH + SL)
-    XBeeAddress64 aAddr64 = XBeeAddress64(0x0013a200, 0x400a3e5e);
+    XBeeAddress64 aAddr64 = XBeeAddress64(COMMON_ADDR, COORD_ADDR);
 
     // Create a TX Request
     ZBTxRequest aZbTx = ZBTxRequest(aAddr64, aPayload, sizeof(aPayload));

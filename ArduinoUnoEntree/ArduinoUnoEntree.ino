@@ -7,6 +7,9 @@
 //Include for RHT03 library -> https://github.com/nethoncho/Arduino-DHT22
 #include <DHT22.h>
 
+//Deipara includes
+#include <Deipara.h>
+
 //Xbee objects
 //create Xbee object to control a Xbee
 XBee _Xbee = XBee(); 
@@ -20,8 +23,6 @@ const int _InPinLedMeasure = A0;
 const int _InPinMoistureMeasure = A1;
 const int _InPinDht22 = 10;
 const int _OutPinBuz1 = 9;
-//Define other consts
-const unsigned long COORD_ADDR=0x400a3e5e;
 
 //Global variable used in the program
 int _CmdReceived = 0;
@@ -60,7 +61,7 @@ void sendZigBeeMsg(unsigned int iPayLoad, unsigned long iAddrToTarget)
   aPayload[0] = iPayLoad;
 
   // Specify the address of the remote XBee (this is the SH + SL)
-  XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, iAddrToTarget);
+  XBeeAddress64 addr64 = XBeeAddress64(COMMON_ADDR, iAddrToTarget);
 
   // Create a TX Request
   ZBTxRequest zbTx = ZBTxRequest(addr64, aPayload, sizeof(aPayload));
@@ -98,9 +99,8 @@ void sendZigBeeMsg(unsigned int iPayLoad, unsigned long iAddrToTarget)
 void setup()
 {
   // start serial
-  _Xbee.begin(9600);
-  // Remember to set baud rate in Serial Monitor or lower this to 9600 (default value)
-  Serial.begin(9600);
+  _Xbee.begin(XBEE_SPEED);
+  Serial.begin(XBEE_SPEED);
 
   //defined IO
   pinMode(_InPinIrDetector,INPUT);
@@ -261,7 +261,7 @@ void loop()
     Serial.println(aPayload[2], HEX);
 
     // Specify the address of the remote XBee (this is the SH + SL)
-    XBeeAddress64 aAddr64 = XBeeAddress64(0x0013a200, COORD_ADDR);
+    XBeeAddress64 aAddr64 = XBeeAddress64(COMMON_ADDR, COORD_ADDR);
 
     // Create a TX Request
     ZBTxRequest aZbTx = ZBTxRequest(aAddr64, aPayload, sizeof(aPayload));

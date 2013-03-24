@@ -3,6 +3,9 @@
 //X10
 #include <X10ex.h>
 
+//Deipara includes
+#include <Deipara.h>
+
 #define POWER_LINE_MSG "PL:"
 #define POWER_LINE_BUFFER_ERROR "PL:_ExBuffer"
 #define SERIAL_DATA_MSG "SD:"
@@ -19,8 +22,7 @@ const int _OutPinLedTest = 7;
 const int _InPinIrDetector = 8;
 const int _InPinButtonOn = 4;
 //Define other consts
-const unsigned long ENTREE_ADDR=0x408CCB53;
-const unsigned long TERRASSE_ADDR=0x400a3e5d;
+
 
 // Fields used for serial and byte message reception
 unsigned long sdReceived;
@@ -72,12 +74,10 @@ void setup()
   digitalWrite(_InPinButtonOn,HIGH);
 
   // start serial
-  _Xbee.begin(9600);
-    // Remember to set baud rate in Serial Monitor or lower this to 9600 (default value)
-  Serial.begin(9600);
+  _Xbee.begin(XBEE_SPEED);
+  Serial.begin(XBEE_SPEED);
   // Start the Power Line Communication library
   x10ex.begin();
-  //while (! Serial);
 }
 
 void flashPin(int pin, int times, int wait) 
@@ -106,7 +106,7 @@ void sendZigBeeMsg(unsigned int iPayLoad, unsigned long iAddrToTarget)
   aPayload[0] = iPayLoad;
 
   // Specify the address of the remote XBee (this is the SH + SL)
-  XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, iAddrToTarget);
+  XBeeAddress64 addr64 = XBeeAddress64(COMMON_ADDR, iAddrToTarget);
 
   // Create a TX Request
   ZBTxRequest zbTx = ZBTxRequest(addr64, aPayload, sizeof(aPayload));
