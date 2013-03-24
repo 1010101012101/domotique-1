@@ -1,2 +1,3 @@
 syntax: glob
 RaspberyPi/PythonWrapperWebArduinoUsb/ConfigFiles
+RaspberyPi/PythonGoogleLatitudeWatcher/client_secrets.json
