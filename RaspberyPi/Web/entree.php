@@ -86,7 +86,7 @@
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iCmdToExecute : '30' , iCmdType : "CMD_X10_READ"}),
+				data: ({iCmdToExecute : '30' , iCmdType : "CMD_X10"}),
 				cache: false,
 				dataType: "text",
 				success:  function(data) 
@@ -102,7 +102,7 @@
 			{
 				type: "POST",
 				url: "./Reader/GateWayReader.php",
-				data: ({iCmdToExecute : '31' , iCmdType : "CMD_X10_READ"}),
+				data: ({iCmdToExecute : '31' , iCmdType : "CMD_X10"}),
 				cache: false,
 				dataType: "text",
 				success: function(data) 

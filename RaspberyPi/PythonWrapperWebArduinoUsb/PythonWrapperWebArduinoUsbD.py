@@ -101,11 +101,11 @@ while 1:
                 c.execute("INSERT INTO measures (id, timestamp, value) VALUES (?,?,?)",(aRequestorId,expires,float(aValueReceived)))
                 sqliteCnx.commit()
                 sqliteCnx.close()
-                if(aRequestorId == "2"):
+                if(aRequestorId == "1"):
                     print("OMG...Hell on earth1")
                     sendEmailFireDetected()
 
-                elif (aRequestorId == "1"):
+                elif (aRequestorId == "2"):
                     print("OMG...Hell on earth2")
                     PeopleDetectedCharlesRoom(fd)
                 else :

@@ -1,9 +1,11 @@
+//Libraries definitions
 //Xbee library
 #include <XBee.h>
-//X10
+//Timer library
+#include <MsTimer2.h>
+//X10 library
 #include <X10ex.h>
-
-//Deipara includes
+//Deipara library
 #include <Deipara.h>
 
 #define POWER_LINE_MSG "PL:"
@@ -14,16 +16,14 @@
 #define MODULE_STATE_MSG "MS:"
 #define MSG_DATA_ERROR "_ExSyntax"
 
-XBee _Xbee = XBee(); // create Xbee object to control a Xbee
-ZBRxResponse _ZbRxResp = ZBRxResponse(); //Create reusable response objects for responses we expect to handle
-
 //Define the pin number
 const int _OutPinLedTest = 7;
 const int _InPinIrDetector = 8;
 const int _InPinButtonOn = 4;
 //Define other consts
 
-
+XBee _Xbee = XBee(); // create Xbee object to control a Xbee
+ZBRxResponse _ZbRxResp = ZBRxResponse(); //Create reusable response objects for responses we expect to handle
 // Fields used for serial and byte message reception
 unsigned long sdReceived;
 char bmHouse;
@@ -31,8 +31,21 @@ byte bmUnit;
 byte bmCommand;
 byte bmExtCommand;
 int _CmdReceived = 0;
+bool _TimerExpire = true;
 int _UsbCmdReceived = 0;
 int _DataToSend = 0;
+int _SenderId = 0;
+// X10 Power Line Communication Library
+X10ex x10ex = X10ex(
+  1, // Zero Cross Interrupt Number (2 = "Custom" Pin Change Interrupt)
+  2, // Zero Cross Interrupt Pin (Pin 4-7 can be used with interrupt 2)
+  9, // Power Line Transmit Pin 
+  10, // Power Line Receive Pin
+  true, // Enable this to see echo of what is transmitted on the power line
+  powerLineEvent, // Event triggered when power line message is received
+  1, // Number of phases (1 = No Phase Repeat/Coupling)
+  50 // The power line AC frequency (e.g. 50Hz in Europe, 60Hz in North America)
+);
 
 //Config cable XM10:
 // 1 2 3 4
@@ -51,17 +64,11 @@ int _DataToSend = 0;
 // 3rouge vers 10
 // 4noir vers 9
 
-// X10 Power Line Communication Library
-X10ex x10ex = X10ex(
-  1, // Zero Cross Interrupt Number (2 = "Custom" Pin Change Interrupt)
-  2, // Zero Cross Interrupt Pin (Pin 4-7 can be used with interrupt 2)
-  9, // Power Line Transmit Pin 
-  10, // Power Line Receive Pin
-  true, // Enable this to see echo of what is transmitted on the power line
-  powerLineEvent, // Event triggered when power line message is received
-  1, // Number of phases (1 = No Phase Repeat/Coupling)
-  50 // The power line AC frequency (e.g. 50Hz in Europe, 60Hz in North America)
-);
+void InterruptTimer2() 
+{
+  _TimerExpire= true;
+  MsTimer2::stop();
+}
 
 void setup()
 {
@@ -78,54 +85,11 @@ void setup()
   Serial.begin(XBEE_SPEED);
   // Start the Power Line Communication library
   x10ex.begin();
+  MsTimer2::set(30000, InterruptTimer2);
 }
 
 void processCommandReceivedFromUsb(int iCommande) 
 {
-}
-
-void sendZigBeeMsg(unsigned int iPayLoad, unsigned long iAddrToTarget)
-{
-  //Serial.println("We are going to send a ZigBee message");
-  // Create an array for holding the data you want to send.
-  uint8_t aPayload[1];
-  // Fill it with the data
-  aPayload[0] = iPayLoad;
-
-  // Specify the address of the remote XBee (this is the SH + SL)
-  XBeeAddress64 addr64 = XBeeAddress64(COMMON_ADDR, iAddrToTarget);
-
-  // Create a TX Request
-  ZBTxRequest zbTx = ZBTxRequest(addr64, aPayload, sizeof(aPayload));
-
-  // Send your request
-  _Xbee.send(zbTx);
-  //Serial.println("Message Sent - Waiting for the ACK");
-
-  if (_Xbee.readPacket(5000)) {
-    //Serial.println("We got a response to the message");
-
-    // should be a znet tx status  
-    ZBTxStatusResponse aZbTxStatus = ZBTxStatusResponse();        
-    if (_Xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
-      _Xbee.getResponse().getZBTxStatusResponse(aZbTxStatus);
-
-      // get the delivery status, the fifth byte
-      if (aZbTxStatus.getDeliveryStatus() == SUCCESS) {
-        //Serial.println("The Trx was OK");
-      } 
-      else {
-        //Serial.println("Warning : The Trx was KO");
-      }
-    } 
-    else{
-      //Serial.print("It was not a Trx status. ApiId:");
-      //Serial.println(_Xbee.getResponse().getApiId());
-    }   
-  } 
-  else {
-    //Serial.println("Warning : This should never happen");
-  }
 }
 
 void loop()
@@ -135,6 +99,7 @@ void loop()
   _CmdReceived = 0;
   _UsbCmdReceived = 0;
   _DataToSend = 0;
+  _SenderId = 0;
   uint8_t aPayload[] = { 0, 0 , 0};
 
   if (_Xbee.getResponse().isAvailable()) {
@@ -156,6 +121,7 @@ void loop()
 	  aPayload[0]=_ZbRxResp.getData(0);
 	  aPayload[1]=_ZbRxResp.getData(1);
 	  aPayload[2]=_ZbRxResp.getData(2);
+      _SenderId=aPayload[0];
 	  _DataToSend=word(_ZbRxResp.getData(2),_ZbRxResp.getData(1));
 	  }
       
@@ -171,14 +137,18 @@ void loop()
 
   }
   
- //int aInputDigitalValue = digitalRead(_InPinIrDetector);
-  //if (aInputDigitalValue == HIGH)
-  //{
-	//Serial.println("ID:44_OUTPUT:1");
-  //}
+  int aInputDigitalValue = digitalRead(_InPinIrDetector);
+  if ((aInputDigitalValue == HIGH)&&(_TimerExpire == true))
+  {
+  _TimerExpire = false;
+    _CmdReceived=45;
+    _DataToSend=444;
+    _SenderId=2;
+    MsTimer2::start(); // active Timer 2 
+  }
  
  //Read button status
- int aInputDigitalValue = digitalRead(_InPinButtonOn);
+  aInputDigitalValue = digitalRead(_InPinButtonOn);
   //Reset the counter if button is press
   if ((aInputDigitalValue == LOW))
   {
@@ -195,6 +165,8 @@ void loop()
    // OK x10ex.sendCmd('A', 5, CMD_BRIGHT, 1);
     
   }
+  
+
   
   //Process the command
   //Test if we have an action to do en commencant par une commande de debug
@@ -256,59 +228,64 @@ void loop()
   //Debut des commandes pour ENTREE
   else if(_CmdReceived==30)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==31)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==32)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==33)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==34)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==35)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==36)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==37)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   else if(_CmdReceived==38)
   {
-    sendZigBeeMsg(_CmdReceived,ENTREE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   //Debut des commandes TERRASSE
   else if(_CmdReceived==39)
   {
-    sendZigBeeMsg(_CmdReceived,TERRASSE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR);
   }
   else if(_CmdReceived==40)
   {
-    sendZigBeeMsg(_CmdReceived,TERRASSE_ADDR);
+    sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR);
   }
+  else if(_CmdReceived==45)
+  {
+    //sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR);
+  }
+  
 
   
   //Si on doit renvoyer qq chose sur le port USB (une reponse d un capteur)
   if (_DataToSend!=0)
   {
     delay(10);
-	if(aPayload[0] != 0)
+	if(_SenderId != 0)
 	{
 	Serial.print("ID:");
-	Serial.print(aPayload[0]);
+	Serial.print(_SenderId);
 	Serial.print("_OUTPUT:");
 	Serial.println(_DataToSend);
 	}
@@ -427,161 +404,3 @@ void powerLineEvent(char house, byte unit, byte command, byte extData, byte extC
 // ||+-- House code A-P or *  Example: A = House A, P = House P and * = All house codes
 // |+--- Wipe Module State Character
 // +---- Request Module State Character
-//
-
-//This is useless for me and leqd to issue when I use Xbee so i comment it
-//void serialEvent()
-//{
-//  // Read 3 bytes from serial buffer
-//  if(Serial.available() >= 3)
-//  {
-//    byte byte1 = toupper(Serial.read());
-//    byte byte2 = toupper(Serial.read());
-//    byte byte3 = toupper(Serial.read());
-//    if(process3BMessage(SERIAL_DATA_MSG, byte1, byte2, byte3))
-//    {
-//      // Return error message if message sent to X10ex was not buffered successfully
-//      Serial.println(POWER_LINE_BUFFER_ERROR);
-//    }
-//    sdReceived = 0;
-//  }
-//  // If partial message was received
-//  if(Serial.available() && Serial.available() < 3)
-//  {
-//    // Store received time
-//    if(!sdReceived)
-//    {
-//      sdReceived = millis();
-//    }
-//    // Clear message if all bytes were not received within threshold
-//    else if(sdReceived > millis() || millis() - sdReceived > SERIAL_DATA_THRESHOLD)
-//    {
-//      bmHouse = 0;
-//      bmExtCommand = 0;
-//      sdReceived = 0;
-//      Serial.println(SERIAL_DATA_TIMEOUT);
-//      // Clear serial input buffer
-//      while(Serial.read() != -1);
-//    }
-//  }
-//}
-
-//This is useless for me and leqd to issue when I use Xbee so i comment it
-// Processes and executes 3 byte serial and ethernet messages.
-//bool process3BMessage(const char type[], byte byte1, byte byte2, byte byte3)
-//{
-//  bool x10exBufferError = 0;
-//  // Convert byte2 from hex to decimal unless command is request module state
-//  if(byte1 != 'R') byte2 = charHexToDecimal(byte2);
-//  // Convert byte3 from hex to decimal unless command is wipe module state
-//  if(byte1 != 'R' || byte2 != 'W') byte3 = charHexToDecimal(byte3);
-//  // Check if standard message was received (byte1 = House, byte2 = Unit, byte3 = Command)
-//  if(byte1 >= 'A' && byte1 <= 'P' && (byte2 <= 0xF || byte2 == '_') && (byte3 <= 0xF || byte3 == '_') && (byte2 != '_' || byte3 != '_'))
-//  {
-//    // Store first 3 bytes of message to make it possible to process 9 byte serial messages
-//    bmHouse = byte1;
-//    bmUnit = byte2 == '_' ? 0 : byte2 + 1;
-//    bmCommand = byte3 == '_' ? CMD_STATUS_REQUEST : byte3;
-//    bmExtCommand = 0;
-//    // Send standard message if command type is not extended
-//    if(bmCommand != CMD_EXTENDED_CODE && bmCommand != CMD_EXTENDED_DATA)
-//    {
-//      printX10Message(type, bmHouse, bmUnit, byte3, 0, 0, 8 * Serial.available());
-//      x10exBufferError = x10ex.sendCmd(bmHouse, bmUnit, bmCommand, bmCommand == CMD_BRIGHT || bmCommand == CMD_DIM ? 2 : 1);
-//      bmHouse = 0;
-//    }
-//  }
-//  // Check if extended message was received (byte1 = Hex Seperator, byte2 = Hex 1, byte3 = Hex 2)
-//  else if(byte1 == 'X' && bmHouse)
-//  {
-//    byte data = byte2 * 16 + byte3;
-//    // No extended command set, assume that we are receiving command
-//    if(!bmExtCommand)
-//    {
-//      bmExtCommand = data;
-//    }
-//    // Extended command set, we must be receiving extended data
-//    else
-//    {
-//      printX10Message(type, bmHouse, bmUnit, bmCommand, data, bmExtCommand, 8 * Serial.available());
-//      x10exBufferError = x10ex.sendExt(bmHouse, bmUnit, bmCommand, data, bmExtCommand, 1);
-//      bmHouse = 0;
-//    }
-//  }
-//  // Check if scenario execute command was received (byte1 = Scenario Character, byte2 = Hex 1, byte3 = Hex 2)
-//  else if(byte1 == 'S')
-//  {
-//    byte scenario = byte2 * 16 + byte3;
-//    Serial.print(type);
-//    Serial.print("S");
-//    if(scenario <= 0xF) { Serial.print("0"); }
-//    Serial.println(scenario, HEX);
-//    handleSdScenario(scenario);
-//  }
-//  // Check if request module state command was received (byte1 = Request State Character, byte2 = House, byte3 = Unit)
-//  else if(byte1 == 'R' && ((byte2 >= 'A' && byte2 <= 'P') || byte2 == '*'))
-//  {
-//    Serial.print(type);
-//    Serial.print("R");
-//    Serial.print(byte2);
-//    // All modules
-//    if(byte2 == '*')
-//    {
-//      Serial.println('*');
-//      for(short i = 0; i < 256; i++)
-//      {
-//        sdPrintModuleState((i >> 4) + 0x41, i & 0xF);
-//      }
-//    }
-//    else
-//    {
-//      if(byte3 <= 0xF)
-//      {
-//        Serial.println(byte3, HEX);
-//        sdPrintModuleState(byte2, byte3);
-//      }
-//      // All units using specified house code
-//      else
-//      {
-//        Serial.println('*');
-//        for(byte i = 0; i < 16; i++)
-//        {
-//          sdPrintModuleState(byte2, i);
-//        }
-//      }
-//    }
-//  }
-//  // Check if request wipe module state command was received (byte1 = Request State Character, byte2 = Wipe Character, byte3 = House)
-//  else if(byte1 == 'R' && byte2 == 'W' && ((byte3 >= 'A' && byte3 <= 'P') || byte3 == '*'))
-//  {
-//    Serial.print(type);
-//    Serial.print("RW");
-//    Serial.println((char)byte3);
-//    x10ex.wipeModuleState(byte3);
-//    Serial.print(MODULE_STATE_MSG);
-//    Serial.print(byte3 >= 'A' && byte3 <= 'P' ? (char)byte3 : '*');
-//    Serial.println("__");
-//  }
-//  // Unknown command/data
-//  else
-//  {
-//    Serial.print(type);
-//    Serial.println(MSG_DATA_ERROR);
-//  }
-//  return x10exBufferError;
-//}
-
-//This methode was only needed by the one I comment for Xbee interference so i comment it too
-//void sdPrintModuleState(char house, byte unit)
-//{
-//  unit++;
-//  X10state state = x10ex.getModuleState(house, unit);
-//  if(state.isSeen)
-//  {
-//    printX10Message(
-//      MODULE_STATE_MSG, house, unit,
-//      state.isKnown ? state.isOn ? CMD_STATUS_ON : CMD_STATUS_OFF : DATA_UNKNOWN,
-//      state.data,
-//      0, 0);
-//  }
-//}

@@ -11,9 +11,6 @@
 				$dbh = new PDO("sqlite:../DataBase/Domos.db");
 				$aId = $_REQUEST['iId'];
 				$aResponse = array();
-		
-				//create table object (id integer primary key, status text); 
-				//insert into object (status,id) values ('On',8);
 	
 				$aSqlRequest = 'select id,status from object where id IN (' . $aId . ' )';
 				foreach ($dbh->query($aSqlRequest) as $row)
@@ -59,23 +56,7 @@
 			}
 			break;
 			
-			case "CMD_X10_READ" :
-			$aRequestId = $_REQUEST["iCmdToExecute"];
-			if(($aRequestId == '30')||($aRequestId == '31')||($aRequestId == '40')||($aRequestId == '41'))
-			{
-			//$aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -i " . $_REQUEST['iId'] . " -s " . '"' . $aRequestId . '"';
-            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $aRequestId ;
-			$output = array();
-			exec($aCommandToExecute, $output);
-			print(json_encode($output));
-			}
-			break;
-			
 			case "PING_READ" :
-			$aRequestId = $_REQUEST["iCmdToExecute"];
-			//$aCommandToExecute = 'sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50';
-			//echo exec($aCommandToExecute);
-			//$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . " -s " . '"' . $aRequestId . '"';
 			$aCommandToExecute = 'ping -c 1 -W 2 192.168.0.7';
 			$output = array();
 			exec($aCommandToExecute, $output, $result);

@@ -19,8 +19,8 @@
 					//connect to SQLite database
 					$dbh = new PDO("sqlite:../DataBase/Domos.db");
 					$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$aSqlRequest = 'update object set status="' . $aStatus . '" where id="' . $aId . '" ';
-					$dbh->exec($aSqlRequest);
+					//$aSqlRequest = 'update object set status="' . $aStatus . '" where id="' . $aId . '" ';
+					//$dbh->exec($aSqlRequest);
 					//close the database connection
 					$dbh = null;
 				}
@@ -59,9 +59,6 @@
 				$dbh = new PDO("sqlite:../DataBase/Domos.db");
 				$aId = $_REQUEST['iId'];
 				$aResponse = array();
-		
-				//create table object (id integer primary key, status text); 
-				//insert into object (status,id,name) values ('On',8,'');
 	
 				$aSqlRequest = 'select id,status from object where id IN (' . $aId . ' )';
 				foreach ($dbh->query($aSqlRequest) as $row)

@@ -1,20 +1,12 @@
+//Libraries definitions
 //Xbee library
 #include <XBee.h>
-
 //Timer library
 #include <MsTimer2.h>
-
-//Include for RHT03 library -> https://github.com/nethoncho/Arduino-DHT22
+//RHT03 library
 #include <DHT22.h>
-
-//Deipara includes
+//Deipara library
 #include <Deipara.h>
-
-//Xbee objects
-//create Xbee object to control a Xbee
-XBee _Xbee = XBee(); 
-//Create reusable response objects for responses we expect to handle
-ZBRxResponse _ZbRxResp = ZBRxResponse(); 
 
 //Pin definition
 const int _InPinIrDetector = 7;
@@ -24,12 +16,16 @@ const int _InPinMoistureMeasure = A1;
 const int _InPinDht22 = 10;
 const int _OutPinBuz1 = 9;
 
+//Xbee objects
+//create Xbee object to control a Xbee
+XBee _Xbee = XBee(); 
+//Create reusable response objects for responses we expect to handle
+ZBRxResponse _ZbRxResp = ZBRxResponse(); 
 //Global variable used in the program
 int _CmdReceived = 0;
 int _AllowAutoLight = 1;
 int _DataToSend = 0;
 bool _TimerExpire = true;
-
 DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance
 
 void InterruptTimer2() 
@@ -37,50 +33,6 @@ void InterruptTimer2()
   _TimerExpire= true;
   digitalWrite(_OutPinRelay, LOW);
   MsTimer2::stop();
-}
-
-void sendZigBeeMsg(unsigned int iPayLoad, unsigned long iAddrToTarget)
-{
-  Serial.println("We are going to send a ZigBee message");
-  // Create an array for holding the data you want to send.
-  uint8_t aPayload[1];
-  // Fill it with the data
-  aPayload[0] = iPayLoad;
-
-  // Specify the address of the remote XBee (this is the SH + SL)
-  XBeeAddress64 addr64 = XBeeAddress64(COMMON_ADDR, iAddrToTarget);
-
-  // Create a TX Request
-  ZBTxRequest zbTx = ZBTxRequest(addr64, aPayload, sizeof(aPayload));
-
-  // Send your request
-  _Xbee.send(zbTx);
-  Serial.println("Message Sent - Waiting for the ACK");
-
-  if (_Xbee.readPacket(5000)) {
-    Serial.println("We got a response to the message");
-
-    // should be a znet tx status  
-    ZBTxStatusResponse aZbTxStatus = ZBTxStatusResponse();        
-    if (_Xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
-      _Xbee.getResponse().getZBTxStatusResponse(aZbTxStatus);
-
-      // get the delivery status, the fifth byte
-      if (aZbTxStatus.getDeliveryStatus() == SUCCESS) {
-        Serial.println("The Trx was OK");
-      } 
-      else {
-        Serial.println("Warning : The Trx was KO");
-      }
-    } 
-    else{
-      Serial.print("It was not a Trx status. ApiId:");
-      Serial.println(_Xbee.getResponse().getApiId());
-    }   
-  } 
-  else {
-    Serial.println("Warning : This should never happen");
-  }
 }
 
 void setup()
@@ -235,56 +187,6 @@ void loop()
     //Send the response if necessary
   if(_DataToSend!=0)
   {
-    uint8_t aPayload[3];
-
-    aPayload[0] = _CmdReceived; //LSB
-    Serial.print("Data0: 0x");
-    Serial.println(aPayload[0], HEX);
-    aPayload[1] = _DataToSend & 0xff; //LSB
-    Serial.print("Data0: 0x");
-    Serial.println(aPayload[1], HEX);
-    aPayload[2] = (_DataToSend >> 8) & 0xff; //MSB
-    Serial.print("Data1: 0x");
-    Serial.println(aPayload[2], HEX);
-
-    // Specify the address of the remote XBee (this is the SH + SL)
-    XBeeAddress64 aAddr64 = XBeeAddress64(COMMON_ADDR, COORD_ADDR);
-
-    // Create a TX Request
-    ZBTxRequest aZbTx = ZBTxRequest(aAddr64, aPayload, sizeof(aPayload));
-
-    // Send your request
-    _Xbee.send(aZbTx);
-
-    Serial.println("Message has been sent");
-
-    if (_Xbee.readPacket(5000)) {
-      Serial.println("We got a response to the message");
-
-      // should be a znet tx status  
-
-      ZBTxStatusResponse aZbTxStatus = ZBTxStatusResponse();        
-      if (_Xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
-        Serial.println("It is a transmition status");
-        _Xbee.getResponse().getZBTxStatusResponse(aZbTxStatus);
-
-        // get the delivery status, the fifth byte
-        if (aZbTxStatus.getDeliveryStatus() == SUCCESS) {
-          Serial.println("The Trx was OK");
-        } 
-        else {
-          Serial.println("Warning : The Trx was KO");
-        }
-      } 
-      else{
-        Serial.print("It was not a Trx status. ApiId:");
-        Serial.println(_Xbee.getResponse().getApiId());
-      }   
-    } 
-    else {
-      Serial.println("Warning : This should never happen");
-    }
+    sendZigBeeMsg2(_CmdReceived,_DataToSend,COORD_ADDR);
   }
 }
-
-
