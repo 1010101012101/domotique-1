@@ -29,8 +29,6 @@ parser.add_option("-s", "--send",action="store",dest="aMsgToSend",default="20",h
 parser.add_option("-o", "--originator",action="store",dest="aOriginator",default="UNKNOW",help="Originator of the request")
 (options, args) = parser.parse_args()
 
-aMsgToSend = 
-
 HOST = ''
 PORT = int(options.aPortToUse)
 

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-import serial, time
+import serial
+import time
 import sys
 import socket
 import datetime
@@ -16,6 +17,16 @@ from email.mime.text import MIMEText
 
 import sqlite3
 from optparse import OptionParser
+
+class Object:
+    "Encore une nouvelle classe temporelle"
+    def __init__(self):
+        self.id =0
+
+    def __repr__(self):
+        aRetString = ""
+        aRetString = aRetString + "self.id : " + str(self.id) + "\n"
+        return aRetString
 
 
 def sendEmailFireDetected():
@@ -45,19 +56,63 @@ def PeopleDetectedCharlesRoom(iSerialLink):
     aDataToWrite = "MSG:11_ORIGIN:PythonScript"
     SendMessage(iSerialLink, aDataToWrite)
     
+def PeopleDetectedEntree(iSerialLink):
+    print("Detection entree")
+    #aDataToWrite = "MSG:11_ORIGIN:PythonScript"
+    #SendMessage(iSerialLink, aDataToWrite)
+    
 def SendMessage(iSerialLink,iDataToWrite):
     print ("Writting input to USB port and sending back to sender")
     aCurrentDateTime = datetime.datetime.now()
     aCmdFromData=int((iDataToWrite.split('_')[0]).split(':')[1])
     aOriginFromData=(iDataToWrite.split('_')[1]).split(':')[1]
     #print ("chr(0x1F):" + chr(0x1F) + "_chr(31):" + chr(aCmdFromData))
-    aLogLine = "(V2)DATE: " + str(aCurrentDateTime) + " ORIGIN: " + aOriginFromData  + " CMD: " + str(aCmdFromData)
+    aLogLine = "(V2)TO:USB DATE: " + str(aCurrentDateTime) + " ORIGIN: " + aOriginFromData  + " CMD: " + str(aCmdFromData)
+    
+    #sqliteCnx = sqlite3.connect('/var/www/DataBase/Domos.db')
+    #c = sqliteCnx.cursor()
+    #c.execute("update object set status=off where id=?",(aCmdFromData))
+    #sqliteCnx.commit()
+    #sqliteCnx.close()
+    
     print ("Log line : " + aLogLine)
     aLogFile = open("/var/www/Logs/logs.txt", "a")
     aLogFile.write(aLogLine+"\n")
     aLogFile.close()
     iSerialLink.write(chr(aCmdFromData))
     
+def HandleUsbInput(iUsbString):
+    print ("USB response : " + iUsbString)
+    if("ID" in iUsbString):
+        sqliteCnx = sqlite3.connect('/var/www/DataBase/Domos.db')
+        c = sqliteCnx.cursor()
+        expires = datetime.datetime.now()
+        aValueReceived = float((iUsbString.split('_')[1]).split(':')[1])
+        aRequestorId = (iUsbString.split('_')[0]).split(':')[1]
+        c.execute("INSERT INTO measures (id, timestamp, value) VALUES (?,?,?)",(aRequestorId,expires,aValueReceived))
+        sqliteCnx.commit()
+        sqliteCnx.close()
+        
+        aCurrentDateTime = datetime.datetime.now()
+        aLogLine = "(V2)FROM:USB DATE: " + str(aCurrentDateTime) + " ORIGIN: " + aRequestorId  + " VALUE: " + str(aValueReceived)
+        print ("Log line : " + aLogLine)
+        aLogFile = open("/var/www/Logs/logs.txt", "a")
+        aLogFile.write(aLogLine+"\n")
+        aLogFile.close()
+        
+        if(aRequestorId == "1"):
+            print("OMG...Hell on earth1")
+            sendEmailFireDetected()
+        elif (aRequestorId == "2"):
+            print("OMG...Hell on earth2")
+            PeopleDetectedCharlesRoom(fd)
+        elif (aRequestorId == "80"):
+            print("OMG...Hell on earth3")
+            PeopleDetectedEntree(fd)
+        else :
+            print ("KO")
+    else:
+        print("Strange response....ignore it")
 
 parser = OptionParser(usage="usage: %prog [options]",version="%prog 1.0")
 parser.add_option("-p", "--port",action="store",dest="aPortToUse",default="50007",help="the port to listen")
@@ -91,27 +146,7 @@ while 1:
         elif s == fd:
             print ("handle USB port input")
             aResponse = fd.readline()
-            print ("USB response : " + aResponse)
-            if("ID" in aResponse):
-                sqliteCnx = sqlite3.connect('/var/www/DataBase/Domos.db')
-                c = sqliteCnx.cursor()
-                expires = datetime.datetime.now()
-                aValueReceived = (aResponse.split('_')[1]).split(':')[1]
-                aRequestorId = (aResponse.split('_')[0]).split(':')[1]
-                c.execute("INSERT INTO measures (id, timestamp, value) VALUES (?,?,?)",(aRequestorId,expires,float(aValueReceived)))
-                sqliteCnx.commit()
-                sqliteCnx.close()
-                if(aRequestorId == "1"):
-                    print("OMG...Hell on earth1")
-                    sendEmailFireDetected()
-
-                elif (aRequestorId == "2"):
-                    print("OMG...Hell on earth2")
-                    PeopleDetectedCharlesRoom(fd)
-                else :
-                    print ("KO")
-            else:
-                print("Strange response....ignore it")
+            HandleUsbInput(aResponse)
 
         else:
             print ("handle all other sockets")
