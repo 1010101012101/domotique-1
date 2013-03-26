@@ -5,30 +5,10 @@
 	switch($aCmdType) 
 		{
 			case "CMD_X10" :
-			//$aCommandToExecute = WRAPPER . "-o " . getenv(REMOTE_ADDR) . "-i " . $_REQUEST['iId'] . " -s " . '"' . $_REQUEST["iCmdToExecute"] . '"';
             $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $_REQUEST["iCmdToExecute"] ;
 			$output = array();
 			exec($aCommandToExecute, $output);
 			print(json_encode($output));
-			if(isset($_REQUEST['iStatus']))
-			{
-				try 
-				{
-					$aId = $_REQUEST['iId'];
-					$aStatus = $_REQUEST['iStatus'];
-					//connect to SQLite database
-					$dbh = new PDO("sqlite:../DataBase/Domos.db");
-					$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					//$aSqlRequest = 'update object set status="' . $aStatus . '" where id="' . $aId . '" ';
-					//$dbh->exec($aSqlRequest);
-					//close the database connection
-					$dbh = null;
-				}
-				catch(PDOException $e)
-				{
-					echo $e->getMessage();
-				}
-			}
 			break;
 			
 			case "CMD_WOL" :
