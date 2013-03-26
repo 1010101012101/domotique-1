@@ -22,10 +22,26 @@ class Object:
     "Encore une nouvelle classe temporelle"
     def __init__(self):
         self.id =0
+        self.physicalLocation =""
+        self.currentStatus =""
+        self.InPossibleCmd ={}
+        self.OutPossibleCmd ={}
+        self.ActionsCommands ={}
+        self.PossibleStates ={}
+        
+    def executeCmd(self,aCmdFromData):
+        print ("executing : " + str(aCmdFromData) )
+        exec(self.ActionsCommands[aCmdFromData])
 
     def __repr__(self):
         aRetString = ""
         aRetString = aRetString + "self.id : " + str(self.id) + "\n"
+        aRetString = aRetString + "self.physicalLocation : " + str(self.physicalLocation) + "\n"
+        aRetString = aRetString + "self.currentStatus : " + str(self.currentStatus) + "\n"
+        aRetString = aRetString + "self.InPossibleCmd : " + str(self.InPossibleCmd) + "\n"
+        aRetString = aRetString + "self.OutPossibleCmd : " + str(self.OutPossibleCmd) + "\n"
+        aRetString = aRetString + "self.ActionsCommands : " + str(self.ActionsCommands) + "\n"
+        aRetString = aRetString + "self.PossibleStates : " + str(self.PossibleStates) + "\n"
         return aRetString
 
 
@@ -40,6 +56,7 @@ def sendEmailFireDetected():
     smtp_pass   = Config["smtp_pass"]
     
     # Construct email
+    expires = datetime.datetime.now()
     msg = MIMEText('Fire detected at ' + str(expires))
     msg['To'] = addr_to
     msg['From'] = addr_from
@@ -79,6 +96,16 @@ def SendMessage(iSerialLink,iDataToWrite):
     aLogFile = open("/var/www/Logs/logs.txt", "a")
     aLogFile.write(aLogLine+"\n")
     aLogFile.close()
+    
+    for aOneObj in aRegisterDevices:
+        print ("checking if command is for : " + str(aOneObj) )
+        print ("possible cmd : " + str(aOneObj.InPossibleCmd.keys()))
+        if aCmdFromData in aOneObj.InPossibleCmd.keys():
+            print ("It is ;)")
+            aOneObj.executeCmd(aCmdFromData)
+            #exec(aOneObj.ActionsCommands[aCmdFromData])
+            #self.currentStatus="on"
+    
     iSerialLink.write(chr(aCmdFromData))
     
 def HandleUsbInput(iUsbString):
@@ -123,6 +150,25 @@ fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 json_data = open('ConfigFiles')
 Config = json.load(json_data)
 print ("config is : " + str(Config))
+
+#Create static object (the modules bought since I can not change them to register themselve)
+aLampeCharles = Object()
+aLampeCharles.physicalLocation = "Charles"
+aLampeCharles.InPossibleCmd = {5:"on",6:"off"}
+aLampeCharles.OutPossibleCmd = {}
+aLampeCharles.PossibleStates = ["on","off"]
+aLampeCharles.ActionsCommands ={5:"self.currentStatus=\"on\"", 6:"self.currentStatus=\"off\""}
+
+aDetecteurFumee = Object()
+aDetecteurFumee.physicalLocation = "Cuisine"
+aDetecteurFumee.InPossibleCmd = {39:"ping avec reponse",40:"Buz"}
+aDetecteurFumee.OutPossibleCmd = {444:"incendie ongoing"}
+aDetecteurFumee.PossibleStates = ["incendie en cours","pas incendie"]
+aDetecteurFumee.ActionsCommands ={39:"", 40:"",444:"print(\"au feu\")"}
+
+aRegisterDevices =[]
+aRegisterDevices.append(aLampeCharles)
+aRegisterDevices.append(aDetecteurFumee)
 
 host = ''
 port = int(options.aPortToUse)
