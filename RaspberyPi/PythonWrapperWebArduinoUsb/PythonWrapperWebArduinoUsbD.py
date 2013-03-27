@@ -3,6 +3,7 @@
 import serial
 import time
 import sys
+import Deipara
 import socket
 import datetime
 import select
@@ -14,42 +15,6 @@ import smtplib
 from email.mime.text import MIMEText
 import sqlite3
 import logging
-
-class Object:
-    "Une classe qui decrit un capteur"
-    
-    def __init__(self):
-        self.id =0
-        self.physicalLocation =""
-        self.currentStatus =""
-        self.description =""
-        self.Reset =""
-        self.InPossibleCmd ={}
-        self.OutPossibleCmd ={}
-        self.ActionsCommands ={}
-        self.PossibleStates ={}
-        
-    def executeCmd(self,aCmdFromData):
-        #logging.info ("executing : " + str(aCmdFromData) )
-        exec(self.ActionsCommands[aCmdFromData])
-        
-    def reset(self):
-        logging.debug("reseting")
-        exec(self.Reset)
-
-    def __repr__(self):
-        aRetString = ""
-        aRetString = aRetString + "self.id : " + str(self.id) + "\n"
-        aRetString = aRetString + "self.physicalLocation : " + str(self.physicalLocation) + "\n"
-        aRetString = aRetString + "self.currentStatus : " + str(self.currentStatus) + "\n"
-        aRetString = aRetString + "self.description : " + str(self.description) + "\n"
-        aRetString = aRetString + "self.Reset : " + str(self.Reset) + "\n"
-        aRetString = aRetString + "self.InPossibleCmd : " + str(self.InPossibleCmd) + "\n"
-        aRetString = aRetString + "self.OutPossibleCmd : " + str(self.OutPossibleCmd) + "\n"
-        aRetString = aRetString + "self.ActionsCommands : " + str(self.ActionsCommands) + "\n"
-        aRetString = aRetString + "self.PossibleStates : " + str(self.PossibleStates) + "\n"
-        return aRetString
-
 
 def sendEmailFireDetected():
     logging.info("Envoi email detection incendie")
@@ -91,7 +56,7 @@ def smartProcessing(iListOfDevice,iSerialLink):
         if ((aOneDevice.id == 2) and (aOneDevice.currentStatus=="incendie en cours")):
             sendEmailFireDetected()
         elif ((aOneDevice.id == 6) and (aOneDevice.currentStatus=="personne detecte")):
-            PeopleDetectedEntree()
+            PeopleDetectedEntree(iSerialLink)
         elif ((aOneDevice.id == 7) and (aOneDevice.currentStatus=="personne detecte")):
             PeopleDetectedCharlesRoom(iSerialLink,iListOfDevice)
         else :
@@ -160,7 +125,7 @@ Config = json.load(json_data)
 logging.info("config is : " + str(Config))
 
 #Create static object (the modules bought since I can not change them to register themselve)
-aLampeCharles = Object()
+aLampeCharles = Deipara.Object()
 aLampeCharles.physicalLocation = "Charles"
 aLampeCharles.id = 1
 aLampeCharles.description = "Lampe charles"
@@ -170,7 +135,7 @@ aLampeCharles.OutPossibleCmd = {}
 aLampeCharles.PossibleStates = ["on","off"]
 aLampeCharles.ActionsCommands ={5:"self.currentStatus=\"on\"", 6:"self.currentStatus=\"off\""}
 
-aVoletCharles = Object()
+aVoletCharles = Deipara.Object()
 aVoletCharles.physicalLocation = "Charles"
 aVoletCharles.id = 4
 aVoletCharles.description = "Volet charles"
@@ -179,7 +144,7 @@ aVoletCharles.OutPossibleCmd = {}
 aVoletCharles.PossibleStates = ["ouvert","ferme"]
 aVoletCharles.ActionsCommands ={7:"self.currentStatus=\"ouvert\"", 8:"self.currentStatus=\"ferme\""}
 
-aLampeSecondaireCharles = Object()
+aLampeSecondaireCharles = Deipara.Object()
 aLampeSecondaireCharles.physicalLocation = "Charles"
 aLampeSecondaireCharles.id = 3
 aLampeSecondaireCharles.description = "Lampe secondaire charles"
@@ -188,7 +153,7 @@ aLampeSecondaireCharles.OutPossibleCmd = {}
 aLampeSecondaireCharles.PossibleStates = ["on","off"]
 aLampeSecondaireCharles.ActionsCommands ={11:"self.currentStatus=\"on\"", 12:"self.currentStatus=\"off\""}
 
-aDetecteurFumee = Object()
+aDetecteurFumee = Deipara.Object()
 aDetecteurFumee.physicalLocation = "Cuisine"
 aDetecteurFumee.id = 2
 aDetecteurFumee.description = "Detecteur fumee cuisine"
@@ -198,7 +163,7 @@ aDetecteurFumee.OutPossibleCmd = {1:"incendie ongoing"}
 aDetecteurFumee.PossibleStates = ["incendie en cours","pas incendie"]
 aDetecteurFumee.ActionsCommands ={39:"", 40:"",1:"self.currentStatus=\"incendie en cours\""}
 
-aDetecteurEntree = Object()
+aDetecteurEntree = Deipara.Object()
 aDetecteurEntree.physicalLocation = "Entree"
 aDetecteurEntree.id = 6
 aDetecteurEntree.Reset = "self.currentStatus=\"pas personne detecte\""
@@ -208,7 +173,7 @@ aDetecteurEntree.OutPossibleCmd = {50:"personne detecte"}
 aDetecteurEntree.PossibleStates = ["personne detecte","pas personne detecte"]
 aDetecteurEntree.ActionsCommands ={34:"", 35:"", 36:"", 33:"",50:"self.currentStatus=\"personne detecte\""}
 
-aDetecteurCharles = Object()
+aDetecteurCharles = Deipara.Object()
 aDetecteurCharles.physicalLocation = "Charles"
 aDetecteurCharles.id = 7
 aDetecteurCharles.Reset = "self.currentStatus=\"pas personne detecte\""
