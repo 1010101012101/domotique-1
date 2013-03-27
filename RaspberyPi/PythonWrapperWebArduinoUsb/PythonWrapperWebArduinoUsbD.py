@@ -13,7 +13,6 @@ import smtplib
 # Import the email modules
 from email.mime.text import MIMEText
 import sqlite3
-from optparse import OptionParser
 import logging
 
 class Object:
@@ -151,10 +150,6 @@ def HandleUsbInput(iUsbString,iListOfDevice):
     else:
         logging.error("Strange response....ignore it")
 
-parser = OptionParser(usage="usage: %prog [options]",version="%prog 1.0")
-parser.add_option("-p", "--port",action="store",dest="aPortToUse",default="50007",help="the port to listen")
-(options, args) = parser.parse_args()
-
 logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.INFO)
 logging.info('Daemon starting...')
 
@@ -233,7 +228,7 @@ aRegisterDevices.append(aDetecteurEntree)
 aRegisterDevices.append(aDetecteurCharles)
 
 host = ''
-port = int(options.aPortToUse)
+port = 50007
 backlog = 5
 size = 1024
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
