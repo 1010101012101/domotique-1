@@ -1,0 +1,17 @@
+{ "ActionsCommands" : { "42" : "self.currentStatus=\"on\"",
+      "43" : "self.currentStatus=\"off\""
+    },
+  "InPossibleCmd" : { "42" : "on",
+      "43" : "off"
+    },
+  "OutPossibleCmd" : {  },
+  "PossibleStates" : [ "on",
+      "off"
+    ],
+  "Reset" : "",
+  "currentStatus" : "",
+  "description" : "Chauffage SDB",
+  "id" : 9,
+  "physicalLocation" : "SDB",
+  "py/object" : "Deipara.Object"
+}

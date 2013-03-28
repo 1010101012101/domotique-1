@@ -153,20 +153,18 @@ void loop()
   if ((aInputDigitalValue == LOW))
   {
     _CmdReceived=20;
-   // flashPin(_OutPinLedTest, 3, 200);
+    //flashPin(_OutPinLedTest, 3, 200);
     //x10ex.sendCmd('A', 5, CMD_OFF, 1);
     //x10ex.sendExtDim('A', 5, 40, 0, 1);
     //x10ex.sendExt('A',  5, CMD_EXTENDED_CODE,5, EXC_PRE_SET_DIM,1);
     //KO x10ex.sendExtDim('A', 5, 40, EXC_DIM_TIME_30, 1);
     //KO x10ex.sendExtDim('A', 5, 40, EXC_DIM_TIME_60, 1);
     //x10ex.sendExtDim('A', 5, 40, EXC_DIM_TIME_300, 1);
-  //  x10ex.sendCmd('A', 5, CMD_DIM, 1);
+    //x10ex.sendCmd('A', 5, CMD_DIM, 1);
     delay(1000);
-   // OK x10ex.sendCmd('A', 5, CMD_BRIGHT, 1);
+    //OK x10ex.sendCmd('A', 5, CMD_BRIGHT, 1);
     
   }
-  
-
   
   //Process the command
   //Test if we have an action to do en commencant par une commande de debug
@@ -226,54 +224,14 @@ void loop()
     x10ex.sendCmd('A', 8, CMD_OFF, 1); 
   }
   //Debut des commandes pour ENTREE
-  else if(_CmdReceived==30)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==31)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==32)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==33)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==34)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==35)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==36)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==37)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
-  }
-  else if(_CmdReceived==38)
+  else if((_CmdReceived==30)||(_CmdReceived==31)||(_CmdReceived==32)||(_CmdReceived==33)||(_CmdReceived==34)||(_CmdReceived==35)||(_CmdReceived==36)||(_CmdReceived==37)||(_CmdReceived==38))
   {
     sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   //Debut des commandes TERRASSE
-  else if(_CmdReceived==39)
+  else if((_CmdReceived==39)||(_CmdReceived==40))
   {
     sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR);
-  }
-  else if(_CmdReceived==40)
-  {
-    sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR);
-  }
-  else if(_CmdReceived==45)
-  {
-    //sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR);
   }
   
 

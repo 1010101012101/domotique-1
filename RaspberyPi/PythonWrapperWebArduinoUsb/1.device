@@ -1,0 +1,17 @@
+{ "ActionsCommands" : { "5" : "self.currentStatus=\"on\"",
+      "6" : "self.currentStatus=\"off\""
+    },
+  "InPossibleCmd" : { "5" : "on",
+      "6" : "off"
+    },
+  "OutPossibleCmd" : {  },
+  "PossibleStates" : [ "on",
+      "off"
+    ],
+  "Reset" : "",
+  "currentStatus" : "",
+  "description" : "Lampe principale charles",
+  "id" : 1,
+  "physicalLocation" : "Charles",
+  "py/object" : "Deipara.Object"
+}

@@ -1,0 +1,22 @@
+{ "ActionsCommands" : { "33" : "",
+      "34" : "",
+      "35" : "",
+      "36" : "",
+      "50" : "self.currentStatus=\"personne detecte\""
+    },
+  "InPossibleCmd" : { "33" : "debug simule passage detecteur",
+      "34" : "allume lumiere",
+      "35" : "teindre lumiere",
+      "36" : "allume lumiere 2 min"
+    },
+  "OutPossibleCmd" : { "50" : "personne detecte" },
+  "PossibleStates" : [ "personne detecte",
+      "pas personne detecte"
+    ],
+  "Reset" : "self.currentStatus=\"pas personne detecte\"",
+  "currentStatus" : "",
+  "description" : "Detecteur entree",
+  "id" : 6,
+  "physicalLocation" : "Entree",
+  "py/object" : "Deipara.Object"
+}

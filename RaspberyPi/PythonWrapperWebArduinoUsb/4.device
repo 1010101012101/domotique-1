@@ -1,0 +1,17 @@
+{ "ActionsCommands" : { "7" : "self.currentStatus=\"ouvert\"",
+      "8" : "self.currentStatus=\"ferme\""
+    },
+  "InPossibleCmd" : { "7" : "ouvert",
+      "8" : "ferme"
+    },
+  "OutPossibleCmd" : {  },
+  "PossibleStates" : [ "ouvert",
+      "ferme"
+    ],
+  "Reset" : "",
+  "currentStatus" : "",
+  "description" : "Volet charles",
+  "id" : 4,
+  "physicalLocation" : "Charles",
+  "py/object" : "Deipara.Object"
+}
