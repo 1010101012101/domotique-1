@@ -80,7 +80,7 @@ class Brain:
             
         for aOneDevice in iListOfDevice.registeredDevices:
             logging.debug("checking states : " + str(aOneDevice))
-            if ((aOneDevice.id == 7) and (datetime.datetime.now() - self.lastPeopleDetectedCharles > datetime.timedelta (seconds = 100))):
+            if ((aOneDevice.id == 7) and (datetime.datetime.now() - self.lastPeopleDetectedCharles > datetime.timedelta (seconds = 600))):
                 self.TurnCharlesLightOff(iListOfDevice)
             elif ((aOneDevice.id == 6) and (datetime.datetime.now() - self.lastPeopleDetectedEntree > datetime.timedelta (seconds = 180))):
                 self.TurnEntreeLightOff(iListOfDevice)
