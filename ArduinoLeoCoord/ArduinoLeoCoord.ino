@@ -7,6 +7,8 @@
 #include <X10ex.h>
 //Deipara library
 #include <Deipara.h>
+//RHT03 library
+#include <DHT22.h>
 
 #define POWER_LINE_MSG "PL:"
 #define POWER_LINE_BUFFER_ERROR "PL:_ExBuffer"
@@ -17,9 +19,9 @@
 #define MSG_DATA_ERROR "_ExSyntax"
 
 //Define the pin number
-const int _OutPinLedTest = 7;
 const int _InPinIrDetector = 8;
 const int _InPinButtonOn = 4;
+const int _InPinDht22 = 7;
 //Define other consts
 
 XBee _Xbee = XBee(); // create Xbee object to control a Xbee
@@ -46,6 +48,7 @@ X10ex x10ex = X10ex(
   1, // Number of phases (1 = No Phase Repeat/Coupling)
   50 // The power line AC frequency (e.g. 50Hz in Europe, 60Hz in North America)
 );
+DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance
 
 //Config cable XM10:
 // 1 2 3 4
@@ -73,7 +76,6 @@ void InterruptTimer2()
 void setup()
 {
   //defined input button
-  pinMode(_OutPinLedTest,OUTPUT);
   pinMode(_InPinButtonOn,INPUT);
   pinMode(_InPinIrDetector,INPUT);
   
@@ -170,7 +172,6 @@ void loop()
   //Test if we have an action to do en commencant par une commande de debug
   if(_CmdReceived==3)
   {
-    flashPin(_OutPinLedTest, 3, 200);
     delay(10);
     Serial.println("ACK_1");
   }
@@ -222,6 +223,60 @@ void loop()
   else if(_CmdReceived==43) //Eteindre le chauffage de la SDB
   {
     x10ex.sendCmd('A', 8, CMD_OFF, 1); 
+  }
+  //commande pour le coord lui meme
+  else if((_CmdReceived==15)||(_CmdReceived==16)) //temperature
+  {
+    delay(50);
+    DHT22_ERROR_t errorCode;
+    Serial.print("Requesting data...");
+    errorCode = _Dht22.readData();
+    
+    switch(errorCode)
+    {
+    case DHT_ERROR_NONE:
+      Serial.print("Got Data ");
+      Serial.print(_Dht22.getTemperatureCAsFloat());
+      Serial.print("/");
+      Serial.print(_Dht22.getTemperatureCAsInt());
+      Serial.print("C ");
+      Serial.print(_Dht22.getHumidityAsFloat());
+      Serial.print("/");
+      Serial.print(_Dht22.getHumidityAsInt());
+      Serial.println("%");
+      if (_CmdReceived==15)
+      {
+        _DataToSend=_Dht22.getTemperatureCAsInt();
+        _SenderId=15;
+      }
+      else if(_CmdReceived==16)
+      {
+        _DataToSend=_Dht22.getHumidityAsInt();
+        _SenderId=16;
+      }
+      break;
+    case DHT_ERROR_CHECKSUM:
+      Serial.print("check sum error ");
+      break;
+    case DHT_BUS_HUNG:
+      Serial.println("BUS Hung ");
+      break;
+    case DHT_ERROR_NOT_PRESENT:
+      Serial.println("Not Present ");
+      break;
+    case DHT_ERROR_ACK_TOO_LONG:
+      Serial.println("ACK time out ");
+      break;
+    case DHT_ERROR_SYNC_TIMEOUT:
+      Serial.println("Sync Timeout ");
+      break;
+    case DHT_ERROR_DATA_TIMEOUT:
+      Serial.println("Data Timeout ");
+      break;
+    case DHT_ERROR_TOOQUICK:
+      Serial.println("Polled to quick ");
+      break;
+    }
   }
   //Debut des commandes pour ENTREE
   else if((_CmdReceived==30)||(_CmdReceived==31)||(_CmdReceived==32)||(_CmdReceived==33)||(_CmdReceived==34)||(_CmdReceived==35)||(_CmdReceived==36)||(_CmdReceived==37)||(_CmdReceived==38))
