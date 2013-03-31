@@ -27,7 +27,6 @@ DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance
 void InterruptTimer2() 
 {
   _TimerExpire= true;
-  digitalWrite(_OutPinRelay, LOW);
   MsTimer2::stop();
 }
 
@@ -69,16 +68,12 @@ void loop()
     }  
   }
   
-  if (aInputDigitalValue == HIGH)
+  if ((aInputDigitalValue == HIGH)&&(_TimerExpire == true))
   {
-    digitalWrite(_OutPinRelay, HIGH);
+    _TimerExpire = false;
+    _CmdReceived = 50;
+    _DataToSend=440;
     MsTimer2::start(); // active Timer 2 
-    if (_TimerExpire == true)
-    {
-        _TimerExpire = false;
-        _CmdReceived = 50;
-        _DataToSend=440;
-    }
   }
 
   //Do the real action
@@ -91,12 +86,6 @@ void loop()
   {
     //This command allow the master to turn the light off
     digitalWrite(_OutPinRelay, LOW);
-  }
-  else if(_CmdReceived==36)
-  {
-    //This command allow to trig the "user detected" even
-    digitalWrite(_OutPinRelay, HIGH);
-    MsTimer2::start(); // active Timer 2 
   }
   else if(_CmdReceived==33)
   {
@@ -157,7 +146,7 @@ void loop()
     }
   }
   
-    //Send the response if necessary
+  //Send the response if necessary
   if(_DataToSend!=0)
   {
     sendZigBeeMsg2(_Xbee,_CmdReceived,_DataToSend,COORD_ADDR);

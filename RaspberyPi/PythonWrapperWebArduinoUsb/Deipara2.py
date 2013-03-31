@@ -5,6 +5,7 @@ import jsonpickle
 import logging
 import datetime
 import serial
+
 ###################################################################################
 ########## Brain class....smart one       #########################################
 ###################################################################################
@@ -27,12 +28,18 @@ class Brain:
         aDataToWrite = "MSG:12_ORIGIN:PythonScript"
         self.lastPeopleDetectedCharles = datetime.datetime.now()
         self.SendMessage( aDataToWrite,iListOfDevice)
-    
-    def PeopleDetectedEntree(self):
-        logging.info("Detection entree")
-        aDataToWrite = "MSG:11_ORIGIN:PythonScript"
+        
+    def TurnEntreeLightOff(self,iListOfDevice):
+        logging.info("Detection chambre charles")
+        aDataToWrite = "MSG:35_ORIGIN:PythonScript"
         self.lastPeopleDetectedEntree = datetime.datetime.now()
-        #SendMessage(iSerialLink, aDataToWrite)
+        self.SendMessage( aDataToWrite,iListOfDevice)
+    
+    def PeopleDetectedEntree(self,iListOfDevice):
+        logging.info("Detection entree")
+        aDataToWrite = "MSG:34_ORIGIN:PythonScript"
+        self.lastPeopleDetectedEntree = datetime.datetime.now()
+        self.SendMessage( aDataToWrite,iListOfDevice)
         
     def sendEmailFireDetected():
         logging.info("Envoi email detection incendie")
@@ -56,34 +63,15 @@ class Brain:
         s.login(smtp_user,smtp_pass)
         s.sendmail(addr_from, addr_to, msg.as_string())
         s.quit()
-        
-    def smartProcessing(self,iListOfDevice):
-        logging.info("Trying to be smart")
-        for aOneDevice in iListOfDevice.registeredDevices:
-            logging.debug("checking event : " + str(aOneDevice))
-            if ((aOneDevice.id == 2) and (aOneDevice.currentStatus=="incendie en cours")):
-                sendEmailFireDetected()
-            elif ((aOneDevice.id == 6) and (aOneDevice.currentStatus=="personne detecte")):
-                self.PeopleDetectedEntree()
-            elif ((aOneDevice.id == 7) and (aOneDevice.currentStatus=="personne detecte")):
-                self.PeopleDetectedCharlesRoom(iListOfDevice)
-            else :
-                logging.debug("Nothing to do even if we are smart")
-            aOneDevice.reset()
-            
-        for aOneDevice in iListOfDevice.registeredDevices:
-            logging.debug("checking states : " + str(aOneDevice))
-            if ((aOneDevice.id == 7) and (datetime.datetime.now() - self.lastPeopleDetectedCharles > datetime.timedelta (seconds = 100))):
-                self.TurnCharlesLightOff(iListOfDevice)
 
     def smartProcessing2(self,iListOfDevice):
-        logging.info("Trying to be smart")
+        logging.debug("Trying to be smart")
         for aOneDevice in iListOfDevice.registeredDevices:
             logging.debug("checking event : " + str(aOneDevice))
             if ((aOneDevice.id == 2) and (aOneDevice.currentStatus=="incendie en cours")):
                 sendEmailFireDetected()
             elif ((aOneDevice.id == 6) and (aOneDevice.currentStatus=="personne detecte")):
-                self.PeopleDetectedEntree()
+                self.PeopleDetectedEntree(iListOfDevice)
             elif ((aOneDevice.id == 7) and (aOneDevice.currentStatus=="personne detecte")):
                 self.PeopleDetectedCharlesRoom(iListOfDevice)
             else :
@@ -94,6 +82,8 @@ class Brain:
             logging.debug("checking states : " + str(aOneDevice))
             if ((aOneDevice.id == 7) and (datetime.datetime.now() - self.lastPeopleDetectedCharles > datetime.timedelta (seconds = 100))):
                 self.TurnCharlesLightOff(iListOfDevice)
+            elif ((aOneDevice.id == 6) and (datetime.datetime.now() - self.lastPeopleDetectedEntree > datetime.timedelta (seconds = 180))):
+                self.TurnEntreeLightOff(iListOfDevice)
                 
     def HandleUsbInput(self,iUsbString,iListOfDevice):
         logging.info ("Handle USB incoming message : " + iUsbString)
