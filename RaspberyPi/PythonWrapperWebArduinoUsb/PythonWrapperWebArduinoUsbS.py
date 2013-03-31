@@ -52,8 +52,5 @@ except:
     
 s.send(aMsgToSend2)
 
-data = s.recv(1024)
-
 s.close()
 
-print 'Received', repr(data)
