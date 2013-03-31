@@ -1,12 +1,11 @@
-pi@raspberrypi ~/Usb_Arduino_Leonardo $ sudo crontab -l -u www-data
 # Eteindre le chuaffage de la salle de bain a 7 heure tous les matins
-15 7 * * 1-5 /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 42
+15 7 * * 1-5 /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 43
 # Allumer le chauffage de la salle de bain a 6 heure tous les matins
-0 6 * * 1-5 /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 43
+0 6 * * 1-5 /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 42
 # Fermer Volet Salon le soir a 18H
-0 19 * * * /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 10
+30 19 * * * /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 10
 # Fermer Volet Charles le soir a 18H05
-5 19 * * * /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 8
+35 19 * * * /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 8
 # toutes les heures + 7 min on refresh la emperature entree
 7 * * * * /home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.py -o CRONTAB -s 30
 # toutes les heures + 13 min on refresh la humidite entree
