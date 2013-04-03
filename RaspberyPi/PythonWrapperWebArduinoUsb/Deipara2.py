@@ -99,12 +99,13 @@ class Brain:
             aLogFile.write(aLogLine+"\n")
             aLogFile.close()
             
-            logging.info("Looping on the devices and allow them to update themselve.")    
+            logging.info("Looping on the devices and allow them to update themselve7.")    
             for aOneObj in iListOfDevice.registeredDevices:
-                #logging.info ("possible cmd : " + str(aOneObj.OutPossibleCmd.keys()))
+                logging.info ("possible cmd : " + str(aOneObj.OutPossibleCmd.keys()))
                 if str(aRequestorId) in aOneObj.OutPossibleCmd.keys():
                     logging.info("Updating device ID : " + str(aOneObj.id))
-                    aOneObj.executeCmd(str(aRequestorId))
+                    aOneObj.executeCmd(str(aRequestorId),aValueReceived)
+                    logging.info("Device ID : " +str(aOneObj))
         else:
             logging.error("Strange response....ignore it")
         
@@ -123,12 +124,12 @@ class Brain:
         aLogFile.write(aLogLine+"\n")
         aLogFile.close()
         
-        logging.info("Looping on the devices and allow them to update themselve.")
+        logging.info("Looping on the devices and allow them to update themselve2.")
         for aOneObj in iListOfDevice.registeredDevices:
             #logging.info ("possible cmd : " + str(aOneObj.InPossibleCmd.keys()))
             if str(aCmdFromData) in aOneObj.InPossibleCmd.keys():
                 logging.info("Updating device ID : " + str(aOneObj.id))
-                aOneObj.executeCmd(str(aCmdFromData))
+                aOneObj.executeCmd(str(aCmdFromData),str(aOriginFromData))
         
         fd.write(chr(aCmdFromData))
 
@@ -156,7 +157,7 @@ class Object:
         self.ActionsCommands ={}
         self.PossibleStates ={}
         
-    def executeCmd(self,aCmdFromData):
+    def executeCmd(self,aCmdFromData,aData):
         exec(self.ActionsCommands[aCmdFromData])
         
     def reset(self):
@@ -175,6 +176,53 @@ class Object:
         aRetString = aRetString + "self.PossibleStates : " + str(self.PossibleStates) + "\n"
         return aRetString
         
+class Temperature(Object):
+    "Une classe qui decrit un capteur"
+    
+    def __init__(self):
+        Object.__init__(self)
+        self.temperature="0"
+        self.humidite="0"
+        self.LastTMeaureDate=datetime.datetime.now()
+        self.LastHMeaureDate=datetime.datetime.now()
+
+    def __repr__(self):
+        aRetString = ""
+        aRetString = aRetString + Object.__repr__(self) + "\n"
+        aRetString = aRetString + "self.temperature : " + str(self.temperature) + "\n"
+        aRetString = aRetString + "self.humidite : " + str(self.humidite) + "\n"
+        aRetString = aRetString + "self.LastTMeaureDate : " + str(self.LastTMeaureDate) + "\n"
+        aRetString = aRetString + "self.LastHMeaureDate : " + str(self.LastHMeaureDate) + "\n"
+        return aRetString
+        
+class InterupteurBiStable(Object):
+    "Une classe qui decrit un capteur"
+    
+    def __init__(self):
+        Object.__init__(self)
+        self.status="off"
+
+    def __repr__(self):
+        aRetString = ""
+        aRetString = aRetString + Object.__repr__(self) + "\n"
+        aRetString = aRetString + "self.status : " + str(self.status) + "\n"
+        return aRetString 
+
+class InterupteurStable(Object):
+    "Une classe qui decrit un capteur"
+    
+    def __init__(self):
+        Object.__init__(self)
+        self.status="off"
+
+    def __repr__(self):
+        aRetString = ""
+        aRetString = aRetString + Object.__repr__(self) + "\n"
+        aRetString = aRetString + "self.status : " + str(self.status) + "\n"
+        return aRetString 
+
+        
+        
 class DevicesHandler:
     "Gere un ensemble de devices"
     
@@ -182,13 +230,82 @@ class DevicesHandler:
         self.registeredDevices =[]
         
     def loadDevices(self):
-        for aOneDeviceFile in glob.glob("*.device"):
-            #logging.info( "working on the file : " + aOneDeviceFile)
-            f = open(aOneDeviceFile)
-            json_str = f.read()
-            aOneDeviceObj = jsonpickle.decode(json_str)
-            #logging.info ("loaded : " + str(aOneDeviceObj))
-            self.registeredDevices.append(aOneDeviceObj)
+        #for aOneDeviceFile in glob.glob("*.device"):
+            #f = open(aOneDeviceFile)
+            #json_str = f.read()
+            #aOneDeviceObj = jsonpickle.decode(json_str)
+            #self.registeredDevices.append(aOneDeviceObj)
+            
+        charlesT = Temperature()
+        charlesT.OutPossibleCmd ={"15" : "recoit Nouvelle T","16" : "recoit Nouvelle H"}
+        charlesT.ActionsCommands ={"15" : "self.temperature=aData","16" : "self.humidite=aData"}
+        charlesT.id =15
+        self.registeredDevices.append(charlesT)
+        
+        entreeT = Temperature()
+        charlesT.OutPossibleCmd ={"30" : "recoit Nouvelle T","31" : "recoit Nouvelle H"}
+        charlesT.ActionsCommands ={"30" : "self.temperature=aData","31" : "self.humidite=aData"}
+        charlesT.id =17
+        self.registeredDevices.append(entreeT)
+        
+        lumiereCharles = InterupteurBiStable()
+        lumiereCharles.PossibleStates=[ "on","off"]
+        lumiereCharles.id =1
+        lumiereCharles.InPossibleCmd ={ "5" : "on","6" : "off"}
+        lumiereCharles.ActionsCommands={ "5" : "self.currentStatus=\"on\"","6" : "self.currentStatus=\"off\""}
+        self.registeredDevices.append(lumiereCharles)
+        
+        lumiere2Charles = InterupteurBiStable()
+        lumiere2Charles.PossibleStates=[ "on","off"]
+        lumiere2Charles.id =3
+        lumiere2Charles.InPossibleCmd ={ "11" : "on","12" : "off"}
+        lumiere2Charles.ActionsCommands={ "11" : "self.currentStatus=\"on\"","12" : "self.currentStatus=\"off\""}
+        self.registeredDevices.append(lumiere2Charles)
+        
+        VoletCharles = InterupteurBiStable()
+        VoletCharles.PossibleStates=[ "on","off"]
+        VoletCharles.id =4
+        VoletCharles.InPossibleCmd ={ "7" : "on","8" : "off"}
+        VoletCharles.ActionsCommands={ "7" : "self.currentStatus=\"on\"","8" : "self.currentStatus=\"off\""}
+        self.registeredDevices.append(VoletCharles)
+        
+        VoletCharles = InterupteurBiStable()
+        VoletCharles.PossibleStates=[ "on","off"]
+        VoletCharles.id =5
+        VoletCharles.InPossibleCmd ={ "9" : "on","10" : "off"}
+        VoletCharles.ActionsCommands={ "9" : "self.currentStatus=\"on\"","10" : "self.currentStatus=\"off\""}
+        self.registeredDevices.append(VoletCharles)
+        
+        LumiereSalonHalogene = InterupteurBiStable()
+        LumiereSalonHalogene.PossibleStates=[ "on","off"]
+        LumiereSalonHalogene.id =6
+        LumiereSalonHalogene.InPossibleCmd ={ "13" : "on","14" : "off"}
+        LumiereSalonHalogene.ActionsCommands={ "13" : "self.currentStatus=\"on\"","14" : "self.currentStatus=\"off\""}
+        self.registeredDevices.append(LumiereSalonHalogene)
+        
+        ChaffageSdb = InterupteurBiStable()
+        ChaffageSdb.PossibleStates=[ "on","off"]
+        ChaffageSdb.id =7
+        ChaffageSdb.InPossibleCmd ={ "42" : "on","43" : "off"}
+        ChaffageSdb.ActionsCommands={ "42" : "self.currentStatus=\"on\"","43" : "self.currentStatus=\"off\""}
+        self.registeredDevices.append(ChaffageSdb)
+        
+        Lumiereentree = InterupteurBiStable()
+        Lumiereentree.PossibleStates=[ "on","off"]
+        Lumiereentree.id =7
+        Lumiereentree.InPossibleCmd ={ "34" : "on","35" : "off"}
+        Lumiereentree.ActionsCommands={ "34" : "self.currentStatus=\"on\"","35" : "self.currentStatus=\"off\""}
+        self.registeredDevices.append(Lumiereentree)
+        
+        VoletCharles = InterupteurStable()
+        VoletCharles.PossibleStates=[ "on","off"]
+        VoletCharles.id =9
+        VoletCharles.OutPossibleCmd ={ "2" : "detected"}
+        VoletCharles.ActionsCommands={ "2" : "self.currentStatus=\"on\""}
+        VoletCharles.Reset = "self.currentStatus=\"pas personne detecte\""
+        self.registeredDevices.append(VoletCharles)
+        
+
         
     def __repr__(self):
         aRetString = ""
