@@ -51,7 +51,7 @@ class TcpHandler(Protocol):
         logging.info("Tcp Handler created to process : " + str(data))
         if "READ" in str(data):
             logging.info("READ command")
-            aRest = aBrain.ReadDeviceStatus(data,aRegisterDevices)
+            aRest = aBrain.ReadDeviceStatus2(data,aRegisterDevices)
             logging.info("READ command res " + str(aRest))
             self.transport.write(str(aRest))
         else:

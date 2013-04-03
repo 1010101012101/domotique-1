@@ -148,6 +148,17 @@ class Brain:
                 aRest = str(aOneObj.currentStatus)+"_"+str(aOneObj.LastTMeaureDate)
                 logging.info("ret : " + aRest)
                 return aRest
+                
+    def ReadDeviceStatus2(self,iDataToWrite, iListOfDevice):
+        aCmdFromData=int((iDataToWrite.split('_')[0]).split(':')[1])
+        logging.info("Looking for the device : " + str(aCmdFromData))
+        for aOneObj in iListOfDevice.registeredDevices:
+            logging.info ("possible cmd : " + str(aOneObj.InPossibleCmd.keys()))
+            if (str(aCmdFromData) == str(aOneObj.id)):
+                logging.info("find it" + str(aOneObj.id))
+                aRest = str(aOneObj)
+                logging.info("ret : " + aRest)
+                return aRest
                
     def __repr__(self):
         aRetString = ""

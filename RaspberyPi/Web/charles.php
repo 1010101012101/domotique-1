@@ -20,7 +20,7 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '4,5,6', iCmdToExecute : "2" , iCmdType : "CMD_READ"}),
+                    data: ({iId : '4', iCmdToExecute : "2" , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess
@@ -31,10 +31,6 @@
 					if((data[0].id==4)&&(data[0].status=="on"))
 					{
 						$('#Flip_LumierePrincipale').val('on').slider("refresh");
-					}
-					if((data[2].id==6)&&(data[2].status=="on"))
-					{
-						$('#Flip_LumiereSecondaire').val('on').slider("refresh");
 					}
 				}
 				

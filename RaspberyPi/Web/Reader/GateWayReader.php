@@ -29,6 +29,13 @@
 				echo $e->getMessage();
 			}
 			break;
+            
+            case "CMD_READ2" :
+            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $_REQUEST["iCmdToExecute"] . " -t READ";
+			$output = array();
+			exec($aCommandToExecute, $output);
+			print(json_encode($output));
+			break;
 			
 			case "CMD_READ_VALUE_DB" :
 			try 
