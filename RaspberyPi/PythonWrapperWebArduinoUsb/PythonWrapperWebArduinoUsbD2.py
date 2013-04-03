@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
-import sys
-import Deipara2
-import logging
-import datetime
+#my python modules
+import Deipara_Brain
+import Deipara_Objects
+
+#twisted python modules
 from twisted.internet import reactor 
 from twisted.internet.protocol import Factory 
 from twisted.internet.protocol import Protocol 
@@ -11,6 +12,11 @@ from twisted.internet.task import LoopingCall
 from twisted.protocols.basic import LineReceiver 
 from twisted.internet.serialport import SerialPort 
 from twisted.python import log
+
+#other modules
+import sys
+import logging
+import datetime
 
 class UsbHandler(LineReceiver):
     """protocol handling class for USB """
@@ -43,7 +49,15 @@ class TcpHandler(Protocol):
     
     def dataReceived(self, data):
         logging.info("Tcp Handler created to process : " + str(data))
-        aBrain.SendMessage(data,aRegisterDevices)
+        if "READ" in str(data):
+            logging.info("READ command")
+            aRest = aBrain.ReadDeviceStatus(data,aRegisterDevices)
+            logging.info("READ command res " + str(aRest))
+            self.transport.write(str(aRest))
+        else:
+            logging.info("Write command")
+            aBrain.SendMessage(data,aRegisterDevices)
+            self.transport.write("ACK")
         
 def tired_task(iBrain):
     #logging.info("I want to run slowly" + str (datetime.datetime.now()))
@@ -54,9 +68,9 @@ logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.INF
 logging.info('Daemon starting...')
 
 #The brain
-aBrain = Deipara2.Brain()
+aBrain = Deipara_Brain.Brain()
 #Object that handle all devices present on the networl
-aRegisterDevices =Deipara2.DevicesHandler()
+aRegisterDevices =Deipara_Objects.DevicesHandler()
 aRegisterDevices.loadDevices()
 
 reactor.listenTCP(50007, TcpHandlerFactory(aBrain,aRegisterDevices))
