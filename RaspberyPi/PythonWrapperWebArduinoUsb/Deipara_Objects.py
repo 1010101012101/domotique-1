@@ -53,7 +53,7 @@ class CapteurMesure(Object):
         self.refreshRatemin = 60
         self.type="CapteurMesure"
         
-    def refreshIfNeeded(self)
+    def refreshIfNeeded(self):
         if (datetime.datetime.now() - self.LastTMeaureDate > datetime.timedelta (minutes = self.refreshRatemin)):
             logging.debug("refresh needed")
 
