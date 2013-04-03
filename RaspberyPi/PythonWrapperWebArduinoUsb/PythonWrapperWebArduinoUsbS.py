@@ -18,15 +18,17 @@ class Command:
         self.idTo = ""
         self.idFrom = ""
         self.message = ""
+        self.isReadOrWrite = ""
         
     def dumpAsString(self):
-        return "MSG:" + self.message + "_ORIGIN:" + self.idFrom
+        return  "MSG:" + self.message + "_ORIGIN:" + self.idFrom +"_"+self.isReadOrWrite
          
 
 parser = OptionParser(usage="usage: %prog [options]",version="%prog 1.0")
 parser.add_option("-p", "--port",action="store",dest="aPortToUse",default="50007",help="the port to listen")
 parser.add_option("-s", "--send",action="store",dest="aMsgToSend",default="20",help="Command to send to Arduino Leonardo")
 parser.add_option("-o", "--originator",action="store",dest="aOriginator",default="UNKNOW",help="Originator of the request")
+parser.add_option("-t", "--type",action="store",dest="aCmdType",default="WRITE",help="Write or Read command")
 (options, args) = parser.parse_args()
 
 HOST = ''
@@ -37,7 +39,10 @@ PORT = int(options.aPortToUse)
 aCmdToSend = Command()
 aCmdToSend.message = options.aMsgToSend
 aCmdToSend.idFrom = options.aOriginator
+aCmdToSend.isReadOrWrite = options.aCmdType
 aMsgToSend2 = aCmdToSend.dumpAsString()
+
+#aMsgToSend2 = "READ"
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
@@ -52,5 +57,10 @@ except:
     
 s.send(aMsgToSend2)
 
+data = s.recv(1024)
+
 s.close()
+
+print 'Received', repr(data)
+
 
