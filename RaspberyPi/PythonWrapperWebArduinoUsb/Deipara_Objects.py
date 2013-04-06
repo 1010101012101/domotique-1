@@ -2,6 +2,7 @@
 
 import logging
 import datetime
+import os
 
 
 ###################################################################################
@@ -19,7 +20,10 @@ class Object:
         self.currentStatus =""
         self.LastTMeaureDate=datetime.datetime.now()
         self.type=""
+        self.refreshRatemin = 60
         self.description =""
+        self.porteuse = "GATEWAY"
+        self.stateCanBeRefresh = False
         self.Reset =""
         self.InPossibleCmd ={}
         self.OutPossibleCmd ={}
@@ -51,12 +55,8 @@ class CapteurMesure(Object):
     
     def __init__(self):
         Object.__init__(self)
-        self.refreshRatemin = 60
         self.type="CapteurMesure"
-        
-    def refreshIfNeeded(self):
-        if (datetime.datetime.now() - self.LastTMeaureDate > datetime.timedelta (minutes = self.refreshRatemin)):
-            logging.debug("refresh needed")
+        self.stateCanBeRefresh = True
 
     def __repr__(self):
         aRetString = ""
@@ -107,6 +107,7 @@ class DevicesHandler:
             
         charlesT = CapteurMesure()
         charlesT.OutPossibleCmd ={"15" : "recoit Nouvelle T"}
+        charlesT.InPossibleCmd ={"15" : "recoit Nouvelle T"}
         charlesT.ActionsCommands ={"15" : """self.currentStatus=aData
 self.LastTMeaureDate=datetime.datetime.now()"""}
         charlesT.id =15
@@ -114,24 +115,42 @@ self.LastTMeaureDate=datetime.datetime.now()"""}
         
         charlesH = CapteurMesure()
         charlesH.OutPossibleCmd ={"16" : "recoit Nouvelle H"}
+        charlesH.InPossibleCmd ={"16" : "recoit Nouvelle H"}
         charlesH.ActionsCommands ={"16" : "self.currentStatus=aData"}
         charlesH.id =16
         self.registeredDevices.append(charlesH)
         
         entreeT = CapteurMesure()
         entreeT.OutPossibleCmd ={"30" : "recoit Nouvelle T"}
+        entreeT.InPossibleCmd ={"30" : "recoit Nouvelle T"}
         entreeT.ActionsCommands ={"30" : "self.currentStatus=aData"}
         entreeT.id =17
         self.registeredDevices.append(entreeT)
         
+        CuisineT = CapteurMesure()
+        CuisineT.OutPossibleCmd ={"39" : "recoit Nouvelle T"}
+        CuisineT.InPossibleCmd ={"39" : "recoit Nouvelle T"}
+        CuisineT.ActionsCommands ={"39" : "self.currentStatus=aData"}
+        CuisineT.id =21
+        self.registeredDevices.append(CuisineT)
+        
+        CuisineH = CapteurMesure()
+        CuisineH.OutPossibleCmd ={"40" : "recoit Nouvelle T"}
+        CuisineH.InPossibleCmd ={"40" : "recoit Nouvelle T"}
+        CuisineH.ActionsCommands ={"40" : "self.currentStatus=aData"}
+        CuisineH.id =23
+        self.registeredDevices.append(CuisineH)
+        
         entreeH = CapteurMesure()
         entreeH.OutPossibleCmd ={"31" : "recoit Nouvelle H"}
+        entreeH.InPossibleCmd ={"31" : "recoit Nouvelle H"}
         entreeH.ActionsCommands ={"31" : "self.currentStatus=aData"}
         entreeH.id =18
         self.registeredDevices.append(entreeH)
         
         Montre = CapteurMesure()
         Montre.OutPossibleCmd ={"37" : "recoit Nouvelle H"}
+        Montre.InPossibleCmd ={"37" : "recoit Nouvelle H"}
         Montre.ActionsCommands ={"37" : "self.currentStatus=aData"}
         Montre.id =2
         Montre.refreshRatemin = 1
@@ -143,6 +162,18 @@ self.LastTMeaureDate=datetime.datetime.now()"""}
         lumiereCharles.InPossibleCmd ={ "5" : "on","6" : "off"}
         lumiereCharles.ActionsCommands={ "5" : "self.currentStatus=\"on\"","6" : "self.currentStatus=\"off\""}
         self.registeredDevices.append(lumiereCharles)
+        
+        PcCharles = InterupteurBiStable()
+        PcCharles.PossibleStates=[ "on","off"]
+        PcCharles.id =19
+        self.porteuse = "PYTHON"
+        PcCharles.stateCanBeRefresh = True
+        PcCharles.InPossibleCmd ={ "5" : "on" , "6" : "verify state by pooling"}
+        PcCharles.ActionsCommands={ "5" : "self.currentStatus=\"on\"", "6" : """if os.system('ping -c 1 -W 2 192.168.0.7'):
+    self.currentStatus="on"
+else:
+    self.currentStatus="off" """}
+        self.registeredDevices.append(PcCharles)
         
         lumiere2Charles = InterupteurBiStable()
         lumiere2Charles.PossibleStates=[ "on","off"]
@@ -188,6 +219,7 @@ self.LastTMeaureDate=datetime.datetime.now()"""}
         
         luminoTersa = CapteurMesure()
         luminoTersa.OutPossibleCmd ={"36" : "recoit Nouvelle L"}
+        luminoTersa.InPossibleCmd ={"36" : "recoit Nouvelle L"}
         luminoTersa.ActionsCommands ={"36" : "self.currentStatus=aData"}
         luminoTersa.id =22
         self.registeredDevices.append(luminoTersa)
