@@ -15,17 +15,7 @@
 		$(document).ready( function()
 		{
 			$('#entree').bind('pageshow', function() 
-			{
-				$.ajax(
-				{
-					type: "POST",
-                    url: "./Reader/GateWayReader.php",
-                    data: ({iId : '8', iCmdType : "CMD_READ"}),
-                    cache: false,
-                    dataType: "json",
-                    success: onSuccess
-                });
-				
+			{			
 				$.ajax(
 				{
 					type: "POST",
@@ -45,14 +35,6 @@
                     dataType: "json",
                     success: onSuccess4
                 });
-				
-				function onSuccess(data)
-				{
-					if((data[0].id==8)&&(data[0].status=="on"))
-					{
-						$('#Flip_LumiereAuto').val('on').slider("refresh");
-					}
-				}
 				
 				function onSuccess4(data)
 				{
@@ -142,29 +124,6 @@
 			});
         });
 		
-		$( "#Flip_LumiereAuto" ).on( 'slidestop', function( event ) 
-		{ 
-			sVal = $(this).val();
-			var theName;
-			if (sVal=="on")
-			{
-				theName = '37';
-			}
-			else
-			{
-				theName = '38';
-			}
-               $.ajax(
-                {
-				type: "POST",
-                   url: "./Sender/XbeeWrapper.php",
-                   data: ({iId : '8' , iStatus : sVal, iCmdToExecute: theName , iCmdType : "CMD_X10"}),
-                   cache: false,
-                   dataType: "text",
-                   success: onSuccess
-               });		
-		});
-		
 		function onSuccess(data)
 		{
 		}
@@ -176,11 +135,6 @@
 			?>
 		</div>
 		<div data-role="content">	
-			<label for="Flip_LumiereAuto">Lumiere auto:</label>
-			<select name="Flip_LumiereAuto" id="Flip_LumiereAuto" data-role="slider">
-				<option value="off">Desactiver</option>
-				<option value="on">Activer</option>
-			</select> 
 			<input id="Button_AllumerLumiere" type="button" name="Button_AllumerLumiere" value="Allumer lumiere"/>
 			<input id="Button_EteindreLumiere" type="button" name="Button_EteindreLumiere" value="Eteindre lumiere"/>
 			<input id="Button_RefreshTemperature" type="button" name="Button_RefreshTemperature" value="Refresh Temperature"/>
@@ -188,7 +142,7 @@
 			<div class="Temperature">
 			</div>
 			<input id="Button_RefreshHumidite" type="button" name="Button_RefreshHumidite" value="Refresh Humidite"/>
-			Response :
+			Humidite :
 			<div class="Humidite">
 			</div>
 		</div>

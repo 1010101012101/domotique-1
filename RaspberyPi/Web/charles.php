@@ -20,7 +20,27 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '4', iCmdToExecute : "2" , iCmdType : "CMD_READ"}),
+                    data: ({iCmdToExecute : "1" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "15" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "16" , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess
@@ -28,17 +48,48 @@
 				
 				function onSuccess(data)
 				{
-					if((data[0].id==4)&&(data[0].status=="on"))
+                    var aDataReceived = data[0]
+                    console.log("aDataReceived: " + aDataReceived)
+                    var obj2 = eval("(" + aDataReceived + ')');
+                    var obj3 = eval("(" + obj2 + ')');
+                    
+                    //console.log("Object.keys(obj3) : " + Object.keys(obj3))
+
+                    if((obj3.id==1)&&(obj3.currentStatus=="on"))
 					{
 						$('#Flip_LumierePrincipale').val('on').slider("refresh");
 					}
+                    //var obj = JSON.parse(aDataReceived);
+                    if((obj3.id==15))
+                    {
+                        $('.Temperature').append("Derniere temperature : ");
+                        var aIntValue=parseInt(obj3.currentStatus);
+                        var aFloat=parseFloat(aIntValue);
+                        aFloat=aFloat/10;
+                        $('.Temperature').append(aFloat);
+                        $('.Temperature').append(" degre releve le : ");
+                        $('.Temperature').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    console.log("obj3.LastTMeaureDate V1 : " + obj3.LastTMeaureDate)
+                    console.log("obj3.LastTMeaureDate V2 : " + Object.keys(obj3.LastTMeaureDate))
+                    if((obj3.id==16))
+                    {
+                        $('.Humidite').append("Derniere humidite : ");
+                        var aIntValue=parseInt(obj3.currentStatus);
+                        var aFloat=parseFloat(aIntValue);
+                        aFloat=aFloat/10;
+                        $('.Humidite').append(aFloat);
+                        $('.Humidite').append(" % humidite relative releve le : ");
+                        $('.Humidite').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    
 				}
 				
 				$.ajax(
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '4,5,6', iCmdToExecute : "2" , iCmdType : "PING_READ"}),
+                    data: ({iCmdType : "PING_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess2
@@ -156,13 +207,13 @@
 		<div data-role="content">	
 			<label for="Flip_LumierePrincipale">Lumiere Principale:</label>
 			<select name="Flip_LumierePrincipale" id="Flip_LumierePrincipale" data-role="slider">
-				<option value="off">Allumer(5)</option>
-				<option value="on">Eteindre(6)</option>
+				<option value="off">Allumer</option>
+				<option value="on">Eteindre</option>
 			</select> 
 			<label for="Flip_LumiereSecondaire">Lumiere Secondaire:</label>
 			<select name="Flip_LumiereSecondaire" id="Flip_LumiereSecondaire" data-role="slider">
-				<option value="off">Allumer(;)</option>
-				<option value="on">Eteindre(<)</option>
+				<option value="off">Allumer</option>
+				<option value="on">Eteindre</option>
 			</select> 
 			<label for="Flip_PcCharles">PC Charles (read only - ping) :</label>
 			<select name="Flip_PcCharles" id="Flip_PcCharles" data-role="slider" disabled >
@@ -172,6 +223,12 @@
 			<input id="Button_AllumerPcCharles" type="button" name="Button_AllumerPcCharles" value="Wake up PC"/>
 			<input id="Button_MonterVoletCharles" type="button" name="Button_MonterVoletCharles" value="Monter Volet"/>
 			<input id="Button_DescendreVoletCharles" type="button" name="Button_DescendreVoletCharles" value="Descendre Volet"/>
+            Temperature :
+			<div class="Temperature">
+			</div>
+            Humidite :
+			<div class="Humidite">
+			</div>
 		</div>
 	</div>
 	</body>

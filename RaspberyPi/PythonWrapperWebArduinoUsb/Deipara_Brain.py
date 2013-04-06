@@ -3,6 +3,7 @@
 import logging
 import datetime
 import serial
+import jsonpickle
 
 ###################################################################################
 ########## Brain class....smart one       #########################################
@@ -66,6 +67,10 @@ class Brain:
         s.login(smtp_user,smtp_pass)
         s.sendmail(addr_from, addr_to, msg.as_string())
         s.quit()
+        
+    def stop(self):
+        logging.debug("Stoping") 
+        
 
     def smartProcessing2(self,iListOfDevice):
         logging.debug("Trying to be smart")
@@ -157,8 +162,9 @@ class Brain:
             if (str(aCmdFromData) == str(aOneObj.id)):
                 logging.info("find it" + str(aOneObj.id))
                 aRest = str(aOneObj)
-                logging.info("ret : " + aRest)
-                return aRest
+                pickled = jsonpickle.encode(aOneObj)
+                logging.info("ret : " + pickled)
+                return pickled
                
     def __repr__(self):
         aRetString = ""

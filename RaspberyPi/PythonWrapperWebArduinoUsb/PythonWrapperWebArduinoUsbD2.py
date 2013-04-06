@@ -54,6 +54,10 @@ class TcpHandler(Protocol):
             aRest = aBrain.ReadDeviceStatus2(data,aRegisterDevices)
             logging.info("READ command res " + str(aRest))
             self.transport.write(str(aRest))
+        elif str(data) == "STOP": 
+            logging.info("STOP command")
+            aBrain.stop()
+            reactor.stop()
         else:
             logging.info("Write command")
             aBrain.SendMessage(data,aRegisterDevices)
