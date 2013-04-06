@@ -20,7 +20,7 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '30', iCmdType : "CMD_READ_VALUE_DB"}),
+                    data: ({iCmdToExecute : '17', iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess4
@@ -30,7 +30,7 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '31' , iCmdType : "CMD_READ_VALUE_DB"}),
+                    data: ({iCmdToExecute : '18' , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess4
@@ -38,25 +38,31 @@
 				
 				function onSuccess4(data)
 				{
-                    if (data[0]["id"]=="30")
+                    var aDataReceived = data[0]
+                    console.log("aDataReceived: " + aDataReceived)
+                    var obj2 = eval("(" + aDataReceived + ')');
+                    var obj3 = eval("(" + obj2 + ')');
+
+                    if((obj3.id==17))
                     {
                         $('.Temperature').append("Derniere temperature : ");
-                        var aIntValue=parseInt(data[0]["value"]);
+                        var aIntValue=parseInt(obj3.currentStatus);
                         var aFloat=parseFloat(aIntValue);
                         aFloat=aFloat/10;
                         $('.Temperature').append(aFloat);
                         $('.Temperature').append(" degre releve le : ");
-                        $('.Temperature').append(data[0]["timestamp"]);
+                        $('.Temperature').append(obj3.LastTMeaureDate["py/repr"]);
                     }
-                    else
+
+                    if((obj3.id==18))
                     {
                         $('.Humidite').append("Derniere humidite : ");
-                        var aIntValue=parseInt(data[0]["value"]);
+                        var aIntValue=parseInt(obj3.currentStatus);
                         var aFloat=parseFloat(aIntValue);
                         aFloat=aFloat/10;
                         $('.Humidite').append(aFloat);
                         $('.Humidite').append(" % humidite relative releve le : ");
-                        $('.Humidite').append(data[0]["timestamp"]);
+                        $('.Humidite').append(obj3.LastTMeaureDate["py/repr"]);
                     }
 				}
             });
