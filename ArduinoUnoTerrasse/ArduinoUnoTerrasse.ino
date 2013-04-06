@@ -3,6 +3,8 @@
 #include <XBee.h>
 //Timer library
 #include <MsTimer2.h>
+//RHT03 library
+#include <DHT22.h>
 //Deipara library
 #include <Deipara.h>
 
@@ -10,8 +12,9 @@
 const int _OutPinBuz = 9;
 const int _OutPinLed4 = 10;
 const int _InPinButton4 = 11;
+const int _InPinIrDetector = 6;
 const int _InPinFireDetection = 8;
-const int _InPinLedMeasure = A0;
+const int _InPinDht22 = 5;
 
 //Global variables
 XBee _Xbee = XBee(); //Create Xbee object to control a Xbee
@@ -20,6 +23,7 @@ int _CurrentLightValue = 0;
 int _CmdReceived = 0;
 int _DataToSend = 0;
 bool _TimerExpire = true;
+DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance
 
 void InterruptTimer2() 
 {
@@ -36,6 +40,7 @@ void setup()
   pinMode(_OutPinLed4, OUTPUT);
   pinMode(_OutPinBuz, OUTPUT);
   pinMode(_InPinButton4,INPUT);
+  pinMode(_InPinIrDetector,INPUT);
   pinMode(_InPinFireDetection,INPUT);
   
   //Set timer to 10seconds
@@ -64,9 +69,8 @@ void loop() {
     }  
   }
   
-  int aInputDigitalValue = digitalRead(_InPinButton4);
-
-  if ((aInputDigitalValue == LOW)&&(_TimerExpire == true))
+  int aInputDigitalValue = digitalRead(_InPinFireDetection);
+  if ((aInputDigitalValue == HIGH)&&(_TimerExpire == true))
   {
   _TimerExpire = false;
   flashPin(_OutPinBuz, 1, 250);
@@ -74,16 +78,67 @@ void loop() {
   _DataToSend=444;
   MsTimer2::start(); // active Timer 2 
   }
+  
+  aInputDigitalValue = digitalRead(_InPinIrDetector);
+  if ((aInputDigitalValue == HIGH)&&(_TimerExpire == true))
+  {
+    _TimerExpire = false;
+    _CmdReceived = 51;
+    _DataToSend=448;
+    MsTimer2::start(); // active Timer 2 
+  }
 
   //Test if we have an action to do 
-  if(_CmdReceived==40)
+  if((_CmdReceived==39)||(_CmdReceived==40))
   {
-    flashPin(_OutPinBuz, 1, 250);
-  }
-  else if(_CmdReceived==39)
-  {
-    //_DataToSend=analogRead(_InPinLedMeasure);
-	_DataToSend=456;
+    delay(50);
+    DHT22_ERROR_t errorCode;
+    Serial.print("Requesting data...");
+    errorCode = _Dht22.readData();
+    
+    switch(errorCode)
+    {
+    case DHT_ERROR_NONE:
+      Serial.print("Got Data ");
+      Serial.print(_Dht22.getTemperatureCAsFloat());
+      Serial.print("/");
+      Serial.print(_Dht22.getTemperatureCAsInt());
+      Serial.print("C ");
+      Serial.print(_Dht22.getHumidityAsFloat());
+      Serial.print("/");
+      Serial.print(_Dht22.getHumidityAsInt());
+      Serial.println("%");
+      if (_CmdReceived==39)
+      {
+        _DataToSend=_Dht22.getTemperatureCAsInt();
+      }
+      else if(_CmdReceived==40)
+      {
+        _DataToSend=_Dht22.getHumidityAsInt();
+      }
+      break;
+    case DHT_ERROR_CHECKSUM:
+      Serial.print("check sum error ");
+      break;
+    case DHT_BUS_HUNG:
+      Serial.println("BUS Hung ");
+      break;
+    case DHT_ERROR_NOT_PRESENT:
+      Serial.println("Not Present ");
+      break;
+    case DHT_ERROR_ACK_TOO_LONG:
+      Serial.println("ACK time out ");
+      break;
+    case DHT_ERROR_SYNC_TIMEOUT:
+      Serial.println("Sync Timeout ");
+      break;
+    case DHT_ERROR_DATA_TIMEOUT:
+      Serial.println("Data Timeout ");
+      break;
+    case DHT_ERROR_TOOQUICK:
+      Serial.println("Polled to quick ");
+      break;
+    }
   }
   else
   {
