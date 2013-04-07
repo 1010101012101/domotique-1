@@ -68,7 +68,7 @@ def tired_task(iBrain):
     iBrain.smartProcessing2(aRegisterDevices)
     
 #The loading API 
-logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.INFO)
+logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.DEBUG)
 logging.info('Daemon starting...')
 
 #The brain
@@ -81,6 +81,6 @@ reactor.listenTCP(50007, TcpHandlerFactory(aBrain,aRegisterDevices))
 SerialPort(UsbHandler(aBrain,aRegisterDevices), '/dev/ttyACM0', reactor, 9600)
 
 lc2 = LoopingCall(tired_task, aBrain)
-lc2.start(1)
+lc2.start(5)
 
 reactor.run()
