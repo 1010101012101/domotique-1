@@ -30,6 +30,16 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "3" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
                     data: ({iCmdToExecute : "15" , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
@@ -58,6 +68,10 @@
                     if((obj3.id==1)&&(obj3.currentStatus=="on"))
 					{
 						$('#Flip_LumierePrincipale').val('on').slider("refresh");
+					}
+                    if((obj3.id==3)&&(obj3.currentStatus=="on"))
+					{
+						$('#Flip_LumiereSecondaire').val('on').slider("refresh");
 					}
                     //var obj = JSON.parse(aDataReceived);
                     if((obj3.id==15))

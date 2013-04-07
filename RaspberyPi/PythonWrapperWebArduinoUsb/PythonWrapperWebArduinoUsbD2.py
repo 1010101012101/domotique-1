@@ -68,7 +68,7 @@ def tired_task(iBrain):
     iBrain.smartProcessing2(aRegisterDevices)
     
 #The loading API 
-logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.DEBUG)
+logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.WARNING)
 logging.info('Daemon starting...')
 
 #The brain

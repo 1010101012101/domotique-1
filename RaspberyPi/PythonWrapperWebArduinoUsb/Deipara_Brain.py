@@ -14,22 +14,22 @@ class Brain:
     "Une classe qui pense"
     
     def __init__(self):  
-        logging.info("create brain")
+        logging.error("create brain")
         
     def PeopleDetectedCharlesRoom(self,iListOfDevice):
-        logging.warning("PeopleDetectedCharlesRoom")
+        logging.error("PeopleDetectedCharlesRoom")
         aDataToWrite = "MSG:11_ORIGIN:PythonScript"
         self.SendMessage( aDataToWrite,iListOfDevice)
         
     def TurnCharlesLightOff(self,iListOfDevice):
-        logging.warning("TurnCharlesLightOff")
+        logging.error("TurnCharlesLightOff")
         aDataToWrite = "MSG:12_ORIGIN:PythonScript"
         self.SendMessage( aDataToWrite,iListOfDevice)
         
     def refreshCapteur(self,iCapteur,iListOfDevice):
-        logging.info("Refreshing capteur : " + str(iCapteur.id))
+        logging.warn("Refreshing capteur : " + str(iCapteur.id))
         aDataToWrite = "MSG:" + str(iCapteur.InPossibleCmd.keys()[0]) + "_ORIGIN:PythonScript"
-        logging.info("Msg used to refresh : " + aDataToWrite)
+        logging.warn("Msg used to refresh : " + aDataToWrite)
         iCapteur.refreshOngoing = True
         self.SendMessage(aDataToWrite,iListOfDevice)
         
@@ -39,17 +39,17 @@ class Brain:
                 return aOneDevice.currentStatus
                 
     def TurnEntreeLightOff(self,iListOfDevice):
-        logging.warning("TurnEntreeLightOff")
+        logging.error("TurnEntreeLightOff")
         aDataToWrite = "MSG:35_ORIGIN:PythonScript"
         self.SendMessage( aDataToWrite,iListOfDevice)
     
     def PeopleDetectedEntree(self,iListOfDevice):
-        logging.warning("PeopleDetectedEntree")
+        logging.error("PeopleDetectedEntree")
         aDataToWrite = "MSG:34_ORIGIN:PythonScript"
         self.SendMessage( aDataToWrite,iListOfDevice)
         
     def sendEmailFireDetected():
-        logging.warning("Envoi email detection incendie")
+        logging.error("Envoi email detection incendie")
         # Define email addresses to use
         addr_to   = Config["addr_to"]
         addr_from = Config["addr_from"]
@@ -72,7 +72,7 @@ class Brain:
         s.quit()
         
     def stop(self):
-        logging.debug("Stoping") 
+        logging.error("Stoping") 
 
     def smartProcessing2(self,iListOfDevice):
         logging.info("Begining of a smart loop")
@@ -95,9 +95,9 @@ class Brain:
         logging.info("Reseting all previous automatic actions")
         for aOneDevice in iListOfDevice.registeredDevices:
             logging.debug("checking states : " + str(aOneDevice.id))
-            if ((aOneDevice.id == 9) and ((iListOfDevice.getDevice(3)).currentStatus=="unstable") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 600))):
+            if ((aOneDevice.id == 9) and ((iListOfDevice.getDevice(3)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 600))):
                 self.TurnCharlesLightOff(iListOfDevice)
-            elif ((aOneDevice.id == 10) and ((iListOfDevice.getDevice(8)).currentStatus=="unstable") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 180))):
+            elif ((aOneDevice.id == 10) and ((iListOfDevice.getDevice(8)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 180))):
                 self.TurnEntreeLightOff(iListOfDevice)
                 
         #Setp 3 : On force un refresh des capteurs periodiques
@@ -125,16 +125,16 @@ class Brain:
             
             logging.info("Looping on the devices and allow them to update themselve7.")    
             for aOneObj in iListOfDevice.registeredDevices:
-                logging.info ("possible cmd : " + str(aOneObj.OutPossibleCmd.keys()))
+                logging.debug ("possible cmd : " + str(aOneObj.OutPossibleCmd.keys()))
                 if str(aRequestorId) in aOneObj.OutPossibleCmd.keys():
                     logging.info("Updating device ID : " + str(aOneObj.id))
                     aOneObj.executeCmd(str(aRequestorId),aValueReceived)
-                    logging.info("Device ID : " +str(aOneObj))
+                    logging.debug("Device ID : " +str(aOneObj))
         else:
             logging.error("Strange response....ignore it")
         
     def SendMessage(self,iDataToWrite, iListOfDevice):
-        logging.debug("Sending message")
+        logging.error("Sending message")
         aCurrentDateTime = datetime.datetime.now()
         aCmdFromData=int((iDataToWrite.split('_')[0]).split(':')[1])
         aOriginFromData=(iDataToWrite.split('_')[1]).split(':')[1]
@@ -142,12 +142,12 @@ class Brain:
         
         #c.execute("update object set status=off where id=?",(aCmdFromData))
         
-        logging.info (aLogLine)
+        logging.error (aLogLine)
         aLogFile = open("/var/www/Logs/logs.txt", "a")
         aLogFile.write(aLogLine+"\n")
         aLogFile.close()
         
-        logging.info("Looping on the devices and allow them to update themselve2.")
+        logging.error("Looping on the devices and allow them to update themselve2.")
         for aOneObj in iListOfDevice.registeredDevices:
             #logging.info ("possible cmd : " + str(aOneObj.InPossibleCmd.keys()))
             if str(aCmdFromData) in aOneObj.InPossibleCmd.keys():

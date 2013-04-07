@@ -120,6 +120,7 @@ class DevicesHandler:
 self.LastTMeaureDate=datetime.datetime.now()
 self.refreshOngoing = False"""}
         charlesT.id =15
+        charlesT.refreshRatemin = 3
         self.registeredDevices.append(charlesT)
         
         charlesH = CapteurMesure()
@@ -129,6 +130,7 @@ self.refreshOngoing = False"""}
 self.LastTMeaureDate=datetime.datetime.now()
 self.refreshOngoing = False"""}
         charlesH.id =16
+        charlesH.refreshRatemin = 4
         self.registeredDevices.append(charlesH)
         
         entreeT = CapteurMesure()
@@ -138,6 +140,7 @@ self.refreshOngoing = False"""}
 self.LastTMeaureDate=datetime.datetime.now()
 self.refreshOngoing = False"""}
         entreeT.id =17
+        entreeT.refreshRatemin = 5
         self.registeredDevices.append(entreeT)
         
         CuisineT = CapteurMesure()
@@ -165,6 +168,7 @@ self.refreshOngoing = False"""}
 self.LastTMeaureDate=datetime.datetime.now()
 self.refreshOngoing = False"""}
         entreeH.id =18
+        entreeH.refreshRatemin = 6
         self.registeredDevices.append(entreeH)
         
         Montre = CapteurMesure()
@@ -178,10 +182,10 @@ self.LastTMeaureDate=datetime.datetime.now()"""}
         self.registeredDevices.append(Montre)
         
         lumiereCharles = InterupteurBiStable()
-        lumiereCharles.PossibleStates=[ "unstable","stable"]
+        lumiereCharles.PossibleStates=[ "off","on"]
         lumiereCharles.id =1
-        lumiereCharles.InPossibleCmd ={ "5" : "unstable","6" : "stable"}
-        lumiereCharles.ActionsCommands={ "5" : "self.currentStatus=\"unstable\"","6" : "self.currentStatus=\"stable\""}
+        lumiereCharles.InPossibleCmd ={ "5" : "off","6" : "on"}
+        lumiereCharles.ActionsCommands={ "5" : "self.currentStatus=\"off\"","6" : "self.currentStatus=\"on\""}
         self.registeredDevices.append(lumiereCharles)
         
         PcCharles = InterupteurBiStable()
@@ -197,45 +201,45 @@ else:
         #self.registeredDevices.append(PcCharles)
         
         lumiere2Charles = InterupteurBiStable()
-        lumiere2Charles.PossibleStates=[ "unstable","stable"]
+        lumiere2Charles.PossibleStates=[ "off","on"]
         lumiere2Charles.id =3
-        lumiere2Charles.InPossibleCmd ={ "11" : "unstable","12" : "stable"}
-        lumiere2Charles.ActionsCommands={ "11" : "self.currentStatus=\"unstable\"","12" : "self.currentStatus=\"stable\""}
+        lumiere2Charles.InPossibleCmd ={ "11" : "on","12" : "off"}
+        lumiere2Charles.ActionsCommands={ "11" : "self.currentStatus=\"on\"","12" : "self.currentStatus=\"off\""}
         self.registeredDevices.append(lumiere2Charles)
         
         VoletCharles = InterupteurBiStable()
-        VoletCharles.PossibleStates=[ "unstable","stable"]
+        VoletCharles.PossibleStates=[ "off","on"]
         VoletCharles.id =4
-        VoletCharles.InPossibleCmd ={ "7" : "unstable","8" : "stable"}
-        VoletCharles.ActionsCommands={ "7" : "self.currentStatus=\"unstable\"","8" : "self.currentStatus=\"stable\""}
+        VoletCharles.InPossibleCmd ={ "7" : "off","8" : "on"}
+        VoletCharles.ActionsCommands={ "7" : "self.currentStatus=\"off\"","8" : "self.currentStatus=\"on\""}
         self.registeredDevices.append(VoletCharles)
         
         VoletSalon = InterupteurBiStable()
-        VoletSalon.PossibleStates=[ "unstable","stable"]
+        VoletSalon.PossibleStates=[ "off","on"]
         VoletSalon.id =5
-        VoletSalon.InPossibleCmd ={ "9" : "unstable","10" : "stable"}
-        VoletSalon.ActionsCommands={ "9" : "self.currentStatus=\"unstable\"","10" : "self.currentStatus=\"stable\""}
+        VoletSalon.InPossibleCmd ={ "9" : "off","10" : "on"}
+        VoletSalon.ActionsCommands={ "9" : "self.currentStatus=\"off\"","10" : "self.currentStatus=\"on\""}
         self.registeredDevices.append(VoletSalon)
         
         LumiereSalonHalogene = InterupteurBiStable()
-        LumiereSalonHalogene.PossibleStates=[ "unstable","stable"]
+        LumiereSalonHalogene.PossibleStates=[ "off","on"]
         LumiereSalonHalogene.id =6
-        LumiereSalonHalogene.InPossibleCmd ={ "13" : "unstable","14" : "stable"}
-        LumiereSalonHalogene.ActionsCommands={ "13" : "self.currentStatus=\"unstable\"","14" : "self.currentStatus=\"stable\""}
+        LumiereSalonHalogene.InPossibleCmd ={ "13" : "off","14" : "on"}
+        LumiereSalonHalogene.ActionsCommands={ "13" : "self.currentStatus=\"off\"","14" : "self.currentStatus=\"on\""}
         self.registeredDevices.append(LumiereSalonHalogene)
         
         ChaffageSdb = InterupteurBiStable()
-        ChaffageSdb.PossibleStates=[ "unstable","stable"]
+        ChaffageSdb.PossibleStates=[ "off","on"]
         ChaffageSdb.id =7
-        ChaffageSdb.InPossibleCmd ={ "42" : "unstable","43" : "stable"}
-        ChaffageSdb.ActionsCommands={ "42" : "self.currentStatus=\"unstable\"","43" : "self.currentStatus=\"stable\""}
+        ChaffageSdb.InPossibleCmd ={ "42" : "off","43" : "on"}
+        ChaffageSdb.ActionsCommands={ "42" : "self.currentStatus=\"off\"","43" : "self.currentStatus=\"on\""}
         self.registeredDevices.append(ChaffageSdb)
         
         Lumiereentree = InterupteurBiStable()
-        Lumiereentree.PossibleStates=[ "unstable","stable"]
+        Lumiereentree.PossibleStates=[ "off","on"]
         Lumiereentree.id =8
-        Lumiereentree.InPossibleCmd ={ "34" : "unstable","35" : "stable"}
-        Lumiereentree.ActionsCommands={ "34" : "self.currentStatus=\"unstable\"","35" : "self.currentStatus=\"stable\""}
+        Lumiereentree.InPossibleCmd ={ "34" : "off","35" : "on"}
+        Lumiereentree.ActionsCommands={ "34" : "self.currentStatus=\"off\"","35" : "self.currentStatus=\"on\""}
         self.registeredDevices.append(Lumiereentree)
         
         luminoTersa = CapteurMesure()
