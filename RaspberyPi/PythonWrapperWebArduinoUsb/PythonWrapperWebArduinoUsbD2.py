@@ -16,6 +16,7 @@ from twisted.python import log
 #other modules
 import sys
 import logging
+import json
 import datetime
 
 class UsbHandler(LineReceiver):
@@ -67,15 +68,21 @@ def tired_task(iBrain):
     #logging.info("I want to run slowly" + str (datetime.datetime.now()))
     iBrain.smartProcessing2(aRegisterDevices)
     
-#The loading API 
-logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.WARNING)
+#The logging API 
+logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.INFO)
 logging.info('Daemon starting...')
 
+#The config API (contains non shared data like google API key or password)
+with open('ConfigFiles') as json_data:
+    Config = json.load(json_data)
+
 #The brain
-aBrain = Deipara_Brain.Brain()
+aBrain = Deipara_Brain.Brain(Config)
+logging.info('aBrain : ' + str(aBrain))
 #Object that handle all devices present on the networl
-aRegisterDevices =Deipara_Objects.DevicesHandler()
+aRegisterDevices =Deipara_Objects.DevicesHandler(Config)
 aRegisterDevices.loadDevices()
+logging.info('aRegisterDevices : ' + str(aRegisterDevices))
 
 reactor.listenTCP(50007, TcpHandlerFactory(aBrain,aRegisterDevices))
 SerialPort(UsbHandler(aBrain,aRegisterDevices), '/dev/ttyACM0', reactor, 9600)
