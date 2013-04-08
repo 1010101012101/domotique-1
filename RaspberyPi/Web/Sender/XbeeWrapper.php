@@ -11,11 +11,6 @@
 			print(json_encode($output));
 			break;
 			
-			case "CMD_WOL" :
-			$aCommandToExecute = 'sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50';
-			echo exec($aCommandToExecute);
-			break;
-			
 			case "CMD_AT" :
 			$aDate = $_REQUEST['iDate'];
 			$aCmd = $_REQUEST['iCmdToExecute'];

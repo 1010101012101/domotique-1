@@ -30,6 +30,7 @@
 		<div data-role="content">	
 			<a href="charles.php" data-role="button">Charles</a>          
 			<a href="salon.php" data-role="button">Salon</a> 
+            <a href="cuisine.php" data-role="button">Cuisine</a> 
 			<a href="entree.php" data-role="button">Entree</a>			
 			<a href="SalleDeBain.php" data-role="button">Salle de bain</a>
 			<a href="Terasse.php" data-role="button">Terasse (Beta)</a>
