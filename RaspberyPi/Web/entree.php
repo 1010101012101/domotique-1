@@ -35,6 +35,16 @@
                     dataType: "json",
                     success: onSuccess4
                 });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : '8' , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess4
+                });
 				
 				function onSuccess4(data)
 				{
@@ -42,6 +52,11 @@
                     console.log("aDataReceived: " + aDataReceived)
                     var obj2 = eval("(" + aDataReceived + ')');
                     var obj3 = eval("(" + obj2 + ')');
+                    
+                    if((obj3.id==8)&&(obj3.currentStatus=="on"))
+					{
+						$('#Flip_Lumiere').val('on').slider("refresh");
+					}
 
                     if((obj3.id==17))
                     {
@@ -103,32 +118,29 @@
 		function onSuccess2(data)
 		{
 		}
-		
-		$("#Button_AllumerLumiere").click(function() 
-		{
-			$.ajax(
+        
+        $( "#Flip_Lumiere" ).on( 'slidestop', function( event ) 
+		{ 
+			sVal = $(this).val();
+			var theName;
+			if (sVal=="on")
+			{
+				theName = '34';
+			}
+			else
+			{
+				theName = '35';
+			}
+               $.ajax(
 			{
 				type: "POST",
-				url: "./Sender/XbeeWrapper.php",
-				data: ({iId : '5' ,iCmdToExecute : '34' , iCmdType : "CMD_X10"}),
-				cache: false,
-				dataType: "text",
-				success: onSuccess
-			});
-        });
-		
-		$("#Button_EteindreLumiere").click(function() 
-		{
-			$.ajax(
-			{
-				type: "POST",
-				url: "./Sender/XbeeWrapper.php",
-				data: ({iId : '5' ,iCmdToExecute : '35' , iCmdType : "CMD_X10"}),
-				cache: false,
-				dataType: "text",
-				success: onSuccess
-			});
-        });
+                   url: "./Sender/XbeeWrapper.php",
+                   data: ({iId : '5', iStatus : sVal ,iCmdToExecute: theName , iCmdType : "CMD_X10"}),
+                   cache: false,
+                   dataType: "text",
+                   success: onSuccess
+               });		
+		});
 		
 		function onSuccess(data)
 		{
@@ -141,8 +153,11 @@
 			?>
 		</div>
 		<div data-role="content">	
-			<input id="Button_AllumerLumiere" type="button" name="Button_AllumerLumiere" value="Allumer lumiere"/>
-			<input id="Button_EteindreLumiere" type="button" name="Button_EteindreLumiere" value="Eteindre lumiere"/>
+            <label for="Flip_Lumiere">Lumiere:</label>
+			<select name="Flip_Lumiere" id="Flip_Lumiere" data-role="slider">
+				<option value="off">Allumer</option>
+				<option value="on">Eteindre</option>
+			</select> 
 			<input id="Button_RefreshTemperature" type="button" name="Button_RefreshTemperature" value="Refresh Temperature"/>
 			Temperature :
 			<div class="Temperature">

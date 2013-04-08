@@ -50,6 +50,16 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "19" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
                     data: ({iCmdToExecute : "16" , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
@@ -72,6 +82,10 @@
                     if((obj3.id==3)&&(obj3.currentStatus=="on"))
 					{
 						$('#Flip_LumiereSecondaire').val('on').slider("refresh");
+					}
+                    if((obj3.id==19)&&(obj3.currentStatus=="on"))
+					{
+						$('#Flip_PcCharles').val('on').slider("refresh");
 					}
                     //var obj = JSON.parse(aDataReceived);
                     if((obj3.id==15))
@@ -98,25 +112,6 @@
                     }
                     
 				}
-				
-				$.ajax(
-				{
-					type: "POST",
-                    url: "./Reader/GateWayReader.php",
-                    data: ({iCmdType : "PING_READ"}),
-                    cache: false,
-                    dataType: "json",
-                    success: onSuccess2
-                });
-				
-				function onSuccess2(data)
-				{
-					if(data=="0")
-					{
-						$('#Flip_PcCharles').val('on').slider("refresh");
-					}
-				}
-
             });
         });
 		
@@ -210,8 +205,6 @@
                });		
 		});
 
-   
-		
 	</script>
 		<div data-role="header">
 			<?php
