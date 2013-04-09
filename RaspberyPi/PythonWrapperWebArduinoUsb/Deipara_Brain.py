@@ -112,9 +112,9 @@ class Brain:
         logging.info("Reseting all previous automatic actions")
         for aOneDevice in iListOfDevice.registeredDevices:
             logging.debug("checking states : " + str(aOneDevice.id))
-            if ((aOneDevice.id == 9) and ((iListOfDevice.getDevice(3)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 60))):
+            if ((aOneDevice.id == 9) and ((iListOfDevice.getDevice(3)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 600))):
                 self.TurnCharlesLightOff(iListOfDevice)
-            elif ((aOneDevice.id == 10) and ((iListOfDevice.getDevice(8)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 60))):
+            elif ((aOneDevice.id == 10) and ((iListOfDevice.getDevice(8)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 180))):
                 self.TurnEntreeLightOff(iListOfDevice)
                 
         #Setp 3 : On force un refresh des capteurs periodiques

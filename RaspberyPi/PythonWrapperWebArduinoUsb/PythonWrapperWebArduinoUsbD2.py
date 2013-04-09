@@ -88,6 +88,6 @@ reactor.listenTCP(50007, TcpHandlerFactory(aBrain,aRegisterDevices))
 SerialPort(UsbHandler(aBrain,aRegisterDevices), '/dev/ttyACM0', reactor, 9600)
 
 lc2 = LoopingCall(tired_task, aBrain)
-lc2.start(5)
+lc2.start(2)
 
 reactor.run()

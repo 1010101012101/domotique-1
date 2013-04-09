@@ -127,7 +127,7 @@ class DevicesHandler:
 self.LastTMeaureDate=datetime.datetime.now()
 self.refreshOngoing = False"""}
         charlesT.InActionsCommands ={"15" : """fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-logging.info ("Writting input to USB port and sending back to sender")
+logging.info ("Writting 15 to USB port and sending back to sender")
 fd.write(chr(15))"""}
         charlesT.id =15
         charlesT.refreshRatemin = 3
@@ -137,7 +137,7 @@ fd.write(chr(15))"""}
         charlesH.OutPossibleCmd ={"16" : "recoit Nouvelle H"}
         charlesH.InPossibleCmd ={"16" : "recoit Nouvelle H"}
         charlesH.InActionsCommands ={"16" : """fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-logging.info ("Writting input to USB port and sending back to sender")
+logging.info ("Writting 16 to USB port and sending back to sender")
 fd.write(chr(16))"""}
         charlesH.OutActionsCommands ={"16" : """self.currentStatus=aData
 self.LastTMeaureDate=datetime.datetime.now()
@@ -150,7 +150,7 @@ self.refreshOngoing = False"""}
         entreeT.OutPossibleCmd ={"30" : "recoit Nouvelle T"}
         entreeT.InPossibleCmd ={"30" : "recoit Nouvelle T"}
         entreeT.InActionsCommands ={"30" : """fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-logging.info ("Writting input to USB port and sending back to sender")
+logging.info ("Writting 30 to USB port and sending back to sender")
 fd.write(chr(30))"""}
         entreeT.OutActionsCommands ={"30" : """self.currentStatus=aData
 self.LastTMeaureDate=datetime.datetime.now()
@@ -214,12 +214,12 @@ fd.write(chr(6))"""}
         PcCharles.id =19
         PcCharles.porteuse = "PYTHON"
         PcCharles.stateCanBeRefresh = True
-        PcCharles.InPossibleCmd ={ "5" : "on" , "6" : "verify state by pooling", "7" : "off"}
-        PcCharles.InActionsCommands={ "5" : """self.currentStatus=\"on\"
-sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50""", "6" : """if os.system('ping -c 1 -W 2 192.168.0.7'):
+        PcCharles.InPossibleCmd ={ "60" : "on" , "61" : "verify state by pooling", "62" : "off"}
+        PcCharles.InActionsCommands={ "60" : """self.currentStatus=\"on\"
+sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50""", "61" : """if os.system('ping -c 1 -W 2 192.168.0.7'):
     self.currentStatus="on"
 else:
-    self.currentStatus="off" """, "7" : ""}
+    self.currentStatus="off" """, "62" : "net rpc shutdown -f -I 192.168.0.7 -U charles%"+Config["WinPasswdRpcShutdown"]"}
         #self.registeredDevices.append(PcCharles)
         
         lumiere2Charles = InterupteurBiStable()

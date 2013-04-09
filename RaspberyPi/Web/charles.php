@@ -115,14 +115,23 @@
             });
         });
 		
-
-		$("#Button_AllumerPcCharles").click(function() 
+        $( "#Flip_PcCharles" ).on( 'slidestop', function( event ) 
+		{ 
+			sVal = $(this).val();
+			var theName;
+			if (sVal=="on")
 		{
+				theName = '60';
+			}
+			else
+			{
+				theName = '62';
+			}
 			$.ajax(
 			{
 				type: "POST",
                    url: "./Sender/XbeeWrapper.php",
-                   data: ({iCmdType : "CMD_WOL"}),
+                   data: ({iId : '6', iStatus : sVal ,iCmdToExecute: theName , iCmdType : "CMD_X10"}),
                    cache: false,
                    dataType: "text",
                    success: onSuccess
@@ -223,11 +232,10 @@
 				<option value="on">Eteindre</option>
 			</select> 
 			<label for="Flip_PcCharles">PC Charles (read only - ping) :</label>
-			<select name="Flip_PcCharles" id="Flip_PcCharles" data-role="slider" disabled >
+			<select name="Flip_PcCharles" id="Flip_PcCharles" data-role="slider" >
 				<option value="off">OFF</option>
 				<option value="on">ON</option>
 			</select> 
-			<input id="Button_AllumerPcCharles" type="button" name="Button_AllumerPcCharles" value="Wake up PC"/>
 			<input id="Button_MonterVoletCharles" type="button" name="Button_MonterVoletCharles" value="Monter Volet"/>
 			<input id="Button_DescendreVoletCharles" type="button" name="Button_DescendreVoletCharles" value="Descendre Volet"/>
             Temperature :
