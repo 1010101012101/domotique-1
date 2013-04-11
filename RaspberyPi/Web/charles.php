@@ -79,7 +79,7 @@
 				function onSuccess(data)
 				{
                     var aDataReceived = data[0]
-                    console.log("aDataReceived: " + aDataReceived)
+                    //console.log("aDataReceived: " + aDataReceived)
                     var obj2 = eval("(" + aDataReceived + ')');
                     var obj3 = eval("(" + obj2 + ')');
                     
@@ -114,8 +114,8 @@
                         $('.PeopleDetection').append("Derniere detection : ");
                         $('.PeopleDetection').append(obj3.LastTMeaureDate["py/repr"]);
                     }
-                    console.log("obj3.LastTMeaureDate V1 : " + obj3.LastTMeaureDate)
-                    console.log("obj3.LastTMeaureDate V2 : " + Object.keys(obj3.LastTMeaureDate))
+                    //console.log("obj3.LastTMeaureDate V1 : " + obj3.LastTMeaureDate)
+                    //console.log("obj3.LastTMeaureDate V2 : " + Object.keys(obj3.LastTMeaureDate))
                     if((obj3.id==16))
                     {
                         $('.Humidite').append("Derniere humidite : ");

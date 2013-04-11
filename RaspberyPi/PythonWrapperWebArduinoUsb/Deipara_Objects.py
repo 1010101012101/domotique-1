@@ -209,11 +209,17 @@ class DevicesHandler:
         
         PcCharles = InterupteurBiStable()
         PcCharles.id =19
-        PcCharles.OutPossibleCmd ={}
+        PcCharles.stateCanBeRefresh = True
+        PcCharles.OutPossibleCmd ={"61" : "checkStatus"}
         PcCharles.InPossibleCmd ={ "60" : "on", "62" : "off"}
         PcCharles.InActionsCommands={ "60" : """self.currentStatus=\"on\"
 os.system('sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50')""", "62" : "os.system('net rpc shutdown -f -I 192.168.0.7 -U charles%"+self.config["WinPasswdRpcShutdown"]+"')"}
-        PcCharles.OutActionsCommands={}
+        PcCharles.OutActionsCommands={"61" : """self.LastTMeaureDate=datetime.datetime.now()
+if os.system('ping -c 1 -W 2 192.168.0.7'):
+    self.currentStatus="on"
+else:
+-   self.currentStatus="off" """}
+        PcCharles.refreshRatemin = 1
         self.registeredDevices.append(PcCharles)
         
         lumiere2Charles = InterupteurBiStable()

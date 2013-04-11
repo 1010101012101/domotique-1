@@ -59,7 +59,7 @@
 				function onSuccess4(data)
 				{
                     var aDataReceived = data[0]
-                    console.log("aDataReceived: " + aDataReceived)
+                    //console.log("aDataReceived: " + aDataReceived)
                     var obj2 = eval("(" + aDataReceived + ')');
                     var obj3 = eval("(" + obj2 + ')');
                     
