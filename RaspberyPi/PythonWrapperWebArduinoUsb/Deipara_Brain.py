@@ -173,12 +173,6 @@ class Brain:
             if str(aCmdFromData) in aOneObj.InPossibleCmd.keys():
                 logging.info("Updating device I5D : " + str(aOneObj.id))
                 aOneObj.executeInCmd(str(aCmdFromData),str(aOriginFromData))
-                if (aOneObj.porteuse == "PYTHON"):
-                    dumy = 7
-                else:
-                    #fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-                    logging.info ("Writting input to USB port and sending back to sender")
-                    #fd.write(chr(aCmdFromData))
                 
     def ReadDeviceStatus2(self,iDataToWrite, iListOfDevice):
         '''Cette fonction est lance lorsqu on recoit qq chose sur TCP (qui provient donc du client et probablement du site web) si il sagit d un ordre read

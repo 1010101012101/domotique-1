@@ -20,7 +20,7 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iCmdToExecute : "39" , iCmdType : "CMD_READ"}),
+                    data: ({iCmdToExecute : "21" , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess
@@ -30,7 +30,17 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iCmdToExecute : "40" , iCmdType : "CMD_READ"}),
+                    data: ({iCmdToExecute : "23" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "27" , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess
@@ -43,7 +53,7 @@
                     var obj2 = eval("(" + aDataReceived + ')');
                     var obj3 = eval("(" + obj2 + ')');
                     
-                    if((obj3.id==39))
+                    if((obj3.id==21))
                     {
                         $('.Temperature').append("Derniere temperature : ");
                         var aIntValue=parseInt(obj3.currentStatus);
@@ -55,7 +65,12 @@
                     }
                     console.log("obj3.LastTMeaureDate V1 : " + obj3.LastTMeaureDate)
                     console.log("obj3.LastTMeaureDate V2 : " + Object.keys(obj3.LastTMeaureDate))
-                    if((obj3.id==40))
+                    if((obj3.id==27))
+                    {
+                        $('.PeopleDetection').append("Derniere detection : ");
+                        $('.PeopleDetection').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    if((obj3.id==23))
                     {
                         $('.Humidite').append("Derniere humidite : ");
                         var aIntValue=parseInt(obj3.currentStatus);
@@ -86,6 +101,9 @@
 			</div>
             Humidite :
 			<div class="Humidite">
+			</div>
+            PeopleDetection :
+			<div class="PeopleDetection">
 			</div>
 		</div>
 	</div>

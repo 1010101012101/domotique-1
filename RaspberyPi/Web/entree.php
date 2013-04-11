@@ -40,6 +40,16 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : '10' , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess4
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
                     data: ({iCmdToExecute : '8' , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
@@ -57,6 +67,12 @@
 					{
 						$('#Flip_Lumiere').val('on').slider("refresh");
 					}
+                    
+                    if((obj3.id==10))
+                    {
+                        $('.PeopleDetection').append("Derniere detection : ");
+                        $('.PeopleDetection').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
 
                     if((obj3.id==17))
                     {
@@ -165,6 +181,9 @@
 			<input id="Button_RefreshHumidite" type="button" name="Button_RefreshHumidite" value="Refresh Humidite"/>
 			Humidite :
 			<div class="Humidite">
+			</div>
+            PeopleDetection :
+			<div class="PeopleDetection">
 			</div>
 		</div>
 	</div>

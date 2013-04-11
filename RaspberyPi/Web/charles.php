@@ -65,6 +65,16 @@
                     dataType: "json",
                     success: onSuccess
                 });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "9" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
 				
 				function onSuccess(data)
 				{
@@ -97,6 +107,12 @@
                         $('.Temperature').append(aFloat);
                         $('.Temperature').append(" degre releve le : ");
                         $('.Temperature').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    
+                    if((obj3.id==9))
+                    {
+                        $('.PeopleDetection').append("Derniere detection : ");
+                        $('.PeopleDetection').append(obj3.LastTMeaureDate["py/repr"]);
                     }
                     console.log("obj3.LastTMeaureDate V1 : " + obj3.LastTMeaureDate)
                     console.log("obj3.LastTMeaureDate V2 : " + Object.keys(obj3.LastTMeaureDate))
@@ -231,7 +247,7 @@
 				<option value="off">Allumer</option>
 				<option value="on">Eteindre</option>
 			</select> 
-			<label for="Flip_PcCharles">PC Charles (read only - ping) :</label>
+			<label for="Flip_PcCharles">PC Charles:</label>
 			<select name="Flip_PcCharles" id="Flip_PcCharles" data-role="slider" >
 				<option value="off">OFF</option>
 				<option value="on">ON</option>
@@ -243,6 +259,9 @@
 			</div>
             Humidite :
 			<div class="Humidite">
+			</div>
+            PeopleDetection :
+			<div class="PeopleDetection">
 			</div>
 		</div>
 	</div>
