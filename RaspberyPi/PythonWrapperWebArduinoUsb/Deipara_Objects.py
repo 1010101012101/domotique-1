@@ -64,10 +64,11 @@ class CapteurMesure(Function):
         self.LastTMeaureDate=datetime.datetime.now()
         self.refreshOngoing = False
         
-    def RequestNewValueWithLeoGateWay(self,iDataToSend):
-        fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-        logging.info ("Writting " + str(iDataToSend) + " to USB port and sending back to sender")
-        fd.write(chr(iDataToSend))
+    def RequestNewValue(self):
+        self.refreshOngoing = True
+        aRefreshStr = str(self.OutPossibleCmd.keys()[0])
+        logging.info ("Using "+ aRefreshStr + " to refresh")
+        exec(self.InActionsCommands[aRefreshStr])
 
     def __repr__(self):
         aRetString = ""
@@ -82,6 +83,11 @@ class InterupteurBiStable(Function):
         Function.__init__(self)
         self.type="InterupteurBiStable"
         self.PossibleStates=[ "off","on"]
+        
+    def RequestNewValue(self):
+        self.refreshOngoing = True
+        logging.info ("Using "+ str(self.OutPossibleCmd.keys()[0]) + " to refresh")
+        exec(self.OutActionsCommands[str(self.OutPossibleCmd.keys()[0])])
         
     def turnOn(self,iDataToSend):
         self.currentStatus="on"
@@ -151,7 +157,10 @@ class DevicesHandler:
         charlesT.OutPossibleCmd ={"15" : "recoit Nouvelle T"}
         charlesT.InPossibleCmd ={"15" : "recoit Nouvelle T"}
         charlesT.OutActionsCommands ={"15" : "self.UpdateValue(aData)"}
-        charlesT.InActionsCommands ={"15" : "self.RequestNewValueWithLeoGateWay(15)"}
+        charlesT.InActionsCommands ={"15" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 15 to USB port and sending back to sender")
+fd.write(chr(15))"""}
         charlesT.id =15
         charlesT.refreshRatemin = 3
         self.registeredDevices.append(charlesT)
@@ -159,7 +168,10 @@ class DevicesHandler:
         charlesH = CapteurMesure()
         charlesH.OutPossibleCmd ={"16" : "recoit Nouvelle H"}
         charlesH.InPossibleCmd ={"16" : "recoit Nouvelle H"}
-        charlesH.InActionsCommands ={"16" : "self.RequestNewValueWithLeoGateWay(16)"}
+        charlesH.InActionsCommands ={"16" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 16 to USB port and sending back to sender")
+fd.write(chr(16))"""}
         charlesH.OutActionsCommands ={"16" : "self.UpdateValue(aData)"}
         charlesH.id =16
         charlesH.refreshRatemin = 4
@@ -168,7 +180,10 @@ class DevicesHandler:
         entreeT = CapteurMesure()
         entreeT.OutPossibleCmd ={"30" : "recoit Nouvelle T"}
         entreeT.InPossibleCmd ={"30" : "recoit Nouvelle T"}
-        entreeT.InActionsCommands ={"30" : "self.RequestNewValueWithLeoGateWay(30)"}
+        entreeT.InActionsCommands ={"30" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 30 to USB port and sending back to sender")
+fd.write(chr(30))"""}
         entreeT.OutActionsCommands ={"30" : "self.UpdateValue(aData)"}
         entreeT.id =17
         entreeT.refreshRatemin = 5
@@ -177,7 +192,10 @@ class DevicesHandler:
         CuisineT = CapteurMesure()
         CuisineT.OutPossibleCmd ={"39" : "recoit Nouvelle T"}
         CuisineT.InPossibleCmd ={"39" : "recoit Nouvelle T"}
-        CuisineT.InActionsCommands ={"39" : "self.RequestNewValueWithLeoGateWay(39)"}
+        CuisineT.InActionsCommands ={"39" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 39 to USB port and sending back to sender")
+fd.write(chr(39))"""}
         CuisineT.OutActionsCommands ={"39" : "self.UpdateValue(aData)"}
         CuisineT.id =21
         CuisineT.refreshRatemin = 9
@@ -187,7 +205,10 @@ class DevicesHandler:
         CuisineH.OutPossibleCmd ={"40" : "recoit Nouvelle T"}
         CuisineH.refreshRatemin = 7
         CuisineH.InPossibleCmd ={"40" : "recoit Nouvelle T"}
-        CuisineH.InActionsCommands ={"40" : "self.RequestNewValueWithLeoGateWay(40)"}
+        CuisineH.InActionsCommands ={"40" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 40 to USB port and sending back to sender")
+fd.write(chr(40))"""}
         CuisineH.OutActionsCommands ={"40" : "self.UpdateValue(aData)"}
         CuisineH.id =23
         self.registeredDevices.append(CuisineH)
@@ -195,7 +216,10 @@ class DevicesHandler:
         entreeH = CapteurMesure()
         entreeH.OutPossibleCmd ={"31" : "recoit Nouvelle H"}
         entreeH.InPossibleCmd ={"31" : "recoit Nouvelle H"}
-        entreeH.InActionsCommands ={"31" : "self.RequestNewValueWithLeoGateWay(31)"}
+        entreeH.InActionsCommands ={"31" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 31 to USB port and sending back to sender")
+fd.write(chr(31))"""}
         entreeH.OutActionsCommands ={"31" : "self.UpdateValue(aData)"}
         entreeH.id =18
         entreeH.refreshRatemin = 6
@@ -215,10 +239,13 @@ class DevicesHandler:
         PcCharles.InActionsCommands={ "60" : """self.currentStatus=\"on\"
 os.system('sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50')""", "62" : "os.system('net rpc shutdown -f -I 192.168.0.7 -U charles%"+self.config["WinPasswdRpcShutdown"]+"')"}
         PcCharles.OutActionsCommands={"61" : """self.LastTMeaureDate=datetime.datetime.now()
+logging.info ("refresh pc")
 if os.system('ping -c 1 -W 2 192.168.0.7'):
-    self.currentStatus="on"
+    self.currentStatus="off"
+    logging.info ("off")
 else:
--   self.currentStatus="off" """}
+    self.currentStatus="on"
+    logging.info ("on")"""}
         PcCharles.refreshRatemin = 1
         self.registeredDevices.append(PcCharles)
         
@@ -261,7 +288,10 @@ else:
         luminoTersa = CapteurMesure()
         luminoTersa.OutPossibleCmd ={"36" : "recoit Nouvelle L"}
         luminoTersa.InPossibleCmd ={"36" : "recoit Nouvelle L"}
-        luminoTersa.InActionsCommands ={"36" : "self.RequestNewValueWithLeoGateWay(36)"}
+        luminoTersa.InActionsCommands ={"36" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 31 to USB port and sending back to sender")
+fd.write(chr(36))"""}
         luminoTersa.OutActionsCommands ={"36" : "self.UpdateValue(aData)"}
         luminoTersa.id =22
         self.registeredDevices.append(luminoTersa)

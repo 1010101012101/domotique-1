@@ -34,10 +34,8 @@ class Brain:
     def refreshCapteur(self,iCapteur,iListOfDevice):
         '''Genere un message pour rafraichir un capteur'''
         logging.warn("Refreshing capteur : " + str(iCapteur.id))
-        aDataToWrite = "MSG:" + str(iCapteur.InPossibleCmd.keys()[0]) + "_ORIGIN:PythonScript"
-        logging.warn("Msg used to refresh : " + aDataToWrite)
-        iCapteur.refreshOngoing = True
-        self.SendMessage(aDataToWrite,iListOfDevice)
+        iCapteur.RequestNewValue()
+
         
     def getExternalLuminosite():
         '''Wrapper pour aller lire la luminosite exterieur depuis le capteur terrasse'''
