@@ -11,15 +11,12 @@ class Function:
     def __init__(self):
         self.id =0
         self.type=""
-        
-        self.physicalLocation =""
         self.currentStatus =""
         self.LastTMeaureDate=datetime.datetime.now()
         self.LastRefreshDate=datetime.datetime.now()
-        self.refreshRatemin = 60
+        self.refreshRatemin = 3600
         self.description =""
         self.stateCanBeRefresh = False
-        self.refreshOngoing = False
         self.Reset =""
         self.InPossibleCmd ={}
         self.OutPossibleCmd ={}
@@ -39,7 +36,6 @@ class Function:
     def __repr__(self):
         aRetString = ""
         aRetString = aRetString + "self.id : " + str(self.id) + "\n"
-        aRetString = aRetString + "self.physicalLocation : " + str(self.physicalLocation) + "\n"
         aRetString = aRetString + "self.LastTMeaureDate : " + str(self.LastTMeaureDate) + "\n"
         aRetString = aRetString + "self.currentStatus : " + str(self.currentStatus) + "\n"
         aRetString = aRetString + "self.description : " + str(self.description) + "\n"
@@ -62,10 +58,9 @@ class CapteurMesure(Function):
     def UpdateValue(self,iData):
         self.currentStatus=iData
         self.LastTMeaureDate=datetime.datetime.now()
-        self.refreshOngoing = False
         
     def RequestNewValue(self):
-        self.refreshOngoing = True
+        self.LastRefreshDate=datetime.datetime.now()
         aRefreshStr = str(self.OutPossibleCmd.keys()[0])
         logging.info ("Using "+ aRefreshStr + " to refresh")
         exec(self.InActionsCommands[aRefreshStr])
@@ -85,9 +80,10 @@ class InterupteurBiStable(Function):
         self.PossibleStates=[ "off","on"]
         
     def RequestNewValue(self):
-        self.refreshOngoing = True
-        logging.info ("Using "+ str(self.OutPossibleCmd.keys()[0]) + " to refresh")
-        exec(self.OutActionsCommands[str(self.OutPossibleCmd.keys()[0])])
+        self.LastRefreshDate=datetime.datetime.now()
+        aRefreshStr = str(self.OutPossibleCmd.keys()[0])
+        logging.info ("Using "+ aRefreshStr + " to refresh")
+        exec(self.OutActionsCommands[aRefreshStr])
         
     def turnOn(self,iDataToSend):
         self.currentStatus="on"
@@ -162,7 +158,7 @@ fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 logging.info ("Writting 15 to USB port and sending back to sender")
 fd.write(chr(15))"""}
         charlesT.id =15
-        charlesT.refreshRatemin = 3
+        charlesT.refreshRatemin = 120
         self.registeredDevices.append(charlesT)
         
         charlesH = CapteurMesure()
@@ -174,7 +170,7 @@ logging.info ("Writting 16 to USB port and sending back to sender")
 fd.write(chr(16))"""}
         charlesH.OutActionsCommands ={"16" : "self.UpdateValue(aData)"}
         charlesH.id =16
-        charlesH.refreshRatemin = 4
+        charlesH.refreshRatemin = 135
         self.registeredDevices.append(charlesH)
         
         entreeT = CapteurMesure()
@@ -186,7 +182,7 @@ logging.info ("Writting 30 to USB port and sending back to sender")
 fd.write(chr(30))"""}
         entreeT.OutActionsCommands ={"30" : "self.UpdateValue(aData)"}
         entreeT.id =17
-        entreeT.refreshRatemin = 5
+        entreeT.refreshRatemin = 150
         self.registeredDevices.append(entreeT)
         
         CuisineT = CapteurMesure()
@@ -198,12 +194,12 @@ logging.info ("Writting 39 to USB port and sending back to sender")
 fd.write(chr(39))"""}
         CuisineT.OutActionsCommands ={"39" : "self.UpdateValue(aData)"}
         CuisineT.id =21
-        CuisineT.refreshRatemin = 9
+        CuisineT.refreshRatemin = 175
         self.registeredDevices.append(CuisineT)
         
         CuisineH = CapteurMesure()
         CuisineH.OutPossibleCmd ={"40" : "recoit Nouvelle T"}
-        CuisineH.refreshRatemin = 7
+        CuisineH.refreshRatemin = 200
         CuisineH.InPossibleCmd ={"40" : "recoit Nouvelle T"}
         CuisineH.InActionsCommands ={"40" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
@@ -222,7 +218,7 @@ logging.info ("Writting 31 to USB port and sending back to sender")
 fd.write(chr(31))"""}
         entreeH.OutActionsCommands ={"31" : "self.UpdateValue(aData)"}
         entreeH.id =18
-        entreeH.refreshRatemin = 6
+        entreeH.refreshRatemin = 215
         self.registeredDevices.append(entreeH)
         
         lumiereCharles = InterupteurBiStable()
@@ -246,7 +242,7 @@ if os.system('ping -c 1 -W 2 192.168.0.7'):
 else:
     self.currentStatus="on"
     logging.info ("on")"""}
-        PcCharles.refreshRatemin = 1
+        PcCharles.refreshRatemin = 90
         self.registeredDevices.append(PcCharles)
         
         lumiere2Charles = InterupteurBiStable()

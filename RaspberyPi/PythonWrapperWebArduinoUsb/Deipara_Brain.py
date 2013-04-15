@@ -31,12 +31,6 @@ class Brain:
         aDataToWrite = "MSG:12_ORIGIN:PythonScript"
         self.SendMessage( aDataToWrite,iListOfDevice)
         
-    def refreshCapteur(self,iCapteur,iListOfDevice):
-        '''Genere un message pour rafraichir un capteur'''
-        logging.warn("Refreshing capteur : " + str(iCapteur.id))
-        iCapteur.RequestNewValue()
-
-        
     def getExternalLuminosite():
         '''Wrapper pour aller lire la luminosite exterieur depuis le capteur terrasse'''
         for aOneDevice in iListOfDevice.registeredDevices:
@@ -119,10 +113,9 @@ class Brain:
         logging.info("Force the auto refresh of capteur")
         for aOneDevice in iListOfDevice.registeredDevices:
             logging.debug("checking autoupdate : " + str(aOneDevice.id))
-            if ( (aOneDevice.stateCanBeRefresh == True) and (aOneDevice.refreshOngoing == False)and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (minutes = aOneDevice.refreshRatemin) ) ):
+            if ( (aOneDevice.stateCanBeRefresh == True) and (datetime.datetime.now() - aOneDevice.LastRefreshDate > datetime.timedelta (seconds = aOneDevice.refreshRatemin) ) ):
                 logging.debug("We can refresh : " + str(aOneDevice.id))
-                self.refreshCapteur(aOneDevice,iListOfDevice)
-
+                aOneDevice.RequestNewValue()
                 
     def HandleUsbInput(self,iUsbString,iListOfDevice):
         '''Cette fonction est lance lorsqu on recoit qq chose sur le port USB (qui provient donc de l Arduino Leonardo).

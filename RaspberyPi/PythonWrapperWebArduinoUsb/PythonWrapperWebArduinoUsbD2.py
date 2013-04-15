@@ -69,7 +69,7 @@ def tired_task(iBrain):
     iBrain.smartProcessing2(aRegisterDevices)
     
 #The logging API 
-logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.WARNING)
+logging.basicConfig(filename='PythonWrapperWebArduinoUsbD.log',level=logging.WARNING,format='%(asctime)s - %(levelname)s - %(message)s')
 logging.info('Daemon starting...')
 
 #The config API (contains non shared data like google API key or password)
