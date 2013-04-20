@@ -281,6 +281,18 @@ else:
         Lumiereentree.InActionsCommands={ "34" : "self.turnOn(34)","35" : "self.turnOff(35)"}
         self.registeredDevices.append(Lumiereentree)
         
+        GuirlandeLedCuisine = InterupteurBiStable()
+        GuirlandeLedCuisine.id =11
+        GuirlandeLedCuisine.InPossibleCmd ={ "47" : "on","46" : "off"}
+        GuirlandeLedCuisine.InActionsCommands={ "47" : "self.turnOn(47)","46" : "self.turnOff(46)"}
+        self.registeredDevices.append(GuirlandeLedCuisine)
+        
+        GuirlandeLedSalon = InterupteurBiStable()
+        GuirlandeLedSalon.id =12
+        GuirlandeLedSalon.InPossibleCmd ={ "3" : "on","4" : "off"}
+        GuirlandeLedSalon.InActionsCommands={ "3" : "self.turnOn(3)","4" : "self.turnOff(4)"}
+        self.registeredDevices.append(GuirlandeLedSalon)
+        
         luminoTersa = CapteurMesure()
         luminoTersa.OutPossibleCmd ={"36" : "recoit Nouvelle L"}
         luminoTersa.InPossibleCmd ={"36" : "recoit Nouvelle L"}
@@ -298,6 +310,13 @@ fd.write(chr(36))"""}
         DetecteurPresenceCharles.OutActionsCommands={ "2" : "self.detectionEventReceived()"}
         DetecteurPresenceCharles.Reset = "self.currentStatus=\"stable\""
         self.registeredDevices.append(DetecteurPresenceCharles)
+        
+        DetecteurFumeeCuisine = InterupteurStable()
+        DetecteurFumeeCuisine.id =2
+        DetecteurFumeeCuisine.OutPossibleCmd ={ "1" : "unstable position"}
+        DetecteurFumeeCuisine.OutActionsCommands={ "1" : "self.detectionEventReceived()"}
+        DetecteurFumeeCuisine.Reset = "self.currentStatus=\"stable\""
+        #self.registeredDevices.append(DetecteurFumeeCuisine)
         
         DetecteurPresenceEntree = InterupteurStable()
         DetecteurPresenceEntree.id =10

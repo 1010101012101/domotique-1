@@ -84,6 +84,32 @@
 				}
             });
         });
+        
+        $("#Button_LightOn").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '46' ,iCmdToExecute : '46' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
+        
+        $("#Button_LightOff").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '47' ,iCmdToExecute : '47' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
 			
 		function onSuccess(data)
 		{
@@ -96,6 +122,8 @@
 			?>
 		</div>
 		<div data-role="content">	
+            <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
+            <input id="Button_LightOff" type="button" name="Button_LightOff" value="Light Off"/>
             Temperature :
 			<div class="Temperature">
 			</div>

@@ -9,12 +9,13 @@
 #include <Deipara.h>
 
 //Definition of the pin used in program
-const int _OutPinBuz = 9;
-const int _OutPinLed4 = 10;
-const int _InPinButton4 = 11;
 const int _InPinIrDetector = 6;
 const int _InPinFireDetection = 8;
 const int _InPinDht22 = 5;
+//pin guirlande led
+const int _OutPinLedBlue = 9;
+const int _OutPinLedGreen = 10;
+const int _OutPinLedRed = 11;
 
 //Global variables
 XBee _Xbee = XBee(); //Create Xbee object to control a Xbee
@@ -23,6 +24,7 @@ int _CurrentLightValue = 0;
 int _CmdReceived = 0;
 int _DataToSend = 0;
 bool _TimerExpire = true;
+bool _LedGuirlandeIsOn = false;
 DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance
 
 void InterruptTimer2() 
@@ -31,17 +33,32 @@ void InterruptTimer2()
   MsTimer2::stop();
 }
 
+void RandomLedColor() 
+{
+  int randNumberGreen = random(0, 255);
+  int randNumberRed = random(0, 255);
+  int randNumberBlue = random(0, 255);
+  
+  analogWrite(_OutPinLedBlue, randNumberBlue); // impulsion largeur voulue sur la broche 0 = 0% et 255 = 100% haut
+  analogWrite(_OutPinLedGreen, randNumberGreen); // impulsion largeur voulue sur la broche 0 = 0% et 255 = 100% haut
+  analogWrite(_OutPinLedRed, randNumberRed); // impulsion largeur voulue sur la broche 0 = 0% et 255 = 100% haut
+}
+
 void setup() 
 {
   // start serial port
   Serial.begin(XBEE_SPEED);
   _Xbee.begin(XBEE_SPEED);
   
-  pinMode(_OutPinLed4, OUTPUT);
-  pinMode(_OutPinBuz, OUTPUT);
-  pinMode(_InPinButton4,INPUT);
   pinMode(_InPinIrDetector,INPUT);
   pinMode(_InPinFireDetection,INPUT);
+  pinMode(_OutPinLedBlue, OUTPUT);
+  pinMode(_OutPinLedGreen, OUTPUT);
+  pinMode(_OutPinLedRed, OUTPUT);
+  
+  digitalWrite(_OutPinLedBlue, LOW);
+  digitalWrite(_OutPinLedGreen, LOW);
+  digitalWrite(_OutPinLedRed, LOW);
   
   //Set timer to 10seconds
   MsTimer2::set(30000, InterruptTimer2);
@@ -73,7 +90,6 @@ void loop() {
   if ((aInputDigitalValue == HIGH)&&(_TimerExpire == true))
   {
   _TimerExpire = false;
-  flashPin(_OutPinBuz, 1, 250);
   _CmdReceived=1;
   _DataToSend=444;
   MsTimer2::start(); // active Timer 2 
@@ -139,6 +155,20 @@ void loop() {
       Serial.println("Polled to quick ");
       break;
     }
+  }
+  else if(_CmdReceived==47)
+  {
+    //turn led off
+    Serial.println("turn led off");
+    digitalWrite(_OutPinLedBlue, LOW);
+    digitalWrite(_OutPinLedGreen, LOW);
+    digitalWrite(_OutPinLedRed, LOW);
+  }
+  else if(_CmdReceived==46)
+  {
+    //random led color
+    Serial.println("random led color");
+    RandomLedColor();
   }
   else
   {

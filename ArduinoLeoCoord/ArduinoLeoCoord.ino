@@ -169,14 +169,8 @@ void loop()
   }
   
   //Process the command
-  //Test if we have an action to do en commencant par une commande de debug
-  if(_CmdReceived==3)
-  {
-    delay(10);
-    Serial.println("ACK_1");
-  }
   //Test des commandes pour le X10
-  else if(_CmdReceived==5) //Charles lumiere principlae
+  if(_CmdReceived==5) //Charles lumiere principlae
   {
     x10ex.sendCmd('A', 4, CMD_ON, 1);
   }
@@ -284,9 +278,13 @@ void loop()
     sendZigBeeMsg(_Xbee,_CmdReceived,ENTREE_ADDR);
   }
   //Debut des commandes TERRASSE
-  else if((_CmdReceived==39)||(_CmdReceived==40))
+  else if((_CmdReceived==39)||(_CmdReceived==40)||(_CmdReceived==46)||(_CmdReceived==47))
   {
     sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR);
+  }
+  else if((_CmdReceived==3)||(_CmdReceived==4))
+  {
+    sendZigBeeMsg(_Xbee,_CmdReceived,SALON_ADDR);
   }
   
 
