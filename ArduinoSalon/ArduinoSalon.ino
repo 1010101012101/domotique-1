@@ -5,7 +5,10 @@
 #include <Deipara.h>
 
 //Pin definition
-const int _OutPinLed = 9;
+//pin guirlande led
+const int _OutPinLedBlue = 9;
+const int _OutPinLedGreen = 10;
+const int _OutPinLedRed = 11;
 
 //Xbee objects
 //create Xbee object to control a Xbee
@@ -15,15 +18,32 @@ ZBRxResponse _ZbRxResp = ZBRxResponse();
 //Global variable used in the program
 int _CmdReceived = 0;
 
+void RandomLedColor() 
+{
+  int randNumberGreen = random(0, 255);
+  int randNumberRed = random(0, 255);
+  int randNumberBlue = random(0, 255);
+  
+  analogWrite(_OutPinLedBlue, randNumberBlue); // impulsion largeur voulue sur la broche 0 = 0% et 255 = 100% haut
+  analogWrite(_OutPinLedGreen, randNumberGreen); // impulsion largeur voulue sur la broche 0 = 0% et 255 = 100% haut
+  analogWrite(_OutPinLedRed, randNumberRed); // impulsion largeur voulue sur la broche 0 = 0% et 255 = 100% haut
+}
+
 void setup()
 {
   // start serial
   _Xbee.begin(XBEE_SPEED);
   Serial.begin(XBEE_SPEED);
   //defined IO
-  pinMode(_OutPinLed, OUTPUT);
   
-  digitalWrite(_OutPinLed, LOW);
+  pinMode(_OutPinLedBlue, OUTPUT);
+  pinMode(_OutPinLedGreen, OUTPUT);
+  pinMode(_OutPinLedRed, OUTPUT);
+  
+  digitalWrite(_OutPinLedBlue, LOW);
+  digitalWrite(_OutPinLedGreen, LOW);
+  digitalWrite(_OutPinLedRed, LOW);
+  
   
   delay(5000);
 }
@@ -49,11 +69,13 @@ void loop()
   if(_CmdReceived==3)
   {
     //This command allow the master to turn the light on
-    digitalWrite(_OutPinLed, HIGH);
+    RandomLedColor();
   }
   else if(_CmdReceived==4)
   {
     //This command allow the master to turn the light off
-    digitalWrite(_OutPinLed, LOW);
+    digitalWrite(_OutPinLedBlue, LOW);
+    digitalWrite(_OutPinLedGreen, LOW);
+    digitalWrite(_OutPinLedRed, LOW);
   }
 }

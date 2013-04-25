@@ -63,6 +63,32 @@
                    success: onSuccess
                });		
 		});
+        
+        $("#Button_LightOn").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '3' ,iCmdToExecute : '3' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
+        
+        $("#Button_LightOff").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '4' ,iCmdToExecute : '4' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
 		
 		function onSuccess(data)
 		{
@@ -102,6 +128,8 @@
 		<div data-role="content">	
 			<input id="Button_MonterVoletSalon" type="button" name="Button_MonterVoletSalon" value="Monter Volet"/>
 			<input id="Button_DescendreVoletSalon" type="button" name="Button_DescendreVoletSalon" value="Descendre Volet"/>
+            <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
+            <input id="Button_LightOff" type="button" name="Button_LightOff" value="Light Off"/>
 			<label for="Flip_HalogeneSalon">Halogene:</label>
 			<select name="Flip_HalogeneSalon" id="Flip_HalogeneSalon" data-role="slider">
 				<option value="off">Allumer</option>
