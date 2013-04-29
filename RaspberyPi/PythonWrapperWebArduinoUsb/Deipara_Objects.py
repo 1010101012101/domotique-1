@@ -311,6 +311,13 @@ fd.write(chr(36))"""}
         DetecteurPresenceCharles.Reset = "self.currentStatus=\"stable\""
         self.registeredDevices.append(DetecteurPresenceCharles)
         
+        DetecteurPresenceSalon = InterupteurStable()
+        DetecteurPresenceSalon.id =13
+        DetecteurPresenceSalon.OutPossibleCmd ={ "17" : "unstable position"}
+        DetecteurPresenceSalon.OutActionsCommands={ "17" : "self.detectionEventReceived()"}
+        DetecteurPresenceSalon.Reset = "self.currentStatus=\"stable\""
+        self.registeredDevices.append(DetecteurPresenceSalon)
+        
         DetecteurFumeeCuisine = InterupteurStable()
         DetecteurFumeeCuisine.id =2
         DetecteurFumeeCuisine.OutPossibleCmd ={ "1" : "unstable position"}

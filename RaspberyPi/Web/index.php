@@ -34,6 +34,10 @@
 			<a href="entree.php" data-role="button">Entree</a>			
 			<a href="SalleDeBain.php" data-role="button">Salle de bain</a>
 			<a href="Terasse.php" data-role="button">Terasse (Beta)</a>
+            <div data-role="controlgroup">
+            <a href="http://www.djynet.net" data-role="button" rel="external" data-theme="a">Mon Blog</a>
+            <a href="http://code.google.com/p/domotique-1/" data-role="button" rel="external" data-theme="a">Google Code</a>
+            </div>
 		</div>
 		<div data-role="footer" data-id="foo1" data-position="fixed">
 	<div data-role="navbar">

@@ -3,8 +3,11 @@
 #include <XBee.h>
 //Deipara library
 #include <Deipara.h>
+//Timer library
+#include <MsTimer2.h>
 
 //Pin definition
+const int _InPinIrDetector = 7;
 //pin guirlande led
 const int _OutPinLedBlue = 9;
 const int _OutPinLedGreen = 10;
@@ -17,6 +20,14 @@ XBee _Xbee = XBee();
 ZBRxResponse _ZbRxResp = ZBRxResponse(); 
 //Global variable used in the program
 int _CmdReceived = 0;
+int _DataToSend = 0;
+bool _TimerExpire = true;
+
+void InterruptTimer2() 
+{
+  _TimerExpire= true;
+  MsTimer2::stop();
+}
 
 void RandomLedColor() 
 {
@@ -35,7 +46,7 @@ void setup()
   _Xbee.begin(XBEE_SPEED);
   Serial.begin(XBEE_SPEED);
   //defined IO
-  
+  pinMode(_InPinIrDetector,INPUT);
   pinMode(_OutPinLedBlue, OUTPUT);
   pinMode(_OutPinLedGreen, OUTPUT);
   pinMode(_OutPinLedRed, OUTPUT);
@@ -44,6 +55,8 @@ void setup()
   digitalWrite(_OutPinLedGreen, LOW);
   digitalWrite(_OutPinLedRed, LOW);
   
+  //Set timer to 10seconds
+  MsTimer2::set(120000, InterruptTimer2);
   
   delay(5000);
 }
@@ -65,6 +78,15 @@ void loop()
     }  
   }
   
+  int aInputDigitalValue = digitalRead(_InPinIrDetector);
+  if ((aInputDigitalValue == HIGH)&&(_TimerExpire == true))
+  {
+    _TimerExpire = false;
+    _CmdReceived = 17;
+    _DataToSend=328;
+    MsTimer2::start(); // active Timer 2 
+  }
+  
   //Do the real action
   if(_CmdReceived==3)
   {
@@ -78,4 +100,11 @@ void loop()
     digitalWrite(_OutPinLedGreen, LOW);
     digitalWrite(_OutPinLedRed, LOW);
   }
+  
+    //Send the response if necessary
+  if(_DataToSend!=0)
+  {
+    sendZigBeeMsg2(_Xbee,_CmdReceived,_DataToSend,COORD_ADDR);
+  }
+  
 }

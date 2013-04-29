@@ -120,7 +120,7 @@ class Brain:
     def HandleUsbInput(self,iUsbString,iListOfDevice):
         '''Cette fonction est lance lorsqu on recoit qq chose sur le port USB (qui provient donc de l Arduino Leonardo).
         Elle va trouver la fonction associe a la requette entrante et permettre au device de se mettre a jour'''
-        logging.info ("Handle USB incoming message : " + iUsbString)
+        logging.warning ("Handle USB incoming message : " + iUsbString)
         if("ID" in iUsbString):
             expires = datetime.datetime.now()
             aValueReceived = float((iUsbString.split('_')[1]).split(':')[1])

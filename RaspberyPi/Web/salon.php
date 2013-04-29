@@ -102,7 +102,17 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
-                    data: ({iId : '13', iCmdToExecute : "2" , iCmdType : "CMD_READ"}),
+                    data: ({iCmdToExecute : "13" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "6" , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
                     success: onSuccess
@@ -110,10 +120,21 @@
 				
 				function onSuccess(data)
 				{
-					if((data[1].id==13)&&(data[1].status=="on"))
+                    var aDataReceived = data[0]
+                    console.log("aDataReceived: " + aDataReceived)
+                    var obj2 = eval("(" + aDataReceived + ')');
+                    var obj3 = eval("(" + obj2 + ')');
+                    
+                    if((obj3.id==6)&&(obj3.currentStatus=="on"))
 					{
 						$('#Flip_HalogeneSalon').val('on').slider("refresh");
 					}
+                    
+                    if((obj3.id==13))
+                    {
+                        $('.PeopleDetection').append("Derniere detection : ");
+                        $('.PeopleDetection').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
 				}
 
             });
@@ -128,13 +149,16 @@
 		<div data-role="content">	
 			<input id="Button_MonterVoletSalon" type="button" name="Button_MonterVoletSalon" value="Monter Volet"/>
 			<input id="Button_DescendreVoletSalon" type="button" name="Button_DescendreVoletSalon" value="Descendre Volet"/>
+            PeopleDetection :
+			<div class="PeopleDetection">
+			</div>
             <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
             <input id="Button_LightOff" type="button" name="Button_LightOff" value="Light Off"/>
 			<label for="Flip_HalogeneSalon">Halogene:</label>
 			<select name="Flip_HalogeneSalon" id="Flip_HalogeneSalon" data-role="slider">
 				<option value="off">Allumer</option>
 				<option value="on">Eteindre</option>
-			</select> 			
+			</select>
 		</div>
 	</div>
 	</body>
