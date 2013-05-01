@@ -64,6 +64,7 @@ void setup()
 void loop()
 {
   _CmdReceived = 0;
+  _DataToSend = 0;
   _Xbee.readPacket();
   
   if (_Xbee.getResponse().isAvailable()) 
