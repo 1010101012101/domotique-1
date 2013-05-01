@@ -25,6 +25,18 @@ class Brain:
         aDataToWrite = "MSG:11_ORIGIN:PythonScript"
         self.SendMessage( aDataToWrite,iListOfDevice)
         
+    def PeopleDetectedSalon(self,iListOfDevice):
+        '''Action trige lors de la detection de presence dans le salon'''
+        logging.error("PeopleDetectedSalon")
+        aDataToWrite = "MSG:3_ORIGIN:PythonScript"
+        self.SendMessage( aDataToWrite,iListOfDevice)
+        
+    def TurnSalonLightOff(self,iListOfDevice):
+        '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
+        logging.error("TurnSalonLightOff")
+        aDataToWrite = "MSG:4_ORIGIN:PythonScript"
+        self.SendMessage( aDataToWrite,iListOfDevice)
+        
     def TurnCharlesLightOff(self,iListOfDevice):
         '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
         logging.error("TurnCharlesLightOff")
@@ -97,6 +109,8 @@ class Brain:
                 self.PeopleDetectedEntree(iListOfDevice)
             elif ((aOneDevice.id == 9) and (aOneDevice.currentStatus=="unstable")):
                 self.PeopleDetectedCharlesRoom(iListOfDevice)
+            elif ((aOneDevice.id == 13) and (aOneDevice.currentStatus=="unstable")):
+                self.PeopleDetectedSalon(iListOfDevice)
             aOneDevice.reset()
             
         #Setp 2 : On reset les actions resultantes des detections passe
@@ -108,6 +122,8 @@ class Brain:
                 self.TurnCharlesLightOff(iListOfDevice)
             elif ((aOneDevice.id == 10) and ((iListOfDevice.getDevice(8)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 180))):
                 self.TurnEntreeLightOff(iListOfDevice)
+            elif ((aOneDevice.id == 13) and ((iListOfDevice.getDevice(12)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 1800))):
+                self.TurnSalonLightOff(iListOfDevice)
                 
         #Setp 3 : On force un refresh des capteurs periodiques
         logging.info("Force the auto refresh of capteur")
