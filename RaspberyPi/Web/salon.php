@@ -112,6 +112,26 @@
 				{
 					type: "POST",
                     url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "24" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "25" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
                     data: ({iCmdToExecute : "6" , iCmdType : "CMD_READ"}),
                     cache: false,
                     dataType: "json",
@@ -135,6 +155,30 @@
                         $('.PeopleDetection').append("Derniere detection : ");
                         $('.PeopleDetection').append(obj3.LastTMeaureDate["py/repr"]);
                     }
+                    
+                    if((obj3.id==24))
+                    {
+                        $('.Temperature').append("Derniere temperature : ");
+                        var aIntValue=parseInt(obj3.currentStatus);
+                        var aFloat=parseFloat(aIntValue);
+                        aFloat=aFloat/10;
+                        $('.Temperature').append(aFloat);
+                        $('.Temperature').append(" degre releve le : ");
+                        $('.Temperature').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    
+                    if((obj3.id==25))
+                    {
+                        $('.Humidite').append("Derniere humidite : ");
+                        var aIntValue=parseInt(obj3.currentStatus);
+                        var aFloat=parseFloat(aIntValue);
+                        aFloat=aFloat/10;
+                        $('.Humidite').append(aFloat);
+                        $('.Humidite').append(" % humidite relative releve le : ");
+                        $('.Humidite').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    
+                    
 				}
 
             });
@@ -149,6 +193,12 @@
 		<div data-role="content">	
 			<input id="Button_MonterVoletSalon" type="button" name="Button_MonterVoletSalon" value="Monter Volet"/>
 			<input id="Button_DescendreVoletSalon" type="button" name="Button_DescendreVoletSalon" value="Descendre Volet"/>
+            Temperature :
+			<div class="Temperature">
+			</div>
+            Humidite :
+			<div class="Humidite">
+			</div>
             PeopleDetection :
 			<div class="PeopleDetection">
 			</div>

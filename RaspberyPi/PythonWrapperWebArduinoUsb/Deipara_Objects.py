@@ -158,7 +158,7 @@ fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 logging.info ("Writting 15 to USB port and sending back to sender")
 fd.write(chr(15))"""}
         charlesT.id =15
-        charlesT.refreshRatemin = 120
+        charlesT.refreshRatemin = 240
         self.registeredDevices.append(charlesT)
         
         charlesH = CapteurMesure()
@@ -170,7 +170,7 @@ logging.info ("Writting 16 to USB port and sending back to sender")
 fd.write(chr(16))"""}
         charlesH.OutActionsCommands ={"16" : "self.UpdateValue(aData)"}
         charlesH.id =16
-        charlesH.refreshRatemin = 135
+        charlesH.refreshRatemin = 250
         self.registeredDevices.append(charlesH)
         
         entreeT = CapteurMesure()
@@ -182,8 +182,32 @@ logging.info ("Writting 30 to USB port and sending back to sender")
 fd.write(chr(30))"""}
         entreeT.OutActionsCommands ={"30" : "self.UpdateValue(aData)"}
         entreeT.id =17
-        entreeT.refreshRatemin = 150
+        entreeT.refreshRatemin = 260
         self.registeredDevices.append(entreeT)
+        
+        SalonT = CapteurMesure()
+        SalonT.OutPossibleCmd ={"18" : "recoit Nouvelle T"}
+        SalonT.InPossibleCmd ={"18" : "recoit Nouvelle T"}
+        SalonT.InActionsCommands ={"18" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 18 to USB port and sending back to sender")
+fd.write(chr(18))"""}
+        SalonT.OutActionsCommands ={"18" : "self.UpdateValue(aData)"}
+        SalonT.id =24
+        SalonT.refreshRatemin = 265
+        self.registeredDevices.append(SalonT)
+        
+        salonH = CapteurMesure()
+        salonH.OutPossibleCmd ={"19" : "recoit Nouvelle H"}
+        salonH.InPossibleCmd ={"19" : "recoit Nouvelle H"}
+        salonH.InActionsCommands ={"19" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 19 to USB port and sending back to sender")
+fd.write(chr(19))"""}
+        salonH.OutActionsCommands ={"19" : "self.UpdateValue(aData)"}
+        salonH.id =25
+        salonH.refreshRatemin = 275
+        self.registeredDevices.append(salonH)
         
         CuisineT = CapteurMesure()
         CuisineT.OutPossibleCmd ={"39" : "recoit Nouvelle T"}
@@ -194,12 +218,12 @@ logging.info ("Writting 39 to USB port and sending back to sender")
 fd.write(chr(39))"""}
         CuisineT.OutActionsCommands ={"39" : "self.UpdateValue(aData)"}
         CuisineT.id =21
-        CuisineT.refreshRatemin = 175
+        CuisineT.refreshRatemin = 270
         self.registeredDevices.append(CuisineT)
         
         CuisineH = CapteurMesure()
         CuisineH.OutPossibleCmd ={"40" : "recoit Nouvelle T"}
-        CuisineH.refreshRatemin = 200
+        CuisineH.refreshRatemin = 280
         CuisineH.InPossibleCmd ={"40" : "recoit Nouvelle T"}
         CuisineH.InActionsCommands ={"40" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
@@ -218,7 +242,7 @@ logging.info ("Writting 31 to USB port and sending back to sender")
 fd.write(chr(31))"""}
         entreeH.OutActionsCommands ={"31" : "self.UpdateValue(aData)"}
         entreeH.id =18
-        entreeH.refreshRatemin = 215
+        entreeH.refreshRatemin = 290
         self.registeredDevices.append(entreeH)
         
         lumiereCharles = InterupteurBiStable()
@@ -242,7 +266,7 @@ if os.system('ping -c 1 -W 2 192.168.0.7'):
 else:
     self.currentStatus="on"
     logging.info ("on")"""}
-        PcCharles.refreshRatemin = 90
+        PcCharles.refreshRatemin = 300
         self.registeredDevices.append(PcCharles)
         
         lumiere2Charles = InterupteurBiStable()
@@ -283,8 +307,8 @@ else:
         
         GuirlandeLedCuisine = InterupteurBiStable()
         GuirlandeLedCuisine.id =11
-        GuirlandeLedCuisine.InPossibleCmd ={ "47" : "on","46" : "off"}
-        GuirlandeLedCuisine.InActionsCommands={ "47" : "self.turnOn(47)","46" : "self.turnOff(46)"}
+        GuirlandeLedCuisine.InPossibleCmd ={ "47" : "off","46" : "on"}
+        GuirlandeLedCuisine.InActionsCommands={ "46" : "self.turnOn(46)","47" : "self.turnOff(47)"}
         self.registeredDevices.append(GuirlandeLedCuisine)
         
         GuirlandeLedSalon = InterupteurBiStable()

@@ -30,6 +30,18 @@ class Brain:
         logging.error("PeopleDetectedSalon")
         aDataToWrite = "MSG:3_ORIGIN:PythonScript"
         self.SendMessage( aDataToWrite,iListOfDevice)
+     
+    def PeopleDetectedCuisine(self,iListOfDevice):
+        '''Action trige lors de la detection de presence dans le salon'''
+        logging.error("PeopleDetectedCuisine")
+        aDataToWrite = "MSG:46_ORIGIN:PythonScript"
+        self.SendMessage( aDataToWrite,iListOfDevice) 
+
+    def TurnCuisineLightOff(self,iListOfDevice):
+        '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
+        logging.error("TurnCuisineLightOff")
+        aDataToWrite = "MSG:47_ORIGIN:PythonScript"
+        self.SendMessage( aDataToWrite,iListOfDevice)        
         
     def TurnSalonLightOff(self,iListOfDevice):
         '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
@@ -111,6 +123,8 @@ class Brain:
                 self.PeopleDetectedCharlesRoom(iListOfDevice)
             elif ((aOneDevice.id == 13) and (aOneDevice.currentStatus=="unstable")):
                 self.PeopleDetectedSalon(iListOfDevice)
+            elif ((aOneDevice.id == 27) and (aOneDevice.currentStatus=="unstable")):
+                self.PeopleDetectedCuisine(iListOfDevice)
             aOneDevice.reset()
             
         #Setp 2 : On reset les actions resultantes des detections passe
@@ -122,8 +136,10 @@ class Brain:
                 self.TurnCharlesLightOff(iListOfDevice)
             elif ((aOneDevice.id == 10) and ((iListOfDevice.getDevice(8)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 180))):
                 self.TurnEntreeLightOff(iListOfDevice)
-            elif ((aOneDevice.id == 13) and ((iListOfDevice.getDevice(12)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 1800))):
+            elif ((aOneDevice.id == 13) and ((iListOfDevice.getDevice(12)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 600))):
                 self.TurnSalonLightOff(iListOfDevice)
+            elif ((aOneDevice.id == 27) and ((iListOfDevice.getDevice(11)).currentStatus=="on") and (datetime.datetime.now() - aOneDevice.LastTMeaureDate > datetime.timedelta (seconds = 240))):
+                self.TurnCuisineLightOff(iListOfDevice)
                 
         #Setp 3 : On force un refresh des capteurs periodiques
         logging.info("Force the auto refresh of capteur")

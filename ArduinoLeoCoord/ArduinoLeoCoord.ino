@@ -282,7 +282,7 @@ void loop()
   {
     sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR);
   }
-  else if((_CmdReceived==3)||(_CmdReceived==4))
+  else if((_CmdReceived==3)||(_CmdReceived==4)||(_CmdReceived==18)||(_CmdReceived==19))
   {
     sendZigBeeMsg(_Xbee,_CmdReceived,SALON_ADDR);
   }
