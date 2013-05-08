@@ -311,6 +311,12 @@ else:
         GuirlandeLedCuisine.InActionsCommands={ "46" : "self.turnOn(46)","47" : "self.turnOff(47)"}
         self.registeredDevices.append(GuirlandeLedCuisine)
         
+        LedTerrasse = InterupteurBiStable()
+        LedTerrasse.id =14
+        LedTerrasse.InPossibleCmd ={ "21" : "off","20" : "on"}
+        LedTerrasse.InActionsCommands={ "20" : "self.turnOn(20)","21" : "self.turnOff(21)"}
+        self.registeredDevices.append(LedTerrasse)
+        
         GuirlandeLedSalon = InterupteurBiStable()
         GuirlandeLedSalon.id =12
         GuirlandeLedSalon.InPossibleCmd ={ "3" : "on","4" : "off"}

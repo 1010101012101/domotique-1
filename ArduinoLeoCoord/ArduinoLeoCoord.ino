@@ -286,6 +286,10 @@ void loop()
   {
     sendZigBeeMsg(_Xbee,_CmdReceived,SALON_ADDR);
   }
+  else if((_CmdReceived==20)||(_CmdReceived==21)||(_CmdReceived==36))
+  {
+    sendZigBeeMsg(_Xbee,_CmdReceived,TERRASSE_ADDR2);
+  }
   
 
   
