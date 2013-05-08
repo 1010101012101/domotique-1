@@ -29,6 +29,7 @@ class UsbHandler(LineReceiver):
     def lineReceived(self, line):
         logging.info("USB Handler created to process : " + str(line))
         self.brain.HandleUsbInput(line,self.registeredDevices)
+        self.brain.smartProcessing2(self.registeredDevices)
             
 class TcpHandlerFactory(Factory):
     """my factory class. The buildProtocol method of the Factory is used to create a Protocol for each new connection"""
@@ -63,6 +64,7 @@ class TcpHandler(Protocol):
             logging.info("Write command")
             aBrain.SendMessage(data,aRegisterDevices)
             self.transport.write("ACK")
+            self.brain.smartProcessing2(self.registeredDevices)
         
 def tired_task(iBrain):
     #logging.info("I want to run slowly" + str (datetime.datetime.now()))
@@ -88,6 +90,6 @@ reactor.listenTCP(50007, TcpHandlerFactory(aBrain,aRegisterDevices))
 SerialPort(UsbHandler(aBrain,aRegisterDevices), '/dev/ttyACM0', reactor, 9600)
 
 lc2 = LoopingCall(tired_task, aBrain)
-lc2.start(2)
+lc2.start(10)
 
 reactor.run()
