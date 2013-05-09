@@ -324,6 +324,7 @@ else:
         self.registeredDevices.append(GuirlandeLedSalon)
         
         luminoTersa = CapteurMesure()
+        luminoTersa.stateCanBeRefresh = False
         luminoTersa.OutPossibleCmd ={"36" : "recoit Nouvelle L"}
         luminoTersa.InPossibleCmd ={"36" : "recoit Nouvelle L"}
         luminoTersa.InActionsCommands ={"36" : """logging.warn("Refreshing capteur : " + str(self.id))
