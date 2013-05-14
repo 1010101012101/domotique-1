@@ -77,6 +77,46 @@
 			});
         });
         
+        $("#Button_SwithTv").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '3' ,iCmdToExecute : '65' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
+        
+        $("#Button_TvInc").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '3' ,iCmdToExecute : '63' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
+        
+        $("#Button_TvDec").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '3' ,iCmdToExecute : '64' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
+        
+        
         $("#Button_LightOff").click(function() 
 		{
 			$.ajax(
@@ -204,6 +244,11 @@
 			</div>
             <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
             <input id="Button_LightOff" type="button" name="Button_LightOff" value="Light Off"/>
+            <div data-role="controlgroup" data-type="horizontal">
+                <input id="Button_SwithTv" type="button" name="Button_SwithTv" value="Switch TV"/>
+                <input id="Button_TvInc" type="button" name="Button_TvInc" value="TV++"/>
+                <input id="Button_TvDec" type="button" name="Button_TvDec" value="TV--"/>
+            </div>
 			<label for="Flip_HalogeneSalon">Halogene:</label>
 			<select name="Flip_HalogeneSalon" id="Flip_HalogeneSalon" data-role="slider">
 				<option value="off">Allumer</option>

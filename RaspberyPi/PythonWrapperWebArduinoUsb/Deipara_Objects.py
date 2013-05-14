@@ -3,6 +3,7 @@
 import logging
 import datetime
 import os
+import urllib
 import serial
 
 class Function:
@@ -122,6 +123,25 @@ class InterupteurStable(Function):
         aRetString = aRetString + "self.stateForceByUser : " + str(self.stateForceByUser) + "\n"
         aRetString = aRetString + "self.DateTimeStateForce : " + str(self.DateTimeStateForce) + "\n"
         return aRetString 
+        
+class Complex(Function):
+    '''Une classe qui decrit un interupteur stable (detecteur presence, ...)''' 
+    
+    def __init__(self):
+        Function.__init__(self)
+        self.type="Complex"
+
+    def __repr__(self):
+        aRetString = ""
+        aRetString = aRetString + Function.__repr__(self)
+        return aRetString 
+        
+    def sendMsgToFreebox(self,key):
+        url = "http://hd1.freebox.fr/pub/remote_control?" + "key=" + key + "&code=59999459"
+        logging.error("sending : " + url)
+        reponse = urllib.urlopen(url)
+        logging.error("reponse : " + str(reponse))
+
 
 class PhysicalDevice:
     '''Une classe generique qui decrit une carte physique et possede 1 ou plusieurs fonction''' 
@@ -369,6 +389,13 @@ fd.write(chr(36))"""}
         DetecteurPresenceCuisine.OutActionsCommands={ "51" : "self.detectionEventReceived()"}
         DetecteurPresenceCuisine.Reset = "self.currentStatus=\"stable\""
         self.registeredDevices.append(DetecteurPresenceCuisine)
+        
+        Freebox = Complex()
+        Freebox.id = 28
+        Freebox.InPossibleCmd ={ "63" : "chaine+1","64" : "chaine-1","65" : "off/on"}
+        Freebox.InActionsCommands={ "64" : "self.sendMsgToFreebox(\"prgm_inc\")","63" : "self.sendMsgToFreebox(\"prgm_dec\")","65" : "self.sendMsgToFreebox(\"power\")"}
+        self.registeredDevices.append(Freebox)
+        #http://hd1.freebox.fr/pub/remote_control?code=59999459&key=2
         
     def __repr__(self):
         aRetString = ""
