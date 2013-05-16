@@ -10,12 +10,15 @@
 // Keep track of how many sleep cycles have been completed.
 volatile int sleep_count = 0; 
 // 75 loop needed since ze sleep for 8s and want to wait 10 minutes
-const int sleep_total = 75; 
+//const int sleep_total = 75; 
+const int sleep_total = 40; 
 
 //pin
-const int _OutDebugLed = 8;
-const int _InLightPin = 4;
 const int _OutXbeeWakeUp = 7;
+const int _OutDebugLed = 8;
+const int _OutXbeePower = 9;
+const int _InLightPin = 4;
+
 
 //Xbee objects
 //create Xbee object to control a Xbee
@@ -78,29 +81,41 @@ ISR(WDT_vect)
 
 void setup(void) 
 {
+  pinMode(_OutDebugLed, OUTPUT);
+  pinMode(_OutXbeePower, OUTPUT);
+  pinMode(_OutXbeeWakeUp, OUTPUT);
+  pinMode(_InLightPin, INPUT);
+  
+  digitalWrite(_OutXbeeWakeUp, HIGH);
+  digitalWrite(_OutXbeePower, HIGH);
+  digitalWrite(_OutDebugLed, HIGH);
+
   // start serial
   _Xbee.begin(XBEE_SPEED); 
   Serial.begin(XBEE_SPEED);
+  
+  delay(1000);
+  
   watchdogOn(); // Turn on the watch dog timer.
-  pinMode(_OutDebugLed, OUTPUT);
-  pinMode(_OutXbeeWakeUp, OUTPUT);
-  pinMode(_InLightPin, INPUT);
 }
 
 void loop(void) 
 {
   goToSleep(); // ATmega328 goes to sleep for about 8 seconds and continues to execute code when it wakes up
 
-  if (sleep_count == sleep_total) 
+  if (sleep_count > sleep_total) 
     {
     sleep_count = 0;
     // CODE TO BE EXECUTED PERIODICALLY
     //digitalWrite(_OutDebugLed, HIGH);
-    digitalWrite(_OutXbeeWakeUp, LOW);
-    delay(5000);
+    digitalWrite(_OutDebugLed, HIGH);
+    digitalWrite(_OutXbeePower, HIGH);
+    digitalWrite(_OutXbeeWakeUp, HIGH);
+    delay(10000);
     unsigned int val = analogRead(_InLightPin);    // read the input pin
     sendZigBeeMsg2(_Xbee,36,val,COORD_ADDR);
-    //digitalWrite(_OutDebugLed, LOW);
-    digitalWrite(_OutXbeeWakeUp, HIGH);
+    digitalWrite(_OutDebugLed, LOW);
+    digitalWrite(_OutXbeePower, LOW);
+    digitalWrite(_OutXbeeWakeUp, LOW);
   }
 }
