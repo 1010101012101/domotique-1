@@ -13,46 +13,89 @@
 	
 	<div id="TERASSE" data-role="page" data-add-back-btn="true">
 	<script type="text/javascript">
+    
+        function onSuccess(data)
+		{
+		}
 
-		
-		$("#Button_PingAvecReponse").click(function() 
+        $(document).ready( function()
 		{
-			$.ajax(
+			$('#TERASSE').bind('pageshow', function() 
 			{
-				type: "POST",
-				url: "./Reader/GateWayReader.php",
-				data: ({iCmdToExecute : '39' , iCmdType : "CMD_X10"}),
-				cache: false,
-				dataType: "text",
-				success:  function(data) 
-                {
-                    onSuccess(data);
-                }
-			});
+				$.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "20" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "22" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+                
+                $.ajax(
+				{
+					type: "POST",
+                    url: "./Reader/GateWayReader.php",
+                    data: ({iCmdToExecute : "26" , iCmdType : "CMD_READ"}),
+                    cache: false,
+                    dataType: "json",
+                    success: onSuccess
+                });
+				
+				function onSuccess(data)
+				{
+                    var aDataReceived = data[0]
+                    console.log("aDataReceived: " + aDataReceived)
+                    var obj2 = eval("(" + aDataReceived + ')');
+                    var obj3 = eval("(" + obj2 + ')');
+                    
+                    
+                    if((obj3.id==20))
+                    {
+                        $('.Luminosite').append("Derniere luminosite : ");
+                        var aIntValue=parseInt(obj3.currentStatus);
+                        $('.Luminosite').append(aIntValue);
+                        $('.Luminosite').append(" lux releve le : ");
+                        $('.Luminosite').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    
+                    if((obj3.id==22))
+                    {
+                        $('.Temperature').append("Derniere temperature : ");
+                        var aIntValue=parseInt(obj3.currentStatus);
+                        var aFloat=parseFloat(aIntValue);
+                        aFloat=aFloat/10;
+                        $('.Temperature').append(aFloat);
+                        $('.Temperature').append(" degre releve le : ");
+                        $('.Temperature').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    
+                    if((obj3.id==26))
+                    {
+                        $('.Humidite').append("Derniere humidite : ");
+                        var aIntValue=parseInt(obj3.currentStatus);
+                        var aFloat=parseFloat(aIntValue);
+                        aFloat=aFloat/10;
+                        $('.Humidite').append(aFloat);
+                        $('.Humidite').append(" % humidite relative releve le : ");
+                        $('.Humidite').append(obj3.LastTMeaureDate["py/repr"]);
+                    }
+                    
+                    
+				}
+
+            });
         });
-		
-		$("#Button_PingSansReponse").click(function() 
-		{
-			$.ajax(
-			{
-				type: "POST",
-				url: "./Reader/GateWayReader.php",
-				data: ({iCmdToExecute : '40' , iCmdType : "CMD_X10"}),
-				cache: false,
-				dataType: "text",
-				success: onSuccess2
-			});
-        });
-		
-		function onSuccess(data)
-		{
-            $('.container').text("DEBUG LOG START");
-            $('.container').append(data);
-		}
-		
-		function onSuccess2(data)
-		{
-		}
 		
 	</script>
 		<div data-role="header">
@@ -61,12 +104,15 @@
 			?>
 		</div>
 		<div data-role="content">
-		PAGE DE TEST--le capteur est dans ma chambre en ce moment est pas encore sur la terrasse
-			<input id="Button_PingAvecReponse" type="button" name="Button_PingAvecReponse" value="Ping avec reponse(debug only)"/>
-			Response :
-			<div class="container">
+			Temperature :
+			<div class="Temperature">
 			</div>
-			<input id="Button_PingSansReponse" type="button" name="Button_PingSansReponse" value="Ping sans reponse(debug only)"/>
+            Humidite :
+			<div class="Humidite">
+			</div>
+            Luminosite :
+			<div class="Luminosite">
+			</div>
 		</div>
 	</div>
 	</body>

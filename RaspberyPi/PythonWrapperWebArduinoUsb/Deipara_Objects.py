@@ -355,6 +355,30 @@ fd.write(chr(36))"""}
         luminoTersa.id =22
         self.registeredDevices.append(luminoTersa)
         
+        TerrasseTemperature = CapteurMesure()
+        TerrasseTemperature.stateCanBeRefresh = False
+        TerrasseTemperature.OutPossibleCmd ={"37" : "recoit Nouvelle L"}
+        TerrasseTemperature.InPossibleCmd ={"37" : "recoit Nouvelle L"}
+        TerrasseTemperature.InActionsCommands ={"37" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 31 to USB port and sending back to sender")
+fd.write(chr(37))"""}
+        TerrasseTemperature.OutActionsCommands ={"37" : "self.UpdateValue(aData)"}
+        TerrasseTemperature.id =20
+        self.registeredDevices.append(TerrasseTemperature)
+        
+        TerrasseHumidite = CapteurMesure()
+        TerrasseHumidite.stateCanBeRefresh = False
+        TerrasseHumidite.OutPossibleCmd ={"38" : "recoit Nouvelle L"}
+        TerrasseHumidite.InPossibleCmd ={"38" : "recoit Nouvelle L"}
+        TerrasseHumidite.InActionsCommands ={"38" : """logging.warn("Refreshing capteur : " + str(self.id))
+fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+logging.info ("Writting 31 to USB port and sending back to sender")
+fd.write(chr(38))"""}
+        TerrasseHumidite.OutActionsCommands ={"38" : "self.UpdateValue(aData)"}
+        TerrasseHumidite.id =26
+        self.registeredDevices.append(TerrasseHumidite)
+        
         DetecteurPresenceCharles = InterupteurStable()
         DetecteurPresenceCharles.id =9
         DetecteurPresenceCharles.OutPossibleCmd ={ "2" : "unstable position"}

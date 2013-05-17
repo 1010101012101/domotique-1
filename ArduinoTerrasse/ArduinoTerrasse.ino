@@ -4,6 +4,8 @@
 #include <Deipara.h>
 // This library contains functions to set various low-power states for the ATmega328
 #include <avr/sleep.h>
+//RHT03 library
+#include <DHT22.h>
 
 
 // This variable is made volatile because it is changed inside an interrupt function
@@ -11,20 +13,25 @@
 volatile int sleep_count = 0; 
 // 75 loop needed since ze sleep for 8s and want to wait 10 minutes
 //const int sleep_total = 75; 
-const int sleep_total = 40; 
+const int sleep_total = 60; 
 
 //pin
-const int _OutXbeeWakeUp = 7;
-const int _OutDebugLed = 8;
-const int _OutXbeePower = 9;
+const int _InPinDht22 = 6;
+const int _OutPowerLightSensor = 7;
+const int _OutXbeePower1 = 8;
+const int _OutXbeePower2 = 9;
+const int _OutPowerDHT22 = 10;
 const int _InLightPin = 4;
+
 
 
 //Xbee objects
 //create Xbee object to control a Xbee
 XBee _Xbee = XBee(); 
 //Create reusable response objects for responses we expect to handle
-ZBRxResponse _ZbRxResp = ZBRxResponse(); 
+ZBRxResponse _ZbRxResp = ZBRxResponse();
+//Setup a DHT22 instance
+DHT22 _Dht22(_InPinDht22); //Setup a DHT22 instance 
 //Global variable used in the program
 int _CmdReceived = 0;
 int _DataToSend = 0;
@@ -81,20 +88,22 @@ ISR(WDT_vect)
 
 void setup(void) 
 {
-  pinMode(_OutDebugLed, OUTPUT);
-  pinMode(_OutXbeePower, OUTPUT);
-  pinMode(_OutXbeeWakeUp, OUTPUT);
+  pinMode(_OutPowerLightSensor, OUTPUT);
+  pinMode(_OutPowerDHT22, OUTPUT);
+  pinMode(_OutXbeePower1, OUTPUT);
+  pinMode(_OutXbeePower2, OUTPUT);
   pinMode(_InLightPin, INPUT);
   
-  digitalWrite(_OutXbeeWakeUp, HIGH);
-  digitalWrite(_OutXbeePower, HIGH);
-  digitalWrite(_OutDebugLed, HIGH);
+  digitalWrite(_OutPowerLightSensor, LOW);
+  digitalWrite(_OutPowerDHT22, LOW);
+  digitalWrite(_OutXbeePower1, LOW);
+  digitalWrite(_OutXbeePower2, LOW);
 
   // start serial
   _Xbee.begin(XBEE_SPEED); 
   Serial.begin(XBEE_SPEED);
   
-  delay(1000);
+  delay(500);
   
   watchdogOn(); // Turn on the watch dog timer.
 }
@@ -106,16 +115,36 @@ void loop(void)
   if (sleep_count > sleep_total) 
     {
     sleep_count = 0;
-    // CODE TO BE EXECUTED PERIODICALLY
-    //digitalWrite(_OutDebugLed, HIGH);
-    digitalWrite(_OutDebugLed, HIGH);
-    digitalWrite(_OutXbeePower, HIGH);
-    digitalWrite(_OutXbeeWakeUp, HIGH);
-    delay(10000);
-    unsigned int val = analogRead(_InLightPin);    // read the input pin
-    sendZigBeeMsg2(_Xbee,36,val,COORD_ADDR);
-    digitalWrite(_OutDebugLed, LOW);
-    digitalWrite(_OutXbeePower, LOW);
-    digitalWrite(_OutXbeeWakeUp, LOW);
+    //First we power the Xbee so it has time to reach the network and the other captor
+    digitalWrite(_OutXbeePower1, HIGH);
+    digitalWrite(_OutXbeePower2, HIGH);
+    digitalWrite(_OutPowerDHT22, HIGH);
+    digitalWrite(_OutPowerLightSensor, HIGH);
+    //Then wait 0.5s to be ready 
+    delay(1000);
+    //we read the light sensor value
+    unsigned int aLightValue = analogRead(_InLightPin);
+    //we turn it off
+    digitalWrite(_OutPowerLightSensor, LOW);
+    delay(2000);
+    //Then read T
+    DHT22_ERROR_t errorCode;
+    errorCode = _Dht22.readData();
+    int aTempValue=_Dht22.getTemperatureCAsInt();
+    int aHumidityValue=_Dht22.getHumidityAsInt();
+    
+    digitalWrite(_OutPowerDHT22, LOW);
+
+    //we wait few second to be sure Xbee reach the network
+    delay(3000);
+    //we send the info
+    sendZigBeeMsg2(_Xbee,36,aLightValue,COORD_ADDR);
+    delay(50);
+    sendZigBeeMsg2(_Xbee,37,aTempValue,COORD_ADDR);
+    delay(50);
+    sendZigBeeMsg2(_Xbee,38,aHumidityValue,COORD_ADDR);
+    //we turn off the xbee module
+    digitalWrite(_OutXbeePower1, LOW);
+    digitalWrite(_OutXbeePower2, LOW);
   }
 }
