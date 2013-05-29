@@ -5,14 +5,14 @@
 	switch($aCmdType) 
 		{
 			case "CMD_X10" :
-            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $_REQUEST["iCmdToExecute"] ;
+            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $_REQUEST["iCmdToExecute"] . " -t WRITE";
 			$output = array();
 			exec($aCommandToExecute, $output);
 			print(json_encode($output));
 			break;
             
             case "CMD_SPEAK" :
-            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -x " . $_REQUEST["iCmdStrings"] ;
+            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $_REQUEST["iCmdStrings"] . " -t SPEAK";
 			$output = array();
 			exec($aCommandToExecute, $output);
 			print(json_encode($output));

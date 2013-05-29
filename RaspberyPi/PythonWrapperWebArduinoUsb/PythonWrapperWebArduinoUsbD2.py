@@ -43,6 +43,10 @@ class Example(xmlrpc.XMLRPC):
         aRest = aBrain.ReadDeviceStatus2(aDeviceId,aRegisterDevices)
         logging.info("READ command res " + str(aRest))
         return str(aRest)
+        
+    def xmlrpc_translateVocalAction(self, aSpeach):
+        logging.info("SPEAK command for " + aSpeach)
+        return (aSpeach)
 
     def xmlrpc_fault(self):
         """

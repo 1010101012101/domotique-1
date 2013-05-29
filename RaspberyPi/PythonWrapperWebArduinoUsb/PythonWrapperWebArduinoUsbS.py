@@ -23,7 +23,6 @@ from optparse import OptionParser
 parser = OptionParser(usage="usage: %prog [options]",version="%prog 1.0")
 parser.add_option("-p", "--port",action="store",dest="aPortToUse",default="50007",help="the port to listen")
 parser.add_option("-s", "--send",action="store",dest="aMsgToSend",default="20",help="Command to send to Arduino Leonardo")
-parser.add_option("-x", "--strings",action="store",dest="aSpeakStrings",default="test",help="strings to send to Arduino Leonardo")
 parser.add_option("-o", "--originator",action="store",dest="aOriginator",default="UNKNOW",help="Originator of the request")
 parser.add_option("-t", "--type",action="store",dest="aCmdType",default="WRITE",help="Write or Read command")
 (options, args) = parser.parse_args()
@@ -54,6 +53,8 @@ if(options.aCmdType == "READ"):
     print (repr(s2.readDeviceStatus(options.aMsgToSend)))
 elif(options.aCmdType == "WRITE"):
     print (s2.sendCommand(options.aMsgToSend,options.aOriginator))
+elif(options.aCmdType == "SPEAK"):
+    print (s2.translateVocalAction(options.aMsgToSend))
 else:
     print("Unknow command")
 
