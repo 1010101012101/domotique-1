@@ -45,8 +45,8 @@ class Example(xmlrpc.XMLRPC):
         return str(aRest)
         
     def xmlrpc_translateVocalAction(self, aSpeach):
-        logging.info("SPEAK command for " + aSpeach)
-        aRest = aBrain.TranslateVocalAction(aDeviceId,aSpeach,aRegisterDevices)
+        logging.warning("SPEAK command for " + aSpeach)
+        aRest = aBrain.TranslateVocalAction(aSpeach,aRegisterDevices)
         return (aSpeach)
 
     def xmlrpc_fault(self):
