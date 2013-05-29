@@ -174,6 +174,9 @@ class Brain:
                     logging.debug("Device ID : " +str(aOneObj))
         else:
             logging.error("Strange response....ignore it")
+            
+    def TranslateVocalAction(self,Sentences, Devices):
+        print("TranslateVocalAction")
         
     def SendMessage(self,iDataToWrite,iOriginator, iListOfDevice):
         '''Cette fonction est lance lorsqu on recoit qq chose sur TCP (qui provient donc du client et probablement du site web) si il sagit d un ordre write
