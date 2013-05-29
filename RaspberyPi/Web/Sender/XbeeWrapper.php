@@ -10,6 +10,13 @@
 			exec($aCommandToExecute, $output);
 			print(json_encode($output));
 			break;
+            
+            case "CMD_SPEAK" :
+            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -x " . $_REQUEST["iCmdStrings"] ;
+			$output = array();
+			exec($aCommandToExecute, $output);
+			print(json_encode($output));
+			break;
 			
 			case "CMD_AT" :
 			$aDate = $_REQUEST['iDate'];
