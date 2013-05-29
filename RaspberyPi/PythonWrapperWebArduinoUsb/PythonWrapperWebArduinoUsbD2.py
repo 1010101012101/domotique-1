@@ -11,6 +11,7 @@ from twisted.internet.protocol import Protocol
 from twisted.internet.task import LoopingCall
 from twisted.protocols.basic import LineReceiver 
 from twisted.internet.serialport import SerialPort 
+from twisted.web import xmlrpc, server
 from twisted.python import log
 
 #other modules
@@ -18,6 +19,37 @@ import sys
 import logging
 import json
 import datetime
+
+class Example(xmlrpc.XMLRPC):
+    """
+    An example object to be published.
+    """
+
+    def __init__(self,iBrain,iRegisteredDevice):
+        self.brain = iBrain
+        self.registeredDevices = iRegisteredDevice
+
+    def xmlrpc_sendCommand(self, aCommandToExecute, aOriginator):
+        """
+        Return all passed args.
+        """
+        logging.info("Write command")
+        aBrain.SendMessage(aCommandToExecute,aOriginator,aRegisterDevices)
+        self.brain.smartProcessing2(self.registeredDevices)
+        return "ACK"
+
+    def xmlrpc_readDeviceStatus(self, aDeviceId):
+        logging.info("READ command")
+        aRest = aBrain.ReadDeviceStatus2(aDeviceId,aRegisterDevices)
+        logging.info("READ command res " + str(aRest))
+        return str(aRest)
+
+    def xmlrpc_fault(self):
+        """
+        Raise a Fault indicating that the procedure should not be used.
+        """
+        raise xmlrpc.Fault(123, "The fault procedure is faulty.")
+
 
 class UsbHandler(LineReceiver):
     """protocol handling class for USB """
@@ -62,7 +94,7 @@ class TcpHandler(Protocol):
             reactor.stop()
         else:
             logging.info("Write command")
-            aBrain.SendMessage(data,aRegisterDevices)
+            aBrain.SendMessage(data,"DUM",aRegisterDevices)
             self.transport.write("ACK")
             self.brain.smartProcessing2(self.registeredDevices)
         
@@ -85,6 +117,9 @@ logging.info('aBrain : ' + str(aBrain))
 aRegisterDevices =Deipara_Objects.DevicesHandler(Config)
 aRegisterDevices.loadDevices()
 logging.info('aRegisterDevices : ' + str(aRegisterDevices))
+
+r = Example(aBrain,aRegisterDevices)
+reactor.listenTCP(49007, server.Site(r))
 
 reactor.listenTCP(50007, TcpHandlerFactory(aBrain,aRegisterDevices))
 SerialPort(UsbHandler(aBrain,aRegisterDevices), '/dev/ttyACM0', reactor, 9600)

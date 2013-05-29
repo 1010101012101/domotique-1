@@ -23,37 +23,37 @@ class Brain:
         '''Action trige lors de la detection de presence dans la chambre charles'''
         logging.error("PeopleDetectedCharlesRoom")
         aDataToWrite = "MSG:11_ORIGIN:PythonScript"
-        self.SendMessage( aDataToWrite,iListOfDevice)
+        self.SendMessage( "11","PythonScript",iListOfDevice)
         
     def PeopleDetectedSalon(self,iListOfDevice):
         '''Action trige lors de la detection de presence dans le salon'''
         logging.error("PeopleDetectedSalon")
         aDataToWrite = "MSG:3_ORIGIN:PythonScript"
-        self.SendMessage( aDataToWrite,iListOfDevice)
+        self.SendMessage( "3","PythonScript",iListOfDevice)
      
     def PeopleDetectedCuisine(self,iListOfDevice):
         '''Action trige lors de la detection de presence dans le salon'''
         logging.error("PeopleDetectedCuisine")
         aDataToWrite = "MSG:46_ORIGIN:PythonScript"
-        self.SendMessage( aDataToWrite,iListOfDevice) 
+        self.SendMessage( "46","PythonScript",iListOfDevice) 
 
     def TurnCuisineLightOff(self,iListOfDevice):
         '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
         logging.error("TurnCuisineLightOff")
         aDataToWrite = "MSG:47_ORIGIN:PythonScript"
-        self.SendMessage( aDataToWrite,iListOfDevice)        
+        self.SendMessage( "47","PythonScript",iListOfDevice)        
         
     def TurnSalonLightOff(self,iListOfDevice):
         '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
         logging.error("TurnSalonLightOff")
         aDataToWrite = "MSG:4_ORIGIN:PythonScript"
-        self.SendMessage( aDataToWrite,iListOfDevice)
+        self.SendMessage( "4","PythonScript",iListOfDevice)
         
     def TurnCharlesLightOff(self,iListOfDevice):
         '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
         logging.error("TurnCharlesLightOff")
         aDataToWrite = "MSG:12_ORIGIN:PythonScript"
-        self.SendMessage( aDataToWrite,iListOfDevice)
+        self.SendMessage( "12","PythonScript",iListOfDevice)
         
     def getExternalLuminosite():
         '''Wrapper pour aller lire la luminosite exterieur depuis le capteur terrasse'''
@@ -65,13 +65,13 @@ class Brain:
         '''Action trige lorsqu plus personne est detecte ds l entree depuis un certains temps'''
         logging.error("TurnEntreeLightOff")
         aDataToWrite = "MSG:35_ORIGIN:PythonScript"
-        self.SendMessage( aDataToWrite,iListOfDevice)
+        self.SendMessage( "35","PythonScript",iListOfDevice)
     
     def PeopleDetectedEntree(self,iListOfDevice):
         '''Action trige lors de la detection de presence dans l entree'''
         logging.error("PeopleDetectedEntree")
         aDataToWrite = "MSG:34_ORIGIN:PythonScript"
-        self.SendMessage( aDataToWrite,iListOfDevice)
+        self.SendMessage( "34","PythonScript",iListOfDevice)
         
     def sendEmailFireDetected():
         '''Envoie email lors de la detection incendie'''
@@ -175,14 +175,18 @@ class Brain:
         else:
             logging.error("Strange response....ignore it")
         
-    def SendMessage(self,iDataToWrite, iListOfDevice):
+    def SendMessage(self,iDataToWrite,iOriginator, iListOfDevice):
         '''Cette fonction est lance lorsqu on recoit qq chose sur TCP (qui provient donc du client et probablement du site web) si il sagit d un ordre write
         Elle va trouver la fonction associe a la requette entrante et permettre au device de se mettre a jour
         ET elle va envoyer le message sur le port USB pour l Arduino Leonardo'''
         logging.error("Sending message")
         aCurrentDateTime = datetime.datetime.now()
-        aCmdFromData=int((iDataToWrite.split('_')[0]).split(':')[1])
-        aOriginFromData=(iDataToWrite.split('_')[1]).split(':')[1]
+        if(iOriginator=="DUM"):
+            aCmdFromData=int((iDataToWrite.split('_')[0]).split(':')[1])
+            aOriginFromData=(iDataToWrite.split('_')[1]).split(':')[1]
+        else:
+            aCmdFromData=int(iDataToWrite)
+            aOriginFromData=(iOriginator)
         aLogLine = "(V2)TO:USB DATE: " + str(aCurrentDateTime) + " ORIGIN: " + aOriginFromData  + " CMD: " + str(aCmdFromData)
         
         logging.error (aLogLine)
@@ -200,7 +204,10 @@ class Brain:
     def ReadDeviceStatus2(self,iDataToWrite, iListOfDevice):
         '''Cette fonction est lance lorsqu on recoit qq chose sur TCP (qui provient donc du client et probablement du site web) si il sagit d un ordre read
         Elle va trouver la fonction associe a la requette entrante et renvoyer l object fonction en JSON au client pour mettre a jour le site WEB'''
-        aCmdFromData=int((iDataToWrite.split('_')[0]).split(':')[1])
+        if("_" in iDataToWrite):        
+            aCmdFromData=int((iDataToWrite.split('_')[0]).split(':')[1])
+        else:
+            aCmdFromData=int(iDataToWrite)
         logging.info("Looking for the device : " + str(aCmdFromData))
         for aOneObj in iListOfDevice.registeredDevices:
             logging.info ("possible cmd : " + str(aOneObj.InPossibleCmd.keys()))
