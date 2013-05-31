@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import logging
 import datetime
@@ -177,6 +178,17 @@ class Brain:
             
     def TranslateVocalAction(self,Sentences, Devices):
         logging.warning("Translate : " + str(Sentences))
+        #Weight, Device ID, CommandID
+        aBestDeviceMatch=(0,0,0)
+        for aOneObj in Devices.registeredDevices:
+            (aWeight,aCmdId)=aOneObj.getDeviceWeightSpeech(Sentences)
+            logging.warning ("DeviceId : " + str(aOneObj.id) + " has weight : " + str(aWeight))
+            if(aWeight > aBestDeviceMatch[0]):
+                aBestDeviceMatch=(aWeight,aOneObj.id,aCmdId)
+        logging.warning("Device is : " + str(aBestDeviceMatch))
+        self.SendMessage( str(aBestDeviceMatch[2]),"VoiceAction",Devices)
+        return (Devices.getDevice(aBestDeviceMatch[1]).description,aBestDeviceMatch[2])
+        
         
     def SendMessage(self,iDataToWrite,iOriginator, iListOfDevice):
         '''Cette fonction est lance lorsqu on recoit qq chose sur TCP (qui provient donc du client et probablement du site web) si il sagit d un ordre write

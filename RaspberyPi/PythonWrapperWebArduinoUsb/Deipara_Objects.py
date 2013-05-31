@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import logging
 import datetime
@@ -33,6 +34,62 @@ class Function:
         
     def reset(self):
         exec(self.Reset)
+        
+    def getDeviceWeightSpeech(self, Sentences):
+        logging.warning("Speech matching for device : " + str(self.id) + " with sentence : " +  str(Sentences))
+        aDeviceWeight = 0
+        aCommand = None
+        #command weight, command ID
+        aBestCommand = (0,0)
+        
+        aSplitedSentences = Sentences.split("_")
+        for aOnesentence in aSplitedSentences:
+            logging.debug("sentence : " + aOnesentence)
+            for aOneWord in aOnesentence.split("-"):
+                #Compare match with word in device description
+                for aOneDescriptionDeviceWord in self.description.split(" "):
+                    logging.debug("compare : " + aOneWord +" and " + aOneDescriptionDeviceWord)
+                    if (aOneWord==aOneDescriptionDeviceWord):
+                        aDeviceWeight=aDeviceWeight+len(aOneWord)
+                #Compare match with word in device possible commands
+                for (aOnePossibleInCmdID,aOnePossibleInCmd) in self.InPossibleCmd.items():
+                    logging.warning("checking new command : " + aOnePossibleInCmd )
+                    aCommandWeight = 0
+                    for aOnePossibleInCmdWord in aOnePossibleInCmd.split(" "):
+                        logging.debug("compare : " + aOneWord +" and " + aOnePossibleInCmdWord)
+                        if (aOneWord==aOnePossibleInCmdWord):
+                            aCommandWeight=aCommandWeight+len(aOneWord)
+                            aDeviceWeight=aDeviceWeight+len(aOneWord)
+                    logging.warning("aCommandWeight : " + str(aCommandWeight) )
+                    if(aCommandWeight>aBestCommand[0]):
+                        aBestCommand=(aCommandWeight,int(aOnePossibleInCmdID))
+        logging.debug("aDeviceWeight : " + str(aDeviceWeight))
+        return (aDeviceWeight,aBestCommand[1])
+        
+    def getDeviceWeightSpeechCmd(self, Sentences):
+        aSplitedSentences = Sentences.split("_")
+        aWeight = 0
+        for aOnesentence in aSplitedSentences:
+            logging.debug("sentence : " + aOnesentence)
+            for aOneWord in aOnesentence.split("-"):
+                #Compare match with word in device description
+                for aOneDescriptionDeviceWord in self.description.split(" "):
+                    logging.debug("compare : " + aOneWord +" and " + aOneDescriptionDeviceWord)
+                    if (aOneWord==aOneDescriptionDeviceWord):
+                        aWeight=aWeight+len(aOneWord)
+                #Compare match with word in device possible commands
+                for aOnePossibleInCmd in self.InPossibleCmd:
+                    for aOnePossibleInCmdWord in aOnePossibleInCmd.split(" "):
+                        logging.debug("compare : " + aOneWord +" and " + aOnePossibleInCmdWord)
+                        if (aOneWord==aOnePossibleInCmdWord):
+                            aWeight=aWeight+len(aOneWord)
+                for aOnePossibleOutCmd in self.OutPossibleCmd:
+                    for aOnePossibleOutCmdWord in aOnePossibleOutCmd.split(" "):
+                        logging.debug("compare : " + aOneWord +" and " + aOnePossibleOutCmdWord)
+                        if (aOneWord==aOnePossibleOutCmdWord):
+                            aWeight=aWeight+len(aOneWord)
+        logging.debug("final weight : " + str(aWeight))
+        return aWeight
 
     def __repr__(self):
         aRetString = ""
@@ -171,6 +228,7 @@ class DevicesHandler:
             
         charlesT = CapteurMesure()
         charlesT.OutPossibleCmd ={"15" : "recoit Nouvelle T"}
+        charlesT.description="capteur temperature chambre Charles"
         charlesT.InPossibleCmd ={"15" : "recoit Nouvelle T"}
         charlesT.OutActionsCommands ={"15" : "self.UpdateValue(aData)"}
         charlesT.InActionsCommands ={"15" : """logging.warn("Refreshing capteur : " + str(self.id))
@@ -182,6 +240,7 @@ fd.write(chr(15))"""}
         self.registeredDevices.append(charlesT)
         
         charlesH = CapteurMesure()
+        charlesH.description="capteur humidite chambre Charles"
         charlesH.OutPossibleCmd ={"16" : "recoit Nouvelle H"}
         charlesH.InPossibleCmd ={"16" : "recoit Nouvelle H"}
         charlesH.InActionsCommands ={"16" : """logging.warn("Refreshing capteur : " + str(self.id))
@@ -194,6 +253,7 @@ fd.write(chr(16))"""}
         self.registeredDevices.append(charlesH)
         
         entreeT = CapteurMesure()
+        entreeT.description="capteur temperature entree"
         entreeT.OutPossibleCmd ={"30" : "recoit Nouvelle T"}
         entreeT.InPossibleCmd ={"30" : "recoit Nouvelle T"}
         entreeT.InActionsCommands ={"30" : """logging.warn("Refreshing capteur : " + str(self.id))
@@ -207,6 +267,7 @@ fd.write(chr(30))"""}
         
         SalonT = CapteurMesure()
         SalonT.OutPossibleCmd ={"18" : "recoit Nouvelle T"}
+        SalonT.description="capteur temperature salon"
         SalonT.InPossibleCmd ={"18" : "recoit Nouvelle T"}
         SalonT.InActionsCommands ={"18" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
@@ -219,6 +280,7 @@ fd.write(chr(18))"""}
         
         salonH = CapteurMesure()
         salonH.OutPossibleCmd ={"19" : "recoit Nouvelle H"}
+        salonH.description="capteur humidite salon"
         salonH.InPossibleCmd ={"19" : "recoit Nouvelle H"}
         salonH.InActionsCommands ={"19" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
@@ -231,6 +293,7 @@ fd.write(chr(19))"""}
         
         CuisineT = CapteurMesure()
         CuisineT.OutPossibleCmd ={"39" : "recoit Nouvelle T"}
+        CuisineT.description="capteur temperature cuisine"
         CuisineT.InPossibleCmd ={"39" : "recoit Nouvelle T"}
         CuisineT.InActionsCommands ={"39" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
@@ -243,6 +306,7 @@ fd.write(chr(39))"""}
         
         CuisineH = CapteurMesure()
         CuisineH.OutPossibleCmd ={"40" : "recoit Nouvelle T"}
+        CuisineH.description="capteur humidite cuisine"
         CuisineH.refreshRatemin = 280
         CuisineH.InPossibleCmd ={"40" : "recoit Nouvelle T"}
         CuisineH.InActionsCommands ={"40" : """logging.warn("Refreshing capteur : " + str(self.id))
@@ -255,6 +319,7 @@ fd.write(chr(40))"""}
         
         entreeH = CapteurMesure()
         entreeH.OutPossibleCmd ={"31" : "recoit Nouvelle H"}
+        entreeH.description="capteur humidite entree"
         entreeH.InPossibleCmd ={"31" : "recoit Nouvelle H"}
         entreeH.InActionsCommands ={"31" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
@@ -267,15 +332,17 @@ fd.write(chr(31))"""}
         
         lumiereCharles = InterupteurBiStable()
         lumiereCharles.id =1
-        lumiereCharles.InPossibleCmd ={ "5" : "on","6" : "off"}
+        lumiereCharles.description="lumiere plafond principale chambre Charles"
+        lumiereCharles.InPossibleCmd ={ "5" : "on allume allumer","6" : "off eteint eteindre"}
         lumiereCharles.InActionsCommands={ "5" : "self.turnOn(5)","6" : "self.turnOff(6)"}
         self.registeredDevices.append(lumiereCharles)
         
         PcCharles = InterupteurBiStable()
         PcCharles.id =19
         PcCharles.stateCanBeRefresh = True
+        PcCharles.description="PC ordinateur Charles"
         PcCharles.OutPossibleCmd ={"61" : "checkStatus"}
-        PcCharles.InPossibleCmd ={ "60" : "on", "62" : "off"}
+        PcCharles.InPossibleCmd ={ "60" : "on allume allumer", "62" : "off eteint eteindre"}
         PcCharles.InActionsCommands={ "60" : """self.currentStatus=\"on\"
 os.system('sudo /usr/sbin/etherwake 20:cf:30:ca:8a:50')""", "62" : "os.system('net rpc shutdown -f -I 192.168.0.7 -U charles%"+self.config["WinPasswdRpcShutdown"]+"')"}
         PcCharles.OutActionsCommands={"61" : """self.LastTMeaureDate=datetime.datetime.now()
@@ -291,84 +358,89 @@ else:
         
         lumiere2Charles = InterupteurBiStable()
         lumiere2Charles.id =3
-        lumiere2Charles.InPossibleCmd ={ "11" : "on","12" : "off"}
+        lumiere2Charles.description="lumiere secondaire Charles ambiance d'ambiance secondaires"
+        lumiere2Charles.InPossibleCmd ={ "11" : "on allumer allume","12" : "off eteint eteindre"}
         lumiere2Charles.InActionsCommands={ "11" : "self.turnOn(11)","12" : "self.turnOff(12)"}
         self.registeredDevices.append(lumiere2Charles)
         
         VoletCharles = InterupteurBiStable()
         VoletCharles.id =4
-        VoletCharles.InPossibleCmd ={ "7" : "off","8" : "on"}
+        VoletCharles.description="volets chambre Charles"
+        VoletCharles.InPossibleCmd ={ "8" : "off ferme fermer","7" : "on ouvrir ouvre"}
         VoletCharles.InActionsCommands={ "7" : "self.turnOff(7)","8" : "self.turnOn(8)"}
         self.registeredDevices.append(VoletCharles)
         
         VoletSalon = InterupteurBiStable()
         VoletSalon.id =5
-        VoletSalon.InPossibleCmd ={ "9" : "off","10" : "on"}
+        VoletSalon.description="volets salon"
+        VoletSalon.InPossibleCmd ={ "9" : "off fermer ferme","10" : "on ouvre ouvrir"}
         VoletSalon.InActionsCommands={ "9" : "self.turnOff(9)","10" : "self.turnOn(10)"}
         self.registeredDevices.append(VoletSalon)
         
         LumiereSalonHalogene = InterupteurBiStable()
         LumiereSalonHalogene.id =6
-        LumiereSalonHalogene.InPossibleCmd ={ "13" : "off","14" : "on"}
+        LumiereSalonHalogene.description="lumiere halogene salon"
+        LumiereSalonHalogene.InPossibleCmd ={ "13" : "off eteint eteindre","14" : "on allume allumer"}
         LumiereSalonHalogene.InActionsCommands={ "13" : "self.turnOff(13)","14" : "self.turnOn(14)"}
         self.registeredDevices.append(LumiereSalonHalogene)
         
         ChaffageSdb = InterupteurBiStable()
         ChaffageSdb.id =7
-        ChaffageSdb.InPossibleCmd ={ "42" : "off","43" : "on"}
+        ChaffageSdb.description="chauffage salle de baim"
+        ChaffageSdb.InPossibleCmd ={ "42" : "off eteint eteindre","43" : "on allumer allume"}
         ChaffageSdb.InActionsCommands={ "42" : "self.turnOff(42)","43" : "self.turnOn(43)"}
         self.registeredDevices.append(ChaffageSdb)
         
         Lumiereentree = InterupteurBiStable()
         Lumiereentree.id =8
-        Lumiereentree.InPossibleCmd ={ "34" : "on","35" : "off"}
+        Lumiereentree.description="lumiere led guirlande entree"
+        Lumiereentree.InPossibleCmd ={ "34" : "on allume allumer","35" : "off etient eteindre"}
         Lumiereentree.InActionsCommands={ "34" : "self.turnOn(34)","35" : "self.turnOff(35)"}
         self.registeredDevices.append(Lumiereentree)
         
         GuirlandeLedCuisine = InterupteurBiStable()
         GuirlandeLedCuisine.id =11
-        GuirlandeLedCuisine.InPossibleCmd ={ "47" : "off","46" : "on"}
+        GuirlandeLedCuisine.description="lumiere led guirlande cuisine"
+        GuirlandeLedCuisine.InPossibleCmd ={ "47" : "off eteint eteindre","46" : "on allumer allume"}
         GuirlandeLedCuisine.InActionsCommands={ "46" : "self.turnOn(46)","47" : "self.turnOff(47)"}
         self.registeredDevices.append(GuirlandeLedCuisine)
         
-        LedTerrasse = InterupteurBiStable()
-        LedTerrasse.id =14
-        LedTerrasse.InPossibleCmd ={ "21" : "off","20" : "on"}
-        LedTerrasse.InActionsCommands={ "20" : "self.turnOn(20)","21" : "self.turnOff(21)"}
-        self.registeredDevices.append(LedTerrasse)
-        
         GuirlandeLedSalon = InterupteurBiStable()
         GuirlandeLedSalon.id =12
-        GuirlandeLedSalon.InPossibleCmd ={ "3" : "on","4" : "off"}
+        GuirlandeLedSalon.description="lumiere led guirlande salon"
+        GuirlandeLedSalon.InPossibleCmd ={ "3" : "on allumer allume","4" : "off eteint eteindre"}
         GuirlandeLedSalon.InActionsCommands={ "3" : "self.turnOn(3)","4" : "self.turnOff(4)"}
         self.registeredDevices.append(GuirlandeLedSalon)
         
         luminoTersa = CapteurMesure()
         luminoTersa.stateCanBeRefresh = False
-        luminoTersa.OutPossibleCmd ={"36" : "recoit Nouvelle L"}
-        luminoTersa.InPossibleCmd ={"36" : "recoit Nouvelle L"}
-        luminoTersa.InActionsCommands ={"36" : """logging.warn("Refreshing capteur : " + str(self.id))
+        luminoTersa.description="capteur lumiere luminosite terrasse soleil"
+        luminoTersa.OutPossibleCmd ={"37" : "recoit Nouvelle L"}
+        luminoTersa.InPossibleCmd ={"37" : "recoit Nouvelle L"}
+        luminoTersa.InActionsCommands ={"37" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 logging.info ("Writting 31 to USB port and sending back to sender")
-fd.write(chr(36))"""}
-        luminoTersa.OutActionsCommands ={"36" : "self.UpdateValue(aData)"}
+fd.write(chr(37))"""}
+        luminoTersa.OutActionsCommands ={"37" : "self.UpdateValue(aData)"}
         luminoTersa.id =22
         self.registeredDevices.append(luminoTersa)
         
         TerrasseTemperature = CapteurMesure()
         TerrasseTemperature.stateCanBeRefresh = False
-        TerrasseTemperature.OutPossibleCmd ={"37" : "recoit Nouvelle L"}
-        TerrasseTemperature.InPossibleCmd ={"37" : "recoit Nouvelle L"}
-        TerrasseTemperature.InActionsCommands ={"37" : """logging.warn("Refreshing capteur : " + str(self.id))
+        TerrasseTemperature.description="capteur temperature terrasse"
+        TerrasseTemperature.OutPossibleCmd ={"36" : "recoit Nouvelle L"}
+        TerrasseTemperature.InPossibleCmd ={"36" : "recoit Nouvelle L"}
+        TerrasseTemperature.InActionsCommands ={"36" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 logging.info ("Writting 31 to USB port and sending back to sender")
-fd.write(chr(37))"""}
-        TerrasseTemperature.OutActionsCommands ={"37" : "self.UpdateValue(aData)"}
+fd.write(chr(36))"""}
+        TerrasseTemperature.OutActionsCommands ={"36" : "self.UpdateValue(aData)"}
         TerrasseTemperature.id =20
         self.registeredDevices.append(TerrasseTemperature)
         
         TerrasseHumidite = CapteurMesure()
         TerrasseHumidite.stateCanBeRefresh = False
+        TerrasseHumidite.description="capteur humidite terrasse"
         TerrasseHumidite.OutPossibleCmd ={"38" : "recoit Nouvelle L"}
         TerrasseHumidite.InPossibleCmd ={"38" : "recoit Nouvelle L"}
         TerrasseHumidite.InActionsCommands ={"38" : """logging.warn("Refreshing capteur : " + str(self.id))
@@ -381,6 +453,7 @@ fd.write(chr(38))"""}
         
         DetecteurPresenceCharles = InterupteurStable()
         DetecteurPresenceCharles.id =9
+        DetecteurPresenceCharles.description="detecteur presence Charles"
         DetecteurPresenceCharles.OutPossibleCmd ={ "2" : "unstable position"}
         DetecteurPresenceCharles.OutActionsCommands={ "2" : "self.detectionEventReceived()"}
         DetecteurPresenceCharles.Reset = "self.currentStatus=\"stable\""
@@ -388,6 +461,7 @@ fd.write(chr(38))"""}
         
         DetecteurPresenceSalon = InterupteurStable()
         DetecteurPresenceSalon.id =13
+        DetecteurPresenceSalon.description="detecteur presence salon"
         DetecteurPresenceSalon.OutPossibleCmd ={ "17" : "unstable position"}
         DetecteurPresenceSalon.OutActionsCommands={ "17" : "self.detectionEventReceived()"}
         DetecteurPresenceSalon.Reset = "self.currentStatus=\"stable\""
@@ -402,6 +476,7 @@ fd.write(chr(38))"""}
         
         DetecteurPresenceEntree = InterupteurStable()
         DetecteurPresenceEntree.id =10
+        DetecteurPresenceEntree.description="detecteur presence entree"
         DetecteurPresenceEntree.OutPossibleCmd ={ "50" : "unstable position"}
         DetecteurPresenceEntree.OutActionsCommands={ "50" : "self.detectionEventReceived()"}
         DetecteurPresenceEntree.Reset = "self.currentStatus=\"stable\""
@@ -409,6 +484,7 @@ fd.write(chr(38))"""}
         
         DetecteurPresenceCuisine = InterupteurStable()
         DetecteurPresenceCuisine.id =27
+        DetecteurPresenceCuisine.description="detecteur presence cuisine"
         DetecteurPresenceCuisine.OutPossibleCmd ={ "51" : "unstable position"}
         DetecteurPresenceCuisine.OutActionsCommands={ "51" : "self.detectionEventReceived()"}
         DetecteurPresenceCuisine.Reset = "self.currentStatus=\"stable\""
@@ -416,8 +492,9 @@ fd.write(chr(38))"""}
         
         Freebox = Complex()
         Freebox.id = 28
-        Freebox.InPossibleCmd ={ "63" : "chaine+1","64" : "chaine-1","65" : "off/on"}
-        Freebox.InActionsCommands={ "64" : "self.sendMsgToFreebox(\"prgm_inc\")","63" : "self.sendMsgToFreebox(\"prgm_dec\")","65" : "self.sendMsgToFreebox(\"power\")"}
+        Freebox.description="freebox television TV tele"
+        Freebox.InPossibleCmd ={ "63" : "chaine+1 chaine augmenter augmente","64" : "chaine-1 diminuer diminue","65" : "off allumer allume on","20" : "chaine 1 un","21" : "chaine 6 six","22" : "chaine 9 neuf","23" : "ok"}
+        Freebox.InActionsCommands={ "64" : "self.sendMsgToFreebox(\"prgm_inc\")","63" : "self.sendMsgToFreebox(\"prgm_dec\")","65" : "self.sendMsgToFreebox(\"power\")","20" : "self.sendMsgToFreebox(\"1\")","21" : "self.sendMsgToFreebox(\"6\")","22" : "self.sendMsgToFreebox(\"9\")","23" : "self.sendMsgToFreebox(\"ok\")"}
         self.registeredDevices.append(Freebox)
         #http://hd1.freebox.fr/pub/remote_control?code=59999459&key=2
         

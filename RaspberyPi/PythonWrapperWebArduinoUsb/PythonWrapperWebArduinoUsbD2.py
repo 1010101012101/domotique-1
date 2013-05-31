@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 #my python modules
 import Deipara_Brain
@@ -46,8 +47,8 @@ class Example(xmlrpc.XMLRPC):
         
     def xmlrpc_translateVocalAction(self, aSpeach):
         logging.warning("SPEAK command for " + aSpeach)
-        aRest = aBrain.TranslateVocalAction(aSpeach,aRegisterDevices)
-        return (aSpeach)
+        (aRest,aCommandId) = aBrain.TranslateVocalAction(aSpeach,aRegisterDevices)
+        return ("Matching Device Description : "+aRest+" and matching command : "+str(aCommandId))
 
     def xmlrpc_fault(self):
         """

@@ -1,7 +1,10 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 #import socket
 import xmlrpclib
+import logging
+import os
 from optparse import OptionParser
 
 #class Command:
@@ -26,6 +29,13 @@ parser.add_option("-s", "--send",action="store",dest="aMsgToSend",default="20",h
 parser.add_option("-o", "--originator",action="store",dest="aOriginator",default="UNKNOW",help="Originator of the request")
 parser.add_option("-t", "--type",action="store",dest="aCmdType",default="WRITE",help="Write or Read command")
 (options, args) = parser.parse_args()
+
+#Create a unique ID
+aProcessId = str(os.getpid())
+
+#The logging API 
+logging.basicConfig(filename='/home/pi/Usb_Arduino_Leonardo/PythonWrapperWebArduinoUsbS.log',level=logging.DEBUG,format='%(asctime)s - %(levelname)s - %(message)s')
+logging.info('Daemon starting with pid : ' + aProcessId + " and string is : " + options.aMsgToSend + " and command type is : " + options.aCmdType)
 
 # There is 2 possibilities to communicate with the server
 # 1/ We send a string on TCP port. String format is like :
@@ -54,8 +64,9 @@ if(options.aCmdType == "READ"):
 elif(options.aCmdType == "WRITE"):
     print (s2.sendCommand(options.aMsgToSend,options.aOriginator))
 elif(options.aCmdType == "SPEAK"):
-    print (s2.translateVocalAction(options.aMsgToSend))
+    logging.info('SPEAK command with : ' + str(options.aMsgToSend))
+    print (s2.translateVocalAction(str(options.aMsgToSend)))
 else:
     print("Unknow command")
 
-
+logging.info('Daemon finish with pid : ' + aProcessId)
