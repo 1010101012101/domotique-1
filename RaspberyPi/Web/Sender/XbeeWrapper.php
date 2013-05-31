@@ -12,7 +12,8 @@
 			break;
             
             case "CMD_SPEAK" :
-            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $_REQUEST["iCmdStrings"] . " -t SPEAK";
+            $aStringFromAndroid = utf8_encode($_REQUEST["iCmdStrings"]);
+            $aCommandToExecute = WRAPPER2 . "-o " . getenv(REMOTE_ADDR) . " -s " . $aStringFromAndroid . " -t SPEAK";
 			$output = array();
 			exec($aCommandToExecute, $output);
 			print(json_encode($output));
