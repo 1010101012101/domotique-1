@@ -12,7 +12,7 @@
 // Keep track of how many sleep cycles have been completed.
 volatile int sleep_count = 0; 
 // 75 loop needed since ze sleep for 8s and want to wait 10 minutes
-//const int sleep_total = 75; 
+//const int sleep_total = 60; 
 const int sleep_total = 60; 
 
 //pin
@@ -126,22 +126,57 @@ void loop(void)
     unsigned int aLightValue = analogRead(_InLightPin);
     //we turn it off
     digitalWrite(_OutPowerLightSensor, LOW);
-    delay(2000);
+    delay(3000);
     //Then read T
     DHT22_ERROR_t errorCode;
+    int aTempValue=0;
+    int aHumidityValue=0;
     errorCode = _Dht22.readData();
-    int aTempValue=_Dht22.getTemperatureCAsInt();
-    int aHumidityValue=_Dht22.getHumidityAsInt();
     
-    digitalWrite(_OutPowerDHT22, LOW);
+    switch(errorCode)
+    {
+    case DHT_ERROR_NONE:
+        aTempValue=_Dht22.getTemperatureCAsInt();
+        aHumidityValue=_Dht22.getHumidityAsInt();
+        //Serial.print("data read OK ");
+        //Serial.print("aTempValue");
+        //Serial.print(aTempValue);
+        //Serial.print("aHumidityValue");
+        //Serial.print(aHumidityValue);
+    case DHT_ERROR_CHECKSUM:
+      Serial.print("check sum error ");
+      break;
+    case DHT_BUS_HUNG:
+      Serial.println("BUS Hung ");
+      break;
+    case DHT_ERROR_NOT_PRESENT:
+      Serial.println("Not Present ");
+      break;
+    case DHT_ERROR_ACK_TOO_LONG:
+      Serial.println("ACK time out ");
+      break;
+    case DHT_ERROR_SYNC_TIMEOUT:
+      Serial.println("Sync Timeout ");
+      break;
+    case DHT_ERROR_DATA_TIMEOUT:
+      Serial.println("Data Timeout ");
+      break;
+    case DHT_ERROR_TOOQUICK:
+      Serial.println("Polled to quick ");
+      break;
+    }
+    
+    //digitalWrite(_OutPowerDHT22, LOW);
 
     //we wait few second to be sure Xbee reach the network
-    delay(3000);
+    delay(2000);
     //we send the info
     sendZigBeeMsg2(_Xbee,36,aLightValue,COORD_ADDR);
-    delay(50);
+    delay(250);
+    //Serial.println("aTempValue2 : ");
+    //Serial.println(aTempValue);
     sendZigBeeMsg2(_Xbee,37,aTempValue,COORD_ADDR);
-    delay(50);
+    delay(250);
     sendZigBeeMsg2(_Xbee,38,aHumidityValue,COORD_ADDR);
     //we turn off the xbee module
     digitalWrite(_OutXbeePower1, LOW);
