@@ -65,31 +65,6 @@ class Function:
                         aBestCommand=(aCommandWeight,int(aOnePossibleInCmdID))
         logging.debug("aDeviceWeight : " + str(aDeviceWeight))
         return (aDeviceWeight,aBestCommand[1])
-        
-    def getDeviceWeightSpeechCmd(self, Sentences):
-        aSplitedSentences = Sentences.split("_")
-        aWeight = 0
-        for aOnesentence in aSplitedSentences:
-            logging.debug("sentence : " + aOnesentence)
-            for aOneWord in aOnesentence.split("-"):
-                #Compare match with word in device description
-                for aOneDescriptionDeviceWord in self.description.split(" "):
-                    logging.debug("compare : " + aOneWord +" and " + aOneDescriptionDeviceWord)
-                    if (aOneWord==aOneDescriptionDeviceWord):
-                        aWeight=aWeight+len(aOneWord)
-                #Compare match with word in device possible commands
-                for aOnePossibleInCmd in self.InPossibleCmd:
-                    for aOnePossibleInCmdWord in aOnePossibleInCmd.split(" "):
-                        logging.debug("compare : " + aOneWord +" and " + aOnePossibleInCmdWord)
-                        if (aOneWord==aOnePossibleInCmdWord):
-                            aWeight=aWeight+len(aOneWord)
-                for aOnePossibleOutCmd in self.OutPossibleCmd:
-                    for aOnePossibleOutCmdWord in aOnePossibleOutCmd.split(" "):
-                        logging.debug("compare : " + aOneWord +" and " + aOnePossibleOutCmdWord)
-                        if (aOneWord==aOnePossibleOutCmdWord):
-                            aWeight=aWeight+len(aOneWord)
-        logging.debug("final weight : " + str(aWeight))
-        return aWeight
 
     def __repr__(self):
         aRetString = ""
@@ -373,7 +348,7 @@ else:
         VoletSalon = InterupteurBiStable()
         VoletSalon.id =5
         VoletSalon.description="volets salon"
-        VoletSalon.InPossibleCmd ={ "9" : "off fermer ferme","10" : "on ouvre ouvrir"}
+        VoletSalon.InPossibleCmd ={ "10" : "off fermer ferme","9" : "on ouvre ouvrir"}
         VoletSalon.InActionsCommands={ "9" : "self.turnOff(9)","10" : "self.turnOn(10)"}
         self.registeredDevices.append(VoletSalon)
         

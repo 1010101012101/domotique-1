@@ -42,7 +42,13 @@ class Brain:
         '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
         logging.error("TurnCuisineLightOff")
         aDataToWrite = "MSG:47_ORIGIN:PythonScript"
-        self.SendMessage( "47","PythonScript",iListOfDevice)        
+        self.SendMessage( "47","PythonScript",iListOfDevice)  
+        
+    def FermeVoletSalon(self,iListOfDevice):
+        '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
+        logging.error("FermeVoletSalon")
+        aDataToWrite = "MSG:10_ORIGIN:PythonScript"
+        self.SendMessage( "10","PythonScript",iListOfDevice) 
         
     def TurnSalonLightOff(self,iListOfDevice):
         '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
@@ -149,6 +155,16 @@ class Brain:
             if ( (aOneDevice.stateCanBeRefresh == True) and (datetime.datetime.now() - aOneDevice.LastRefreshDate > datetime.timedelta (seconds = aOneDevice.refreshRatemin) ) ):
                 logging.debug("We can refresh : " + str(aOneDevice.id))
                 aOneDevice.RequestNewValue()
+                
+        #Setp 4 : action auto non lie a une detection (genre ferme les volets parce qu il fait nuit)
+        logging.info("Force auto non lie a une detection")
+        for aOneDevice in iListOfDevice.registeredDevices:
+            try:
+                logging.debug("checking : " + str(aOneDevice.id))
+                if ((aOneDevice.id == 22) and ((int(aOneDevice.currentStatus)) < 10) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
+                    self.FermeVoletSalon(iListOfDevice)
+            except Exception: 
+                logging.error("Error when checking automatic action for device : " + str(aOneDevice.id))
                 
     def HandleUsbInput(self,iUsbString,iListOfDevice):
         '''Cette fonction est lance lorsqu on recoit qq chose sur le port USB (qui provient donc de l Arduino Leonardo).
