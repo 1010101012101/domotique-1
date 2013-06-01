@@ -17,11 +17,11 @@ const int sleep_total = 60;
 
 //pin
 const int _InPinDht22 = 6;
-const int _OutPowerLightSensor = 7;
+const int _OutPowerLightSensor = 4;
 const int _OutXbeePower1 = 8;
 const int _OutXbeePower2 = 9;
 const int _OutPowerDHT22 = 10;
-const int _InLightPin = 4;
+const int _InLightPin = A7;
 
 
 
@@ -92,7 +92,6 @@ void setup(void)
   pinMode(_OutPowerDHT22, OUTPUT);
   pinMode(_OutXbeePower1, OUTPUT);
   pinMode(_OutXbeePower2, OUTPUT);
-  pinMode(_InLightPin, INPUT);
   
   digitalWrite(_OutPowerLightSensor, LOW);
   digitalWrite(_OutPowerDHT22, LOW);
@@ -124,9 +123,15 @@ void loop(void)
     delay(1000);
     //we read the light sensor value
     unsigned int aLightValue = analogRead(_InLightPin);
+    if (aLightValue==0)
+    {
+      aLightValue=1;
+    }
+    //Serial.println("lumiere");
+    //Serial.println(aLightValue);
     //we turn it off
     digitalWrite(_OutPowerLightSensor, LOW);
-    delay(3000);
+    delay(4000);
     //Then read T
     DHT22_ERROR_t errorCode;
     int aTempValue=0;
@@ -166,10 +171,10 @@ void loop(void)
       break;
     }
     
-    //digitalWrite(_OutPowerDHT22, LOW);
+    digitalWrite(_OutPowerDHT22, LOW);
 
     //we wait few second to be sure Xbee reach the network
-    delay(2000);
+    delay(1000);
     //we send the info
     sendZigBeeMsg2(_Xbee,36,aLightValue,COORD_ADDR);
     delay(250);
