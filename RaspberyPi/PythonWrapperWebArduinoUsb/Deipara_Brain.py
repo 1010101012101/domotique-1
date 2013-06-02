@@ -164,14 +164,14 @@ class Brain:
                 
         #Setp 4 : action auto non lie a une detection (genre ferme les volets parce qu il fait nuit)
         logging.info("Force auto non lie a une detection")
+        aOneActionDone = False 
         for aOneDevice in iListOfDevice.registeredDevices:
             try:
                 logging.debug("checking : " + str(aOneDevice.id))
-                if ((aOneDevice.id == 22) and ((int(aOneDevice.currentStatus)) < 10) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
-                    #self.FermeVoletSalon(iListOfDevice)
-                    if((iListOfDevice.getDevice(4)).currentStatus!="off"):
-                        #self.FermeVoletCharles(iListOfDevice)
-                        logging.error("je dois fermer les volets")
+                if ((aOneDevice.id == 22) and ((iListOfDevice.getDevice(5)).currentStatus!="off") and ((int(aOneDevice.currentStatus)) < 15) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
+                    self.FermeVoletSalon(iListOfDevice)
+                if ((aOneDevice.id == 22) and ((iListOfDevice.getDevice(4)).currentStatus!="off") and ((int(aOneDevice.currentStatus)) < 5) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
+                    self.FermeVoletCharles(iListOfDevice)
             except Exception: 
                 logging.error("Error when checking automatic action for device : " + str(aOneDevice.id))
                 
