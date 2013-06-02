@@ -119,16 +119,22 @@ class InterupteurBiStable(Function):
         exec(self.OutActionsCommands[aRefreshStr])
         
     def turnOn(self,iDataToSend):
-        self.currentStatus="on"
-        fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-        logging.info ("Writting "+ str(iDataToSend) + " to USB port and sending back to sender")
-        fd.write(chr(iDataToSend))
+        if((self.currentStatus=="off")or(self.currentStatus=="")):
+            self.currentStatus="on"
+            fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+            logging.info ("Writting "+ str(iDataToSend) + " to USB port and sending back to sender")
+            fd.write(chr(iDataToSend))
+        else:
+            logging.error ("Device "+ str(self.id) + " can not be turn on because it is already on")
         
     def turnOff(self,iDataToSend):
-        self.currentStatus="off"
-        fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
-        logging.info ("Writting "+ str(iDataToSend) + " to USB port and sending back to sender")
-        fd.write(chr(iDataToSend))
+        if((self.currentStatus=="on")or(self.currentStatus=="")):
+            self.currentStatus="off"
+            fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+            logging.info ("Writting "+ str(iDataToSend) + " to USB port and sending back to sender")
+            fd.write(chr(iDataToSend))
+        else:
+            logging.error ("Device "+ str(self.id) + " can not be turn off because it is already off")
 
     def __repr__(self):
         aRetString = ""
@@ -342,7 +348,7 @@ else:
         VoletCharles.id =4
         VoletCharles.description="volets chambre Charles"
         VoletCharles.InPossibleCmd ={ "8" : "off ferme fermer","7" : "on ouvrir ouvre"}
-        VoletCharles.InActionsCommands={ "7" : "self.turnOff(7)","8" : "self.turnOn(8)"}
+        VoletCharles.InActionsCommands={ "7" : "self.turnOn(7)","8" : "self.turnOff(8)"}
         self.registeredDevices.append(VoletCharles)
         
         VoletSalon = InterupteurBiStable()
@@ -390,26 +396,26 @@ else:
         luminoTersa = CapteurMesure()
         luminoTersa.stateCanBeRefresh = False
         luminoTersa.description="capteur lumiere luminosite terrasse soleil"
-        luminoTersa.OutPossibleCmd ={"37" : "recoit Nouvelle L"}
-        luminoTersa.InPossibleCmd ={"37" : "recoit Nouvelle L"}
-        luminoTersa.InActionsCommands ={"37" : """logging.warn("Refreshing capteur : " + str(self.id))
+        luminoTersa.OutPossibleCmd ={"36" : "recoit Nouvelle L"}
+        luminoTersa.InPossibleCmd ={"36" : "recoit Nouvelle L"}
+        luminoTersa.InActionsCommands ={"36" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 logging.info ("Writting 31 to USB port and sending back to sender")
-fd.write(chr(37))"""}
-        luminoTersa.OutActionsCommands ={"37" : "self.UpdateValue(aData)"}
+fd.write(chr(36))"""}
+        luminoTersa.OutActionsCommands ={"36" : "self.UpdateValue(aData)"}
         luminoTersa.id =22
         self.registeredDevices.append(luminoTersa)
         
         TerrasseTemperature = CapteurMesure()
         TerrasseTemperature.stateCanBeRefresh = False
         TerrasseTemperature.description="capteur temperature terrasse"
-        TerrasseTemperature.OutPossibleCmd ={"36" : "recoit Nouvelle L"}
-        TerrasseTemperature.InPossibleCmd ={"36" : "recoit Nouvelle L"}
-        TerrasseTemperature.InActionsCommands ={"36" : """logging.warn("Refreshing capteur : " + str(self.id))
+        TerrasseTemperature.OutPossibleCmd ={"37" : "recoit Nouvelle L"}
+        TerrasseTemperature.InPossibleCmd ={"37" : "recoit Nouvelle L"}
+        TerrasseTemperature.InActionsCommands ={"37" : """logging.warn("Refreshing capteur : " + str(self.id))
 fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
 logging.info ("Writting 31 to USB port and sending back to sender")
-fd.write(chr(36))"""}
-        TerrasseTemperature.OutActionsCommands ={"36" : "self.UpdateValue(aData)"}
+fd.write(chr(37))"""}
+        TerrasseTemperature.OutActionsCommands ={"37" : "self.UpdateValue(aData)"}
         TerrasseTemperature.id =20
         self.registeredDevices.append(TerrasseTemperature)
         

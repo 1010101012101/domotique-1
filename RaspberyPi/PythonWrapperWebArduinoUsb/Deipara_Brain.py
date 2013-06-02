@@ -50,6 +50,12 @@ class Brain:
         aDataToWrite = "MSG:10_ORIGIN:PythonScript"
         self.SendMessage( "10","PythonScript",iListOfDevice) 
         
+    def FermeVoletCharles(self,iListOfDevice):
+        '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
+        logging.error("FermeVoletCharles")
+        aDataToWrite = "MSG:8_ORIGIN:PythonScript"
+        self.SendMessage( "8","PythonScript",iListOfDevice) 
+        
     def TurnSalonLightOff(self,iListOfDevice):
         '''Action trige lorsqu plus personne est detecte ds la chambre charles depuis un certains temps'''
         logging.error("TurnSalonLightOff")
@@ -162,7 +168,10 @@ class Brain:
             try:
                 logging.debug("checking : " + str(aOneDevice.id))
                 if ((aOneDevice.id == 22) and ((int(aOneDevice.currentStatus)) < 10) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
-                    self.FermeVoletSalon(iListOfDevice)
+                    #self.FermeVoletSalon(iListOfDevice)
+                    if((iListOfDevice.getDevice(4)).currentStatus!="off"):
+                        #self.FermeVoletCharles(iListOfDevice)
+                        logging.error("je dois fermer les volets")
             except Exception: 
                 logging.error("Error when checking automatic action for device : " + str(aOneDevice.id))
                 
