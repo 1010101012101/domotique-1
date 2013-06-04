@@ -355,7 +355,7 @@ else:
         VoletSalon.id =5
         VoletSalon.description="volets salon"
         VoletSalon.InPossibleCmd ={ "10" : "off fermer ferme","9" : "on ouvre ouvrir"}
-        VoletSalon.InActionsCommands={ "9" : "self.turnOff(9)","10" : "self.turnOn(10)"}
+        VoletSalon.InActionsCommands={ "9" : "self.turnOn(9)","10" : "self.turnOff(10)"}
         self.registeredDevices.append(VoletSalon)
         
         LumiereSalonHalogene = InterupteurBiStable()
