@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.system.id="GRADLE" type="JAVA_MODULE" version="4">
+<module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
         <option name="GRADLE_PROJECT_PATH" value=":" />
-        <option name="PROJECT_ABSOLUTE_PATH" value="C:\Users\charles\AndroidStudioProjects\VoiceRecognition" />
+        <option name="PROJECT_ABSOLUTE_PATH" value="C:\TempGoogleCode\VoiceRecognition" />
         <option name="GRADLE_HOME_DIR_PATH" />
       </configuration>
     </facet>
