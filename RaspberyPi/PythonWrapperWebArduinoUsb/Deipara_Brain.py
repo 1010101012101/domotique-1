@@ -168,10 +168,10 @@ class Brain:
         for aOneDevice in iListOfDevice.registeredDevices:
             try:
                 logging.debug("checking : " + str(aOneDevice.id))
-                if ((aOneDevice.id == 22) and ((iListOfDevice.getDevice(5)).currentStatus!="off") and ((int(aOneDevice.currentStatus)) < 15) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
-                    self.FermeVoletSalon(iListOfDevice)
-                if ((aOneDevice.id == 22) and ((iListOfDevice.getDevice(4)).currentStatus!="off") and ((int(aOneDevice.currentStatus)) < 5) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
-                    self.FermeVoletCharles(iListOfDevice)
+                #if ((aOneDevice.id == 22) and ((iListOfDevice.getDevice(5)).currentStatus!="off") and ((int(aOneDevice.currentStatus)) < 15) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
+                #    self.FermeVoletSalon(iListOfDevice)
+                #if ((aOneDevice.id == 22) and ((iListOfDevice.getDevice(4)).currentStatus!="off") and ((int(aOneDevice.currentStatus)) < 5) and (datetime.datetime.now() - aOneDevice.LastTMeaureDate < datetime.timedelta (seconds = 900))):
+                #    self.FermeVoletCharles(iListOfDevice)
             except Exception: 
                 logging.error("Error when checking automatic action for device : " + str(aOneDevice.id))
                 

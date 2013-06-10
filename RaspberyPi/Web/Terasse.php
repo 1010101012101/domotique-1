@@ -60,7 +60,7 @@
                     var obj3 = eval("(" + obj2 + ')');
                     
                     
-                    if((obj3.id==20))
+                    if((obj3.id==22))
                     {
                         $('.Luminosite').append("Derniere luminosite : ");
                         var aIntValue=parseInt(obj3.currentStatus);
@@ -69,7 +69,7 @@
                         $('.Luminosite').append(obj3.LastTMeaureDate["py/repr"]);
                     }
                     
-                    if((obj3.id==22))
+                    if((obj3.id==20))
                     {
                         $('.Temperature').append("Derniere temperature : ");
                         var aIntValue=parseInt(obj3.currentStatus);
