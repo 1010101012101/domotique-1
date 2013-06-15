@@ -140,6 +140,49 @@ class InterupteurBiStable(Function):
         aRetString = ""
         aRetString = aRetString + Function.__repr__(self) + "\n"
         return aRetString 
+        
+class InterupteurMultiStable(InterupteurBiStable):
+    '''Une classe qui decrit un interupteur bi stable (lumiere, PC, volets, ...)''' 
+    
+    def __init__(self):
+        Function.__init__(self)
+        self.type="InterupteurMultiStable"
+        self.PossibleStates=[ "off","on","unknow"]
+        
+    def RequestNewValue(self):
+        self.LastRefreshDate=datetime.datetime.now()
+        aRefreshStr = str(self.OutPossibleCmd.keys()[0])
+        logging.info ("Using "+ aRefreshStr + " to refresh")
+        exec(self.OutActionsCommands[aRefreshStr])
+        
+    def turnOn(self,iDataToSend):
+        if((self.currentStatus=="off")or(self.currentStatus=="")):
+            self.currentStatus="on"
+            fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+            logging.info ("Writting "+ str(iDataToSend) + " to USB port and sending back to sender")
+            fd.write(chr(iDataToSend))
+        else:
+            logging.error ("Device "+ str(self.id) + " can not be turn on because it is already on")
+        
+    def turnOff(self,iDataToSend):
+        if((self.currentStatus=="on")or(self.currentStatus=="")):
+            self.currentStatus="off"
+            fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+            logging.info ("Writting "+ str(iDataToSend) + " to USB port and sending back to sender")
+            fd.write(chr(iDataToSend))
+        else:
+            logging.error ("Device "+ str(self.id) + " can not be turn off because it is already off")
+            
+    def stop(self,iDataToSend):
+        self.currentStatus=""
+        fd = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+        logging.info ("Writting "+ str(iDataToSend) + " to USB port and sending back to sender")
+        fd.write(chr(iDataToSend))
+
+    def __repr__(self):
+        aRetString = ""
+        aRetString = aRetString + Function.__repr__(self) + "\n"
+        return aRetString 
 
 class InterupteurStable(Function):
     '''Une classe qui decrit un interupteur stable (detecteur presence, ...)''' 
@@ -344,18 +387,18 @@ else:
         lumiere2Charles.InActionsCommands={ "11" : "self.turnOn(11)","12" : "self.turnOff(12)"}
         self.registeredDevices.append(lumiere2Charles)
         
-        VoletCharles = InterupteurBiStable()
+        VoletCharles = InterupteurMultiStable()
         VoletCharles.id =4
         VoletCharles.description="volets chambre Charles"
-        VoletCharles.InPossibleCmd ={ "8" : "off ferme fermer","7" : "on ouvrir ouvre"}
-        VoletCharles.InActionsCommands={ "7" : "self.turnOn(7)","8" : "self.turnOff(8)"}
+        VoletCharles.InPossibleCmd ={ "8" : "off ferme fermer","7" : "on ouvrir ouvre","24" : "stop arreter arrete"}
+        VoletCharles.InActionsCommands={ "7" : "self.turnOn(7)","8" : "self.turnOff(8)","24" : "self.turnOff(8)"}
         self.registeredDevices.append(VoletCharles)
         
-        VoletSalon = InterupteurBiStable()
+        VoletSalon = InterupteurMultiStable()
         VoletSalon.id =5
         VoletSalon.description="volets salon"
-        VoletSalon.InPossibleCmd ={ "10" : "off fermer ferme","9" : "on ouvre ouvrir"}
-        VoletSalon.InActionsCommands={ "9" : "self.turnOn(9)","10" : "self.turnOff(10)"}
+        VoletSalon.InPossibleCmd ={ "10" : "off fermer ferme","9" : "on ouvre ouvrir","25" : "stop arreter arrete"}
+        VoletSalon.InActionsCommands={ "9" : "self.turnOn(9)","10" : "self.turnOff(10)","25" : "self.turnOff(10)"}
         self.registeredDevices.append(VoletSalon)
         
         LumiereSalonHalogene = InterupteurBiStable()

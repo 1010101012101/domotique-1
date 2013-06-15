@@ -179,6 +179,19 @@
 				success: onSuccess
 			});
         });
+        
+        $("#Button_StopVoletCharles").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '5' ,iCmdToExecute : '24' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
 			
 		function onSuccess(data)
 		{
@@ -254,6 +267,7 @@
 			</select> 
 			<input id="Button_MonterVoletCharles" type="button" name="Button_MonterVoletCharles" value="Monter Volet"/>
 			<input id="Button_DescendreVoletCharles" type="button" name="Button_DescendreVoletCharles" value="Descendre Volet"/>
+            <input id="Button_StopVoletCharles" type="button" name="Button_StopVoletCharles" value="Stop Volet"/>
             Temperature :
 			<div class="Temperature">
 			</div>

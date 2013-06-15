@@ -40,6 +40,21 @@
 				success: onSuccess
 			});
         });
+        
+        $("#Button_StopVoletSalon").click(function() 
+		{
+			$.ajax(
+			{
+				type: "POST",
+				url: "./Sender/XbeeWrapper.php",
+				data: ({iId : '7' ,iCmdToExecute : '25' , iCmdType : "CMD_X10"}),
+				cache: false,
+				dataType: "text",
+				success: onSuccess
+			});
+        });
+        
+        
 		
 		$( "#Flip_HalogeneSalon" ).on( 'slidestop', function( event ) 
 		{ 
@@ -233,6 +248,7 @@
 		<div data-role="content">	
 			<input id="Button_MonterVoletSalon" type="button" name="Button_MonterVoletSalon" value="Monter Volet"/>
 			<input id="Button_DescendreVoletSalon" type="button" name="Button_DescendreVoletSalon" value="Descendre Volet"/>
+            <input id="Button_StopVoletSalon" type="button" name="Button_StopVoletSalon" value="Stop Volet"/>
             Temperature :
 			<div class="Temperature">
 			</div>
@@ -254,6 +270,9 @@
 				<option value="off">Allumer</option>
 				<option value="on">Eteindre</option>
 			</select>
+            <div data-role="none">
+                <img alt="FOSCAM" src="http://82.227.228.35:8080/videostream.cgi?user=guest&pwd=guest" width="300" height="300"/>
+            </div>
 		</div>
 	</div>
 	</body>
