@@ -122,17 +122,36 @@
 			?>
 		</div>
 		<div data-role="content">	
-            <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
-            <input id="Button_LightOff" type="button" name="Button_LightOff" value="Light Off"/>
-            Temperature :
-			<div class="Temperature">
-			</div>
-            Humidite :
-			<div class="Humidite">
-			</div>
-            PeopleDetection :
-			<div class="PeopleDetection">
-			</div>
+        
+            <div data-role="collapsible">
+                 <h3>Lumiere</h3>
+                <div data-role="controlgroup">
+                <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
+                <input id="Button_LightOff" type="button" name="Button_LightOff" value="Light Off"/>
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Temperature</h3>
+                Temperature :
+                <div class="Temperature">
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Humidite</h3>
+                Humidite :
+                <div class="Humidite">
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>PeopleDetection</h3>
+                PeopleDetection :
+                <div class="PeopleDetection">
+                </div>
+            </div>
+            
 		</div>
 	</div>
 	</body>

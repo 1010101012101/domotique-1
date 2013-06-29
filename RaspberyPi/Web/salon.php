@@ -246,32 +246,69 @@
 			?>
 		</div>
 		<div data-role="content">	
-			<input id="Button_MonterVoletSalon" type="button" name="Button_MonterVoletSalon" value="Monter Volet"/>
-			<input id="Button_DescendreVoletSalon" type="button" name="Button_DescendreVoletSalon" value="Descendre Volet"/>
-            <input id="Button_StopVoletSalon" type="button" name="Button_StopVoletSalon" value="Stop Volet"/>
-            Temperature :
-			<div class="Temperature">
-			</div>
-            Humidite :
-			<div class="Humidite">
-			</div>
-            PeopleDetection :
-			<div class="PeopleDetection">
-			</div>
-            <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
-            <input id="Button_LightOff" type="button" name="Button_LightOff" value="Light Off"/>
-            <div data-role="controlgroup" data-type="horizontal">
-                <input id="Button_SwithTv" type="button" name="Button_SwithTv" value="Switch TV"/>
-                <input id="Button_TvInc" type="button" name="Button_TvInc" value="TV++"/>
-                <input id="Button_TvDec" type="button" name="Button_TvDec" value="TV--"/>
+        
+            <div data-role="collapsible">
+                 <h3>Volets</h3>
+                <div data-role="controlgroup">
+                    <input id="Button_MonterVoletSalon" type="button" name="Button_MonterVoletSalon" value="Monter Volet"/>
+                    <input id="Button_DescendreVoletSalon" type="button" name="Button_DescendreVoletSalon" value="Descendre Volet"/>
+                    <input id="Button_StopVoletSalon" type="button" name="Button_StopVoletSalon" value="Stop Volet"/>
+                </div>
             </div>
-			<label for="Flip_HalogeneSalon">Halogene:</label>
-			<select name="Flip_HalogeneSalon" id="Flip_HalogeneSalon" data-role="slider">
-				<option value="off">Allumer</option>
-				<option value="on">Eteindre</option>
-			</select>
-            <div data-role="none">
-                <img alt="FOSCAM" src="http://82.227.228.35:8080/videostream.cgi?user=guest&pwd=guest" width="300" height="300"/>
+            
+            <div data-role="collapsible">
+                 <h3>Temperature</h3>
+                Temperature :
+                <div class="Temperature">
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Humidite</h3>
+                Humidite :
+                <div class="Humidite">
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>PeopleDetection</h3>
+                PeopleDetection :
+                <div class="PeopleDetection">
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Lumiere</h3>
+                <div data-role="controlgroup">
+                    <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
+                    <input id="Button_LightOff" type="button" name="Button_LightOff" value="Light Off"/>
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>TV</h3>
+                <div data-role="controlgroup">
+                    <input id="Button_SwithTv" type="button" name="Button_SwithTv" value="Switch TV"/>
+                    <input id="Button_TvInc" type="button" name="Button_TvInc" value="TV++"/>
+                    <input id="Button_TvDec" type="button" name="Button_TvDec" value="TV--"/>
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Halogene</h3>
+                <label for="Flip_HalogeneSalon">Halogene:</label>
+                <select name="Flip_HalogeneSalon" id="Flip_HalogeneSalon" data-role="slider">
+                    <option value="off">Allumer</option>
+                    <option value="on">Eteindre</option>
+                </select>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>WebCam</h3>
+                 <div data-role="none">
+                    <img alt="FOSCAM" src="http://82.227.228.35:8080/videostream.cgi?user=guest&pwd=guest" width="300" height="300"/>
+                 </div>
+                 <a href="http://82.227.228.35:8080/" data-role="button" rel="external">Admin</a>
             </div>
 		</div>
 	</div>

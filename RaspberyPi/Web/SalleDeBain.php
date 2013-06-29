@@ -71,11 +71,14 @@
 			?>
 		</div>
 		<div data-role="content">	
+            <div data-role="collapsible">
+                 <h3>Temperature</h3>
 			<label for="Flip_ChauffageSdb">Chauffage:</label>
 			<select name="Flip_ChauffageSdb" id="Flip_ChauffageSdb" data-role="slider">
 				<option value="off">Desactiver</option>
 				<option value="on">Activer</option>
-			</select> 		
+			</select> 	
+            </div>            
 		</div>
 	</div>
 	</body>

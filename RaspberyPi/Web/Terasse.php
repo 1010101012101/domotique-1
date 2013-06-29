@@ -104,15 +104,27 @@
 			?>
 		</div>
 		<div data-role="content">
+            <div data-role="collapsible">
+                 <h3>Temperature</h3>
 			Temperature :
 			<div class="Temperature">
 			</div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Humidite</h3>
             Humidite :
 			<div class="Humidite">
 			</div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Luminosite</h3>
             Luminosite :
 			<div class="Luminosite">
 			</div>
+            </div>
+            
 		</div>
 	</div>
 	</body>

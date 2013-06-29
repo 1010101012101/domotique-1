@@ -249,34 +249,64 @@
 				echo "<h1>" , basename($_SERVER['PHP_SELF'], ".php") , "</h1>" ;
 			?>
 		</div>
-		<div data-role="content">	
-			<label for="Flip_LumierePrincipale">Lumiere Principale:</label>
-			<select name="Flip_LumierePrincipale" id="Flip_LumierePrincipale" data-role="slider">
-				<option value="off">Allumer</option>
-				<option value="on">Eteindre</option>
-			</select> 
-			<label for="Flip_LumiereSecondaire">Lumiere Secondaire:</label>
-			<select name="Flip_LumiereSecondaire" id="Flip_LumiereSecondaire" data-role="slider">
-				<option value="off">Allumer</option>
-				<option value="on">Eteindre</option>
-			</select> 
-			<label for="Flip_PcCharles">PC Charles:</label>
-			<select name="Flip_PcCharles" id="Flip_PcCharles" data-role="slider" >
-				<option value="off">OFF</option>
-				<option value="on">ON</option>
-			</select> 
-			<input id="Button_MonterVoletCharles" type="button" name="Button_MonterVoletCharles" value="Monter Volet"/>
-			<input id="Button_DescendreVoletCharles" type="button" name="Button_DescendreVoletCharles" value="Descendre Volet"/>
-            <input id="Button_StopVoletCharles" type="button" name="Button_StopVoletCharles" value="Stop Volet"/>
-            Temperature :
-			<div class="Temperature">
-			</div>
-            Humidite :
-			<div class="Humidite">
-			</div>
-            PeopleDetection :
-			<div class="PeopleDetection">
-			</div>
+		<div data-role="content">
+        
+            <div data-role="collapsible">
+                 <h3>Lumiere Principale</h3>
+                <label for="Flip_LumierePrincipale">Lumiere Principale:</label>
+                <select name="Flip_LumierePrincipale" id="Flip_LumierePrincipale" data-role="slider">
+                    <option value="off">Allumer</option>
+                    <option value="on">Eteindre</option>
+                </select> 
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Lumiere Secondaire</h3>
+                <label for="Flip_LumiereSecondaire">Lumiere Secondaire:</label>
+                <select name="Flip_LumiereSecondaire" id="Flip_LumiereSecondaire" data-role="slider">
+                    <option value="off">Allumer</option>
+                    <option value="on">Eteindre</option>
+                </select> 
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>PC Charles</h3>
+                <label for="Flip_PcCharles">PC Charles:</label>
+                <select name="Flip_PcCharles" id="Flip_PcCharles" data-role="slider" >
+                    <option value="off">OFF</option>
+                    <option value="on">ON</option>
+                </select> 
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Volets</h3>
+                <div data-role="controlgroup">
+                    <input id="Button_MonterVoletCharles" type="button" name="Button_MonterVoletCharles" value="Monter Volet"/>
+                    <input id="Button_DescendreVoletCharles" type="button" name="Button_DescendreVoletCharles" value="Descendre Volet"/>
+                    <input id="Button_StopVoletCharles" type="button" name="Button_StopVoletCharles" value="Stop Volet"/>
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Temperature</h3>
+                Temperature :
+                <div class="Temperature">
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>Humidite</h3>
+                Humidite :
+                <div class="Humidite">
+                </div>
+            </div>
+            
+            <div data-role="collapsible">
+                 <h3>PeopleDetection</h3>
+                PeopleDetection :
+                <div class="PeopleDetection">
+                </div>
+            </div>
 		</div>
 	</div>
 	</body>
