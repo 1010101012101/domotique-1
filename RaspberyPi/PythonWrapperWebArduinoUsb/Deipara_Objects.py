@@ -391,14 +391,14 @@ else:
         VoletCharles.id =4
         VoletCharles.description="volets chambre Charles"
         VoletCharles.InPossibleCmd ={ "8" : "off ferme fermer","7" : "on ouvrir ouvre","24" : "stop arreter arrete"}
-        VoletCharles.InActionsCommands={ "7" : "self.turnOn(7)","8" : "self.turnOff(8)","24" : "self.turnOff(8)"}
+        VoletCharles.InActionsCommands={ "7" : "self.turnOn(7)","8" : "self.turnOff(8)","24" : "self.stop(8)"}
         self.registeredDevices.append(VoletCharles)
         
         VoletSalon = InterupteurMultiStable()
         VoletSalon.id =5
         VoletSalon.description="volets salon"
         VoletSalon.InPossibleCmd ={ "10" : "off fermer ferme","9" : "on ouvre ouvrir","25" : "stop arreter arrete"}
-        VoletSalon.InActionsCommands={ "9" : "self.turnOn(9)","10" : "self.turnOff(10)","25" : "self.turnOff(10)"}
+        VoletSalon.InActionsCommands={ "9" : "self.turnOn(9)","10" : "self.turnOff(10)","25" : "self.stop(10)"}
         self.registeredDevices.append(VoletSalon)
         
         LumiereSalonHalogene = InterupteurBiStable()
