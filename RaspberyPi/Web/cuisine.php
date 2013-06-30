@@ -123,7 +123,7 @@
 		</div>
 		<div data-role="content">	
         
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Lumiere</h3>
                 <div data-role="controlgroup">
                 <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
@@ -131,21 +131,21 @@
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Temperature</h3>
                 Temperature :
                 <div class="Temperature">
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Humidite</h3>
                 Humidite :
                 <div class="Humidite">
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>PeopleDetection</h3>
                 PeopleDetection :
                 <div class="PeopleDetection">

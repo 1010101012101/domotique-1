@@ -251,7 +251,7 @@
 		</div>
 		<div data-role="content">
         
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Lumiere Principale</h3>
                 <label for="Flip_LumierePrincipale">Lumiere Principale:</label>
                 <select name="Flip_LumierePrincipale" id="Flip_LumierePrincipale" data-role="slider">
@@ -260,7 +260,7 @@
                 </select> 
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Lumiere Secondaire</h3>
                 <label for="Flip_LumiereSecondaire">Lumiere Secondaire:</label>
                 <select name="Flip_LumiereSecondaire" id="Flip_LumiereSecondaire" data-role="slider">
@@ -269,7 +269,7 @@
                 </select> 
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>PC Charles</h3>
                 <label for="Flip_PcCharles">PC Charles:</label>
                 <select name="Flip_PcCharles" id="Flip_PcCharles" data-role="slider" >
@@ -278,7 +278,7 @@
                 </select> 
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Volets</h3>
                 <div data-role="controlgroup">
                     <input id="Button_MonterVoletCharles" type="button" name="Button_MonterVoletCharles" value="Monter Volet"/>
@@ -287,21 +287,21 @@
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Temperature</h3>
                 Temperature :
                 <div class="Temperature">
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Humidite</h3>
                 Humidite :
                 <div class="Humidite">
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>PeopleDetection</h3>
                 PeopleDetection :
                 <div class="PeopleDetection">

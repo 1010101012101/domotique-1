@@ -247,7 +247,7 @@
 		</div>
 		<div data-role="content">	
         
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Volets</h3>
                 <div data-role="controlgroup">
                     <input id="Button_MonterVoletSalon" type="button" name="Button_MonterVoletSalon" value="Monter Volet"/>
@@ -256,28 +256,28 @@
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Temperature</h3>
                 Temperature :
                 <div class="Temperature">
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Humidite</h3>
                 Humidite :
                 <div class="Humidite">
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>PeopleDetection</h3>
                 PeopleDetection :
                 <div class="PeopleDetection">
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Lumiere</h3>
                 <div data-role="controlgroup">
                     <input id="Button_LightOn" type="button" name="Button_LightOn" value="Light On"/>
@@ -285,7 +285,7 @@
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>TV</h3>
                 <div data-role="controlgroup">
                     <input id="Button_SwithTv" type="button" name="Button_SwithTv" value="Switch TV"/>
@@ -294,7 +294,7 @@
                 </div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Halogene</h3>
                 <label for="Flip_HalogeneSalon">Halogene:</label>
                 <select name="Flip_HalogeneSalon" id="Flip_HalogeneSalon" data-role="slider">
@@ -303,7 +303,7 @@
                 </select>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>WebCam</h3>
                  <div data-role="none">
                     <img alt="FOSCAM" src="http://82.227.228.35:8080/videostream.cgi?user=guest&pwd=guest" width="300" height="300"/>

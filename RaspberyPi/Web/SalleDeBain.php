@@ -71,7 +71,7 @@
 			?>
 		</div>
 		<div data-role="content">	
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Temperature</h3>
 			<label for="Flip_ChauffageSdb">Chauffage:</label>
 			<select name="Flip_ChauffageSdb" id="Flip_ChauffageSdb" data-role="slider">

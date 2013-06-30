@@ -170,7 +170,7 @@
 		</div>
 		<div data-role="content">	
         
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Lumiere</h3>
             <label for="Flip_Lumiere">Lumiere:</label>
 			<select name="Flip_Lumiere" id="Flip_Lumiere" data-role="slider">
@@ -179,7 +179,7 @@
 			</select> 
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Temperature</h3>
 			<input id="Button_RefreshTemperature" type="button" name="Button_RefreshTemperature" value="Refresh Temperature"/>
 			Temperature :
@@ -187,7 +187,7 @@
 			</div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>Humidite</h3>
 			<input id="Button_RefreshHumidite" type="button" name="Button_RefreshHumidite" value="Refresh Humidite"/>
 			Humidite :
@@ -195,7 +195,7 @@
 			</div>
             </div>
             
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-content-theme="c">
                  <h3>PeopleDetection</h3>
             PeopleDetection :
 			<div class="PeopleDetection">
