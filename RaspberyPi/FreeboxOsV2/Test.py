@@ -4,6 +4,7 @@
 import requests
 import logging
 import time
+import itertools
 import json
 
 class FreeboxApplication:
@@ -60,6 +61,37 @@ class FreeboxApplication:
             logging.debug("app_token : " + str(self.app_token))
             logging.debug("track_id : " + str(self.track_id))
         logging.info("Ending initial registration")
+        
+        aLoopInd = 0
+        while ((self.registerIntoFreeboxServer != True) or (aLoopInd < 10))
+            self.trackRegristration()
+            time.sleep(30)  # Delay for 1 minute (60 seconds)
+            aLoopInd = aLoopInd + 1
+            
+    def logWithPassword(self, iPassword):
+        #only once. Register the APP on freebox side
+        logging.info("Starting logWithPassword")
+        aRequestUrl = "http://mafreebox.freebox.fr/api/v1/login/session/"
+        aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json'}
+
+        logging.debug("URL used : " + aRequestUrl)
+        
+        aDataToLog = json.dumps({"app_id": self.app_id,"password": iPassword})
+        
+        logging.debug("Datas used : " + str(aDataToLog))
+
+        aRequestResult = requests.post(aRequestUrl, data=aDataToLog, headers=aHeaders)
+        logging.debug("Request result : " + str(aRequestResult))
+        logging.debug("Request result : " + str(aRequestResult.json()))
+        logging.debug("Registration result : " + str(aRequestResult.json()['success']))
+
+        #if (aRequestResult.status_code != "200") or (aRequestResult.json()['success'] != True):
+        if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
+            print ("Error during intial registration into Freebox Server")
+        else:
+            print ("You re log")
+        logging.info("Ending logWithPassword")
+        
 
     def trackRegristration(self):
         logging.info("Starting trackRegristration")
@@ -81,6 +113,37 @@ class FreeboxApplication:
                 logging.info("APP is correclty registered")
         logging.info("Ending trackRegristration")
 
+    def loginProcedure(self):
+        logging.info("Starting loginProcedure")
+        aRequestUrl = "http://mafreebox.freebox.fr/api/v1/login/"
+        aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json'}
+
+        logging.debug("URL used : " + aRequestUrl)
+
+        aRequestResult = requests.get(aRequestUrl, headers=aHeaders)
+        logging.debug("Request result : " + str(aRequestResult))
+        logging.debug("Request result : " + str(aRequestResult.json()))
+        if (aRequestResult.status_code != requests.codes.ok):
+            print ("Error during loginProcedure")
+        else:
+            if (aRequestResult.json()['success'] != True):
+                print ("OK during loginProcedure")
+                achallenge=aRequestResult.json()['result']['challenge']
+                logging.info("We have the challenge")
+                return achallenge
+        logging.info("Ending loginProcedure")
+        
+    def computePassword(self, iChallenge):
+        aPassword = ""
+        return aPassword
+        
+    def loginfull(self):
+        aNewChallenge = self.loginProcedure()
+        #password = hmac-sha1(app_token, challenge)
+        #voir http://stackoverflow.com/questions/8338661/implementaion-hmac-sha1-in-python
+        aPassword = computePassword(aNewChallenge)
+        
+        
 
 print ("Starting")
 
@@ -94,10 +157,6 @@ logging.basicConfig(filename=aLogFileToUse,level=logging.DEBUG,format='%(asctime
 
 aMyApp = FreeboxApplication()
 aMyApp.initialLogging()
-while True:
-    print "This prints once a minute."
-    aMyApp.trackRegristration()
-    time.sleep(10)  # Delay for 1 minute (60 seconds)
 
 
 print ("Ending")
