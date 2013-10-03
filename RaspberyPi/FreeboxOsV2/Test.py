@@ -28,6 +28,8 @@ class FreeboxApplication:
         self.app_token=""
         self.track_id=""
         self.challenge=""
+        self.session_token=""
+        self.bssid=""
         self.loadAppTokenFromFile()
 
     def __repr__(self):
@@ -139,6 +141,50 @@ class FreeboxApplication:
             logging.critical("Error during intial registration into Freebox Server")
         else:
             logging.debug("You re log")
+            self.session_token=aRequestResult.json()['result']['session_token']
+        logging.info("Ending logWithPassword")
+
+    def getWifiId(self):
+        logging.info("Starting turnWifiOff")
+
+        aRequestUrl = "http://mafreebox.freebox.fr/api/v1/wifi/"
+        aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json','X-Fbx-App-Auth':self.session_token}
+
+        logging.debug("URL used : " + aRequestUrl)
+
+        aRequestResult = requests.get(aRequestUrl, headers=aHeaders)
+        logging.debug("Request result : " + str(aRequestResult))
+        logging.debug("Request result : " + str(aRequestResult.json()))
+
+        if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
+            logging.critical("Error during intial registration into Freebox Server")
+        else:
+            logging.debug("You re log")
+            self.bssid=aRequestResult.json()['result']['bss']['perso']['bssid']
+        logging.info("Ending logWithPassword")
+
+        logging.info("Ending logWithPassword")
+
+
+    def listWifiUser(self):
+        logging.info("Starting listWifiUser")
+
+        aRequestUrl = "http://mafreebox.freebox.fr/api/v1/wifi/stations/perso/"
+        aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json','X-Fbx-App-Auth':self.session_token}
+
+        logging.debug("URL used : " + aRequestUrl)
+
+        aRequestResult = requests.get(aRequestUrl, headers=aHeaders)
+        logging.debug("Request result : " + str(aRequestResult))
+        logging.debug("Request result : " + str(aRequestResult.json()))
+
+        if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
+            logging.critical("Error during intial registration into Freebox Server")
+        else:
+            logging.debug("You re log")
+            logging.info("Nb user : " + str(len(aRequestResult.json()['result'])))
+        logging.info("Ending logWithPassword")
+
         logging.info("Ending logWithPassword")
 
     def loginProcedure(self):
@@ -190,5 +236,7 @@ logging.basicConfig(filename=aLogFileToUse,level=logging.DEBUG,format='%(asctime
 aMyApp = FreeboxApplication()
 
 aMyApp.loginfull()
+aMyApp.getWifiId()
+aMyApp.listWifiUser()
 
 print ("Ending")
