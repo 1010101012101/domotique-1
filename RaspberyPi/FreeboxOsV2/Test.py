@@ -8,6 +8,7 @@ import itertools
 import json
 import os
 import sys
+import inspect
 
 from hashlib import sha1
 import hmac
@@ -27,9 +28,7 @@ class FreeboxApplication:
         #Registration parameters
         self.app_token=""
         self.track_id=""
-        self.challenge=""
         self.session_token=""
-        self.bssid=""
         self.loadAppTokenFromFile()
 
     def __repr__(self):
@@ -41,14 +40,11 @@ class FreeboxApplication:
         aRetString = aRetString + "self.registerIntoFreeboxServer: " + str(self.registerIntoFreeboxServer)
         aRetString = aRetString + "self.app_token: " + str(self.app_token)
         aRetString = aRetString + "self.track_id: " + str(self.track_id)
-        aRetString = aRetString + "self.challenge: " + str(self.challenge)
         return aRetString
-
-    def getataForRequests(self):
-        return json.dumps({"app_id": self.app_id,"app_name": self.app_name,"app_version": self.app_version,"device_name": self.device_name})
 
     def loadAppTokenFromFile(self):
         #Degeu...
+        logging.debug("Starting " + inspect.stack()[0][3])
         if (os.path.isfile("AppToken.txt")):
             aAppTokenBackupFile = open("AppToken.txt", "r")
             self.app_token = aAppTokenBackupFile.read()
@@ -61,19 +57,14 @@ class FreeboxApplication:
 
     def initialLogging(self):
         #only once. Register the APP on freebox side
-        logging.info("Starting initial registration")
+        logging.debug("Starting " + inspect.stack()[0][3])
+
         aRequestUrl = "http://mafreebox.freebox.fr/api/v1/login/authorize/"
         aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json'}
+        aDataToLog = json.dumps({"app_id": self.app_id,"app_name": self.app_name,"app_version": self.app_version,"device_name": self.device_name})
 
-        logging.debug("URL used : " + aRequestUrl)
-        logging.debug("Datas used : " + str(self.getataForRequests()))
+        aRequestResult = requests.post(aRequestUrl, data=aDataToLog, headers=aHeaders)
 
-        aRequestResult = requests.post(aRequestUrl, data=self.getataForRequests(), headers=aHeaders)
-        logging.debug("Request result : " + str(aRequestResult))
-        logging.debug("Request result : " + str(aRequestResult.json()))
-        logging.debug("Registration result : " + str(aRequestResult.json()['success']))
-
-        #if (aRequestResult.status_code != "200") or (aRequestResult.json()['success'] != True):
         if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
             logging.critical("Error during intial registration into Freebox Server")
         else:
@@ -100,128 +91,77 @@ class FreeboxApplication:
             #Fin Degeu
 
     def trackRegristration(self):
-        logging.info("Starting trackRegristration")
+        logging.debug("Starting " + inspect.stack()[0][3])
         aRequestUrl = "http://mafreebox.freebox.fr/api/v1/login/authorize/" + str(self.track_id)
         aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json'}
-
-        logging.debug("URL used : " + aRequestUrl)
-
         aRequestResult = requests.get(aRequestUrl, headers=aHeaders)
-        logging.debug("Request result : " + str(aRequestResult))
-        logging.debug("Request result : " + str(aRequestResult.json()))
-        if (aRequestResult.status_code != requests.codes.ok):
-            logging.critical("Error during trackRegristration")
+
+        if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['result']['status'] != "granted"):
+            logging.critical("Error in " + inspect.stack()[0][3])
         else:
-            if (aRequestResult.json()['result']['status'] == "granted"):
-                logging.debug("OK during trackRegristration")
-                self.registerIntoFreeboxServer=True
-                self.challenge=aRequestResult.json()['result']['challenge']
-                logging.info("APP is correclty registered")
-        logging.info("Ending trackRegristration")
+            self.registerIntoFreeboxServer=True
+        logging.debug("Ending " + inspect.stack()[0][3])
 
     def logWithPassword(self, iPassword):
         #only once. Register the APP on freebox side
-        logging.info("Starting logWithPassword")
+        logging.debug("Starting " + inspect.stack()[0][3])
         aRequestUrl = "http://mafreebox.freebox.fr/api/v1/login/session/"
         aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json'}
-
-        logging.debug("URL used : " + aRequestUrl)
-        
         aDataToLog = json.dumps({"app_id": self.app_id,"password": iPassword})
-        
-        logging.debug("Datas used : " + str(aDataToLog))
 
         aRequestResult = requests.post(aRequestUrl, data=aDataToLog, headers=aHeaders)
-        logging.debug("Request result : " + str(aRequestResult))
         logging.debug("Request result : " + str(aRequestResult.json()))
-        logging.debug("Registration result : " + str(aRequestResult.json()['success']))
 
-        #if (aRequestResult.status_code != "200") or (aRequestResult.json()['success'] != True):
         if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
-            logging.critical("Error during intial registration into Freebox Server")
+            logging.critical("Error in " + inspect.stack()[0][3])
         else:
-            logging.debug("You re log")
             self.session_token=aRequestResult.json()['result']['session_token']
-        logging.info("Ending logWithPassword")
-
-    def getWifiId(self):
-        logging.info("Starting turnWifiOff")
-
-        aRequestUrl = "http://mafreebox.freebox.fr/api/v1/wifi/"
-        aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json','X-Fbx-App-Auth':self.session_token}
-
-        logging.debug("URL used : " + aRequestUrl)
-
-        aRequestResult = requests.get(aRequestUrl, headers=aHeaders)
-        logging.debug("Request result : " + str(aRequestResult))
-        logging.debug("Request result : " + str(aRequestResult.json()))
-
-        if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
-            logging.critical("Error during intial registration into Freebox Server")
-        else:
-            logging.debug("You re log")
-            self.bssid=aRequestResult.json()['result']['bss']['perso']['bssid']
-        logging.info("Ending logWithPassword")
-
-        logging.info("Ending logWithPassword")
-
+        logging.debug("Ending " + inspect.stack()[0][3])
 
     def listWifiUser(self):
-        logging.info("Starting listWifiUser")
-
+        logging.debug("Starting " + inspect.stack()[0][3])
         aRequestUrl = "http://mafreebox.freebox.fr/api/v1/wifi/stations/perso/"
         aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json','X-Fbx-App-Auth':self.session_token}
-
-        logging.debug("URL used : " + aRequestUrl)
-
         aRequestResult = requests.get(aRequestUrl, headers=aHeaders)
-        logging.debug("Request result : " + str(aRequestResult))
-        logging.debug("Request result : " + str(aRequestResult.json()))
 
         if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
-            logging.critical("Error during intial registration into Freebox Server")
+            logging.critical("Error in " + inspect.stack()[0][3])
         else:
-            logging.debug("You re log")
-            logging.info("Nb user : " + str(len(aRequestResult.json()['result'])))
-        logging.info("Ending logWithPassword")
-
-        logging.info("Ending logWithPassword")
+            aNbUser=len(aRequestResult.json()['result'])
+            logging.info("Nb user : " + str(aNbUser))
+        logging.debug("Ending " + inspect.stack()[0][3])
 
     def loginProcedure(self):
-        logging.info("Starting loginProcedure")
+        logging.debug("Starting " + inspect.stack()[0][3])
         aRequestUrl = "http://mafreebox.freebox.fr/api/v1/login/"
         aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json'}
-
-        logging.debug("URL used : " + aRequestUrl)
-
         aRequestResult = requests.get(aRequestUrl, headers=aHeaders)
-        logging.debug("Request result : " + str(aRequestResult))
-        logging.debug("Request result : " + str(aRequestResult.json()))
-        if (aRequestResult.status_code != requests.codes.ok):
-            logging.critical("Error during loginProcedure")
+
+        if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
+            logging.critical("Error in " + inspect.stack()[0][3])
         else:
-            if (aRequestResult.json()['success'] == True):
-                logging.debug("OK during loginProcedure")
-                achallenge=aRequestResult.json()['result']['challenge']
-                logging.info("We have the challenge : " + str(achallenge))
-                return achallenge
-            else:
-                logging.critical("Error during loginProcedure")
-        logging.info("Ending loginProcedure")
+            achallenge=aRequestResult.json()['result']['challenge']
+            logging.debug("We have the challenge : " + str(achallenge))
+            return achallenge
         
     def computePassword(self, iChallenge):
+        logging.debug("Starting " + inspect.stack()[0][3])
+
         hashed = hmac.new(self.app_token, iChallenge, sha1)
         logging.info("Password computed : " + str(hashed.digest().encode('hex')))
         return hashed.digest().encode('hex')
         
     def loginfull(self):
+        logging.debug("Starting " + inspect.stack()[0][3])
+
         aNewChallenge = self.loginProcedure()
         #password = hmac-sha1(app_token, challenge)
         #voir http://stackoverflow.com/questions/8338661/implementaion-hmac-sha1-in-python
         #http://stackoverflow.com/questions/13019598/python-hmac-sha1-vs-java-hmac-sha1-different-results
         aPassword = self.computePassword(aNewChallenge)
         self.logWithPassword(aPassword)
-        
+        logging.debug("Ending " + inspect.stack()[0][3])
+
 
 print ("Starting")
 
@@ -236,7 +176,6 @@ logging.basicConfig(filename=aLogFileToUse,level=logging.DEBUG,format='%(asctime
 aMyApp = FreeboxApplication()
 
 aMyApp.loginfull()
-aMyApp.getWifiId()
 aMyApp.listWifiUser()
 
 print ("Ending")
