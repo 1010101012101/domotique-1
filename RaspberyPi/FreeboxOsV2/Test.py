@@ -13,6 +13,17 @@ import inspect
 from hashlib import sha1
 import hmac
 
+class WifiUser:
+    '''Represents a wifi user'''
+
+    def __init__(self):
+        self.user_name=""
+
+    def __repr__(self):
+        aRetString = ""
+        aRetString = aRetString + "self.user_name: " + str(self.user_name)
+        return aRetString
+
 class FreeboxApplication:
     '''Represents an application which interact with freebox server
     API doc : http://dev.freebox.fr/sdk/os/'''
@@ -129,6 +140,34 @@ class FreeboxApplication:
         else:
             aNbUser=len(aRequestResult.json()['result'])
             logging.info("Nb user : " + str(aNbUser))
+            logging.info("Nb user : " + str(aRequestResult.json()))
+            return aRequestResult.json()
+        logging.debug("Ending " + inspect.stack()[0][3])
+
+    def getWifiConfig(self):
+        logging.debug("Starting " + inspect.stack()[0][3])
+        aRequestUrl = "http://mafreebox.freebox.fr/api/v1/wifi/config/"
+        aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json','X-Fbx-App-Auth':self.session_token}
+        aRequestResult = requests.get(aRequestUrl, headers=aHeaders)
+
+        if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
+            logging.critical("Error in " + inspect.stack()[0][3])
+        else:
+            logging.info("Wifi config : " + str(aRequestResult.json()))
+        logging.debug("Ending " + inspect.stack()[0][3])
+
+    def changeWifiState(self,iWifiState):
+        logging.debug("Starting " + inspect.stack()[0][3])
+        aRequestUrl = "http://mafreebox.freebox.fr/api/v1/wifi/config/"
+        aHeaders = {'Content-type': 'application/json', 'Accept': 'application/json','X-Fbx-App-Auth':self.session_token}
+        aDataToLog = json.dumps({"ap_params": {"enabled": iWifiState}})
+        aRequestResult = requests.put(aRequestUrl,data=aDataToLog, headers=aHeaders)
+
+        if (aRequestResult.status_code != requests.codes.ok) or (aRequestResult.json()['success'] != True):
+            logging.critical("Error in " + inspect.stack()[0][3])
+            logging.critical("Request results : " + str(aRequestResult.json()))
+        else:
+            logging.info("Wifi should be off")
         logging.debug("Ending " + inspect.stack()[0][3])
 
     def loginProcedure(self):
@@ -172,10 +211,21 @@ with open(aLogFileToUse, 'w'):
     pass 
 
 logging.basicConfig(filename=aLogFileToUse,level=logging.DEBUG,format='%(asctime)s - %(levelname)s - %(message)s')
+#Change log level for REQUEST PYTHON API 
+requests_log = logging.getLogger("requests")
+requests_log.setLevel(logging.WARNING)
 
 aMyApp = FreeboxApplication()
 
 aMyApp.loginfull()
-aMyApp.listWifiUser()
+aMyApp.getWifiConfig()
+#aMyApp.changeWifiState(True)
+aMyApp.getWifiConfig()
+
+aWifiUsersFromApp = aMyApp.listWifiUser()
+for aOneUser in aWifiUsersFromApp['result']:
+    aWifiUser = WifiUser()
+    aWifiUser.user_name=aOneUser[u'hostname']
+    print ("User:" + str(aWifiUser) + "\n")
 
 print ("Ending")
