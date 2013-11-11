@@ -161,6 +161,29 @@
 		function onSuccess(data)
 		{
 		}
+
+        $( "#Flip_Wifi" ).on( 'slidestop', function( event ) 
+		{ 
+			sVal = $(this).val();
+			var theName;
+			if (sVal=="on")
+			{
+				theName = '27';
+			}
+			else
+			{
+				theName = '26';
+			}
+               $.ajax(
+			{
+				type: "POST",
+                   url: "./Sender/XbeeWrapper.php",
+                   data: ({iId : '28', iStatus : sVal ,iCmdToExecute: theName , iCmdType : "CMD_X10"}),
+                   cache: false,
+                   dataType: "text",
+                   success: onSuccess
+               });		
+		});
 		
 	</script>
 		<div data-role="header">
@@ -174,6 +197,15 @@
                  <h3>Lumiere</h3>
             <label for="Flip_Lumiere">Lumiere:</label>
 			<select name="Flip_Lumiere" id="Flip_Lumiere" data-role="slider">
+				<option value="off">Allumer</option>
+				<option value="on">Eteindre</option>
+			</select> 
+            </div>
+
+            <div data-role="collapsible" data-content-theme="c">
+                 <h3>Wifi</h3>
+            <label for="Flip_Wifi">Wifi:</label>
+			<select name="Flip_Wifi" id="Flip_Wifi" data-role="slider">
 				<option value="off">Allumer</option>
 				<option value="on">Eteindre</option>
 			</select> 
