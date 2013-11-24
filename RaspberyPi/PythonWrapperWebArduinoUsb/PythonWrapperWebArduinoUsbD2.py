@@ -12,8 +12,9 @@ from twisted.internet.protocol import Protocol
 from twisted.internet.task import LoopingCall
 from twisted.protocols.basic import LineReceiver 
 from twisted.internet.serialport import SerialPort 
-from twisted.web import xmlrpc, server
+from twisted.web import xmlrpc, server, twcgi, resource, static
 from twisted.python import log
+from twisted.web.twcgi import FilteredScript
 
 #other modules
 import sys
@@ -56,6 +57,99 @@ class Example(xmlrpc.XMLRPC):
         """
         raise xmlrpc.Fault(123, "The fault procedure is faulty.")
 
+class PhpScript(twcgi.FilteredScript):
+    """
+    Twisted wrapping class to execute PHP code.
+    """
+    filter = '/usr/bin/php-cgi' # Points to the perl parser
+
+    def runProcess(self, env, request, qargs=[]):
+        env['REDIRECT_STATUS'] = ''
+        return FilteredScript.runProcess(self, env, request, qargs)
+
+class FormPage(resource.Resource):
+    """
+    Handle JSON call from website.
+    """
+    isLeaf = True
+    allowedMethods = ('GET', 'POST')
+  
+    def __init__(self,iDevices):
+        resource.Resource.__init__(self)
+        self.aDevice=iDevices
+    
+    def render_GET(self, request):
+        return self.render_POST(request)
+        
+    def render_POST(self, request):
+        logging.debug("Rendering a web page with requests args : " + str(request.args))
+        if( (request.args["action"])[0] == '3'):
+            self.aDevice.startAutoDeploy()
+            self.aDevice.AutoDeployStarted=True
+        elif( (request.args["action"])[0] == '4'):
+            aRes = jsonpickle.encode(self.aDevice)
+            return aRes
+        elif( (request.args["action"])[0] == 'u4'):
+            aRes = jsonpickle.encode(self.aDevice.uid)
+            return aRes
+        elif( (request.args["action"])[0] == '6'):
+            aRes = self.aDevice.getDevicepick("NGI_BOX_NGI")
+            return aRes
+        elif( (request.args["action"])[0] == '19'):
+            self.aDevice.AdminEmail=(request.args["iRboxAdminEmail"])[0]
+            self.aDevice.rGridIp=(request.args["iRgridIp"])[0]
+            self.aDevice.loadTemplate((request.args["iTemplate"])[0])
+            return "OK"
+        elif( (request.args["action"])[0] == 'register_agent'):
+            aIp=(request.args["ip"])[0]
+            logging.info("I receive a new Rbox registration request from IP : " + str(aIp) )
+            aRboxName = self.aDevice.addNewRbox(str(aIp))
+            logging.info("Rbox registered with name : " + str(aRboxName) )
+            return jsonpickle.encode(aRboxName)
+        elif( (request.args["action"])[0] == 'ack_synch'):
+            aIp=(request.args["ip"])[0]
+            logging.info("I receive a new Rbox registration request from IP : " + str(aIp) )
+            aRboxName = self.aDevice.ackSynch(str(aIp))
+            return "OK"
+        elif( (request.args["action"])[0] == 'register'):
+            aIp=str((request.args["admip"])[0])
+            aUid=str((request.args["uid"])[0])
+            aCbIp=str((request.args["cbip"])[0])
+            logging.info("I receive a new Rbox registration request from IP : " + str(aIp) )
+            self.aDevice.handleChildRboxRegistration(aIp,aUid,aCbIp)
+            return "OK"
+        elif( (request.args["action"])[0] == 'ack_instal'):
+            aIp=(request.args["ip"])[0]
+            logging.info("I receive a new Rbox registration request from IP : " + str(aIp) )
+            aRboxName = self.aDevice.ackInstal(str(aIp))
+            return "OK"
+        elif( (request.args["action"])[0] == 'ping_rt'):
+            aFromIp=(request.args["ip_from"])[0]
+            aToIp=(request.args["ip_to"])[0]
+            aValue=(request.args["value"])[0]
+            logging.info("I receive a new pingRt info aFromIp : " + str(aFromIp) +" aToIp:" + str(aToIp) + " aValue:" + str(aValue)   )
+            aRboxName = self.aDevice.ackInstal(str(aIp))
+            return "OK"
+        elif( (request.args["action"])[0] == '17'):
+            logging.info('clone' + (request.args["iId"])[0] + '_' + (request.args["iDetails"])[0])
+            self.aDevice.CloneDevice((request.args["iDetails"])[0])
+            return 'OK'
+        elif( (request.args["action"])[0] == '18'):
+            aRes = jsonpickle.encode(self.aDevice)
+            return aRes
+        elif( (request.args["action"])[0] == 'listTemplates'):
+            aRboxName = self.aDevice.listAvlTemplate()
+            return jsonpickle.encode(aRboxName)
+        elif( (request.args["action"])[0] == 'AreYouAlive'):
+            return 'YES'
+        elif( (request.args["action"])[0] == 'stop'):
+            self.devices.stop()
+            time.sleep(5)
+            reactor.callLater(1, reactor.stop)
+            return("bye")
+            time.sleep(5)
+            sys.exit()
+        return 'toto'
 
 class UsbHandler(LineReceiver):
     """protocol handling class for USB """
@@ -123,6 +217,14 @@ logging.info('aBrain : ' + str(aBrain))
 aRegisterDevices =Deipara_Objects.DevicesHandler(Config)
 aRegisterDevices.loadDevices()
 logging.info('aRegisterDevices : ' + str(aRegisterDevices))
+
+root = static.File("./Web")
+indexPage = resource.Resource()
+root.processors = {".php": PhpScript}
+formHandler = FormPage(aRegisterDevices)
+root.putChild('index.html', indexPage)
+root.putChild('handler.html', formHandler)
+reactor.listenTCP(80, server.Site(root))
 
 r = Example(aBrain,aRegisterDevices)
 reactor.listenTCP(49007, server.Site(r))
